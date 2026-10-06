@@ -1,0 +1,2139 @@
+/* ═══════════════════════════════════════════════════════════════════
+   ATOMITY DESIGN SYSTEM — portable global stylesheet
+   ───────────────────────────────────────────────────────────────────
+   One file, no build step, no framework. Drop it into any repo:
+
+     • Plain HTML / Vite:  <link rel="stylesheet" href="atomity.css">
+     • Next.js:            import "./atomity.css" in app/layout.tsx
+     • Tailwind v4:        @import "tailwindcss"; @import "./atomity.css";
+
+   Sources of truth:
+     atomity-product  src/modules/styles/foundations/*.css (tokens)
+                      src/modules/styles/components/buttons.css
+                      src/components/primitives/* + Storybook docs
+     base_repo        src/app/globals.css (marketing type scale, nav)
+
+   Everything sits in @layer base / components, so Tailwind utilities
+   (or any unlayered CSS of your own) override it without !important.
+   The layer names match Tailwind v4's, so the two merge cleanly.
+
+   FONTS — copy atomity-product/src/fonts/* to ./fonts/ next to this
+   file (or edit the url()s below). If your app already loads the
+   faces through next/font with the variables --font-google-sans-flex,
+   --font-google-sans-code, --font-gowun-batang, those win over the
+   defaults below and the @font-face rules simply go unused.
+
+   CONTENTS
+     1. Fonts                 9. Popover & menu
+     2. Tokens                10. Modal
+     3. Base / reset          11. Toast
+     4. Typography            12. Tooltip
+     5. Buttons               13. Data display (table, rows, stat tile)
+     6. Form fields           14. Feedback (empty state, alert, spinner)
+     7. Chips, badges, avatar 15. Navigation (nav pill, tabs, steps)
+     8. Panel / card          16. Decorative (backdrop grid) & utilities
+   ═══════════════════════════════════════════════════════════════════ */
+
+@layer base, components, utilities;
+
+/* ═══════════════════════════════════════════════════
+   1. FONTS
+   ═══════════════════════════════════════════════════ */
+
+@font-face {
+  font-family: "Google Sans Flex";
+  src: url("./fonts/GoogleSansFlex-VariableFont_GRAD,ROND,opsz,slnt,wdth,wght.ttf") format("truetype");
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Google Sans Code";
+  src: url("./fonts/GoogleSansCode-VariableFont_MONO,wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gowun Batang";
+  src: url("./fonts/GowunBatang-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Gowun Batang";
+  src: url("./fonts/GowunBatang-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-display: swap;
+}
+
+/* ═══════════════════════════════════════════════════
+   2. TOKENS
+   Components reference these — never raw hex.
+   ═══════════════════════════════════════════════════ */
+
+:root {
+  /* Font family names. next/font sets these same variables on a class on
+     <html>, which outranks :root, so a Next app keeps its optimised faces. */
+  --font-google-sans-flex: "Google Sans Flex";
+  --font-google-sans-code: "Google Sans Code";
+  --font-gowun-batang: "Gowun Batang";
+
+  /* ── Brand ── */
+  --atomity-green: #97ddb1;
+  --atomity-green-light: #b0ecc6;
+  --atomity-green-tint: #ddf5e6;   /* palest wash for tinting a whole surface */
+  --atomity-green-dark: #7ecfa0;   /* hover for mint fills, rules, icons — not text on cream */
+  --atomity-orange: #ff6b00;       /* repurposed as warning */
+  --atomity-red: #d93025;
+
+  /* ── Neutrals: solid at the ends, ink-at-opacity in the middle so greys stay warm ── */
+  --atomity-black: #030303;
+  --atomity-gray-950: #0a0a0b;
+  --atomity-gray-900: #0c0c0c;
+  --atomity-gray-800: #1c1c1e;
+  --atomity-gray-700: rgba(3, 3, 3, 0.80);
+  --atomity-gray-600: rgba(3, 3, 3, 0.70);
+  --atomity-gray-500: rgba(3, 3, 3, 0.62);  /* lightest grey that holds up as text */
+  --atomity-gray-400: rgba(3, 3, 3, 0.40);  /* placeholders & icons only */
+  --atomity-gray-300: rgba(3, 3, 3, 0.22);
+  --atomity-gray-200: rgba(3, 3, 3, 0.12);
+  --atomity-gray-100: #e8e5d9;               /* "sand" */
+  --atomity-gray-50: #f6f4ec;
+  --atomity-white: #f6f4ec;                  /* "cream" */
+  --atomity-white-light: #fbfaf7;            /* "paper" */
+
+  /* ── Semantic surface / text ── */
+  --surface-page: #f6f4ec;
+  --surface-paper: #fbfaf7;
+  --surface-sand: #e8e5d9;
+  --surface-card-light: #f6f4ec;
+  --surface-card-dark: #0c0c0c;
+  --surface-dark: #0c0c0c;
+  --surface-input: #ffffff;
+  --surface-footer: var(--atomity-green);
+  --surface-on-dark-subtle: rgb(255 255 255 / 0.12);
+
+  --text-primary: var(--atomity-black);
+  --text-secondary: rgba(20, 1, 1, 0.62);
+  --text-muted: rgba(3, 3, 3, 0.60);
+  --text-on-dark: #f6f4ec;
+  --text-on-green: var(--atomity-black);
+  --text-accent: var(--atomity-green);       /* mint as text — on dark surfaces only */
+
+  /* ── Borders ── */
+  --border-light: rgba(3, 3, 3, 0.12);
+  --border-dark: rgba(3, 3, 3, 0.22);
+  --border-on-dark: rgba(255, 255, 255, 0.28);
+
+  /* ── Radius: soft rectangles for containers, pill for anything pressed or read as status ── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 24px;
+  --radius-pill: 9999px;
+
+  /* ── Typography ── */
+  --font-title: var(--font-google-sans-flex), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-google-sans-flex), ui-sans-serif, system-ui, sans-serif;
+  --font-code: var(--font-google-sans-code), ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-mono: var(--font-code);
+  --font-body: var(--font-gowun-batang), "Gowun Batang", Georgia, serif; /* editorial serif */
+
+  /* ── Layout ── */
+  --container-max: 1280px;
+  --container-padding: 20px;
+  --space-section-sm: 48px;
+  --space-section-md: 80px;
+  --space-section-lg: 120px;
+
+  /* ── Dashboard density (fluid between 1400 and 1920px wide) ── */
+  --dash-card-pad: clamp(10px, 0.729vw, 14px);
+  --dash-gap: clamp(8px, 0.625vw, 12px);
+  --dash-row-pad-y: clamp(4px, 0.313vw, 6px);
+  --dash-page-pad: clamp(14px, 1.25vw, 24px);
+  --dash-fs: clamp(11.5px, 0.651vw, 12.5px);
+  --dash-fs-sm: clamp(10px, 0.573vw, 11px);
+  --dash-fs-xs: clamp(9px, 0.495vw, 9.5px);
+  --dash-kpi-num: clamp(17px, 1.094vw, 21px);
+  --dash-h1: clamp(17px, 1.094vw, 21px);
+  --dash-bar-h: 8px;
+
+  /* ── Motion ── */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);   /* button hover/press overshoot */
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* ── Shadows: ink at low opacity so they warm into the cream ── */
+  --shadow-card: 0 1px 3px rgba(3, 3, 3, 0.04);
+  --shadow-card-hover: 0 4px 20px rgba(3, 3, 3, 0.08);
+  --shadow-elevated: 0 2px 16px rgba(3, 3, 3, 0.06);
+  --shadow-nav: 0 2px 10px rgba(3, 3, 3, 0.08);
+  --shadow-dropdown: 0 12px 32px rgba(3, 3, 3, 0.14);
+  --shadow-tooltip: 0 8px 22px rgba(3, 3, 3, 0.18);
+  --shadow-modal: 0 8px 40px rgba(3, 3, 3, 0.16);
+  --shadow-drag: 0 20px 30px -10px rgba(0, 0, 0, 0.15), 0 10px 15px -5px rgba(0, 0, 0, 0.1);
+
+  /* ── Z-index ladder ── */
+  --z-base: 0;
+  --z-raised: 10;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-overlay: 300;
+  --z-modal: 400;
+  --z-toast: 500;
+
+  /* ── Feedback ── */
+  --color-error: #d93025;                       /* borders, icons, field outlines */
+  --color-error-text: #a3241b;                  /* readable error copy */
+  --color-error-bg: rgba(217, 48, 37, 0.08);
+  --color-error-bg-strong: rgba(217, 48, 37, 0.14);
+  --color-error-border: rgba(217, 48, 37, 0.32);
+  --color-error-focus-ring: 0 0 0 3px rgba(217, 48, 37, 0.16);
+  --color-success: #1e8e3e;
+  --color-success-bg: rgba(30, 142, 62, 0.08);
+  --color-warning: var(--atomity-orange);
+  --color-warning-bg: rgba(255, 107, 0, 0.08);
+
+  /* ── Verdict tones (tinted fill, ink label) ── */
+  --tone-pass-bg: rgba(151, 221, 177, 0.38);
+  --tone-watch-bg: rgba(255, 179, 71, 0.28);
+  --tone-fail-bg: rgba(255, 105, 97, 0.28);
+  --tone-neutral-bg: var(--atomity-gray-100);
+
+  /* ── Focus ── */
+  --focus-ring: 0 0 0 3px rgba(151, 221, 177, 0.5);
+
+  /* ── Decorative ── */
+  --backdrop-grid-size: 150px;
+  --backdrop-grid-line-color: rgba(15, 23, 42, 0.14);
+  --backdrop-grid-line-color-on-dark: rgba(255, 255, 255, 0.08);
+  --scrollbar-thumb: var(--atomity-gray-300);
+}
+
+@media (min-width: 768px) {
+  :root { --container-padding: 32px; }
+}
+
+@media (min-width: 1024px) {
+  :root { --container-padding: 40px; }
+}
+
+/* ═══════════════════════════════════════════════════
+   3. BASE / RESET
+   ═══════════════════════════════════════════════════ */
+
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 13px;
+    line-height: 1.5;
+    background: var(--surface-page);
+    color: var(--text-primary);
+  }
+
+  h1, h2, h3, h4, h5, h6, p, figure, blockquote {
+    margin: 0;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  img, svg, video {
+    max-width: 100%;
+    display: block;
+  }
+
+  button, input, select, textarea {
+    font: inherit;
+    color: inherit;
+  }
+
+  button {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  ::selection {
+    background-color: var(--atomity-green);
+    color: var(--text-on-green);
+  }
+
+  /* Matches the UI kit's icon weight (lucide default is 2). */
+  svg.lucide {
+    stroke-width: 1.75;
+  }
+
+  ::-webkit-scrollbar { width: 5px; height: 5px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb); border-radius: var(--radius-pill); }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   4. TYPOGRAPHY
+   Flex for anything a person reads; Code for anything
+   that labels, counts or classifies. Headings tighten
+   their tracking as they grow; body copy never does.
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  /* ── Marketing scale (base_repo) ── */
+  .text-hero    { font-family: var(--font-display); font-size: clamp(32px, 8vw, 88px); font-weight: 500; line-height: 1; letter-spacing: -0.02em; }
+  .text-h1      { font-family: var(--font-display); font-size: clamp(28px, 6vw, 60px); font-weight: 400; line-height: 1.1; letter-spacing: -0.02em; }
+  .text-h2      { font-family: var(--font-display); font-size: clamp(24px, 5vw, 48px); font-weight: 500; line-height: 1.1; letter-spacing: -0.02em; }
+  .text-h3      { font-family: var(--font-display); font-size: clamp(20px, 3vw, 24px); font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; }
+  .text-h4      { font-family: var(--font-display); font-size: 18px; font-weight: 600; line-height: 1.3; }
+  .text-subtitle { font-family: var(--font-body); font-size: clamp(18px, 2vw, 20px); line-height: 1.6; }
+  .text-editorial { font-family: var(--font-body); font-size: 16px; line-height: 1.7; }
+
+  /* ── Product content scale ── */
+  .text-display  { font-family: var(--font-title); font-size: clamp(26px, 1.8vw, 38px); font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+  .text-title    { font-family: var(--font-title); font-size: 25px; font-weight: 700; line-height: 1.2; letter-spacing: -0.02em; }
+  .text-page-heading { font-family: var(--font-title); font-size: var(--dash-h1); font-weight: 700; line-height: 1.15; letter-spacing: -0.02em; }
+  .text-section  { font-family: var(--font-title); font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .text-lead     { font-size: 15px; line-height: 1.55; color: var(--atomity-gray-500); }
+  .text-body     { font-size: 13px; line-height: 1.5; }
+  .text-body-lg  { font-size: 14px; line-height: 1.6; }
+  .text-small    { font-size: 12px; line-height: 1.55; color: var(--atomity-gray-500); }
+  .text-dash     { font-size: var(--dash-fs); }
+  .text-dash-sm  { font-size: var(--dash-fs-sm); }
+  .text-muted    { color: var(--text-muted); }
+  .text-secondary { color: var(--text-secondary); }
+  .text-on-dark  { color: var(--text-on-dark); }
+  .text-accent   { color: var(--text-accent); }   /* dark surfaces only */
+  .text-error    { color: var(--color-error-text); }
+
+  /* ── Label scale (Google Sans Code, tracked caps) ── */
+  .text-kpi {
+    font-family: var(--font-code);
+    font-size: var(--dash-kpi-num);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .text-cta {
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  .text-label {
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--atomity-gray-500);
+  }
+
+  /* <MicroLabel> — the eyebrow above headings and card titles. */
+  .micro-label {
+    font-family: var(--font-code);
+    font-size: var(--dash-fs-xs);
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+  }
+
+  /* Eyebrow with the mint-dark accent rule in front. */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--atomity-gray-500);
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 18px;
+    height: 2px;
+    flex-shrink: 0;
+    background-color: var(--atomity-green-dark);
+  }
+
+  /* Brand headline — Flex in open caps with the key phrase in large mint Code.
+     Reserved for dark brand panels. */
+  .brand-headline {
+    font-family: var(--font-title);
+    font-size: 26px;
+    font-weight: 450;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #fff;
+  }
+
+  .brand-headline__accent {
+    font-family: var(--font-code);
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--atomity-green);
+  }
+
+  .brand-headline__muted {
+    color: var(--atomity-gray-100);
+  }
+
+  /* Mint highlight behind one word of a hero headline. */
+  .highlight {
+    display: inline-block;
+    padding: 0.1em 0.2em;
+    line-height: 1;
+    border-radius: var(--radius-sm);
+    background-color: var(--atomity-green);
+    color: var(--atomity-black);
+  }
+
+  /* Inline links: ink text, underline changes on hover (mint is never a text colour on cream). */
+  .link {
+    font-weight: 700;
+    color: var(--atomity-black);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: color var(--transition-fast), text-decoration-color var(--transition-fast);
+    background: none;
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .link:hover {
+    text-decoration-color: var(--atomity-green-dark);
+    text-decoration-thickness: 2px;
+  }
+
+  code, .code {
+    padding: 1px 6px;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-sm);
+    background: var(--atomity-gray-100);
+    font-family: var(--font-code);
+    font-size: 0.86em;
+  }
+
+  pre code {
+    padding: 0;
+    border: 0;
+    background: none;
+  }
+
+  pre {
+    margin: 0;
+    padding: 12px 14px;
+    overflow-x: auto;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    background: var(--atomity-white-light);
+    font-family: var(--font-code);
+    font-size: 12px;
+    line-height: 1.6;
+  }
+
+  /* Long-form copy (docs, blog, chat replies). */
+  .prose {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-secondary);
+  }
+
+  .prose > * + * { margin-top: 0.9em; }
+  .prose h2 { margin-top: 2em; font-family: var(--font-title); font-size: 22px; font-weight: 700; letter-spacing: -0.02em; color: var(--atomity-black); }
+  .prose h3 { margin-top: 1.6em; font-family: var(--font-title); font-size: 16px; font-weight: 700; letter-spacing: -0.01em; color: var(--atomity-black); }
+  .prose a { font-weight: 600; color: var(--atomity-black); text-decoration: underline; text-underline-offset: 3px; }
+  .prose a:hover { text-decoration-color: var(--atomity-green-dark); text-decoration-thickness: 2px; }
+  .prose ul, .prose ol { padding-left: 1.3em; }
+  .prose strong { color: var(--atomity-black); }
+  .prose blockquote { padding-left: 14px; border-left: 2px solid var(--atomity-green-dark); }
+  .prose hr { border: 0; border-top: 1px solid var(--border-light); }
+}
+
+/* ═══════════════════════════════════════════════════
+   5. BUTTONS
+   ───────────────────────────────────────────────────
+   .btn — one shape (a pill with a tracked mono label)
+   in several fills. Springs up on hover, dips on press.
+   Works on <button>, <a> or a router Link.
+
+     .btn-primary    ink     — the one action a screen exists for
+     .btn-secondary  outline — the action beside a primary
+     .btn-outline    outline — same, the name error surfaces use
+     .btn-green      mint    — the safe, positive way out (retry)
+     .btn-ghost      none    — tertiary / inline
+     .btn-on-dark    outline inverted for dark panels
+     .btn-outline-green  mint outline for dark panels
+     .btn-danger     destructive confirm
+   Sizes: .btn-sm  .btn-lg   Modifiers: .btn-block  .btn-icon
+
+   .compact-btn — small, sentence-case outline button
+   for use *inside* panels ("View full size", "Open report").
+   .icon-btn — square ghost icon-only control.
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 32px;
+    font-family: var(--font-code);
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.2;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+    text-decoration: none;
+    border: none;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    user-select: none;
+    transition:
+      transform 0.35s var(--ease-spring),
+      background-color var(--transition-fast),
+      color var(--transition-fast),
+      box-shadow var(--transition-fast);
+  }
+
+  .btn:hover { transform: scale(1.06); }
+  .btn:active { transform: scale(0.94); }
+  .btn:focus-visible { box-shadow: var(--focus-ring); }
+
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    pointer-events: none;
+  }
+
+  .btn svg { width: 14px; height: 14px; flex-shrink: 0; }
+
+  /* Fills */
+  .btn-primary { background-color: var(--atomity-black); color: var(--atomity-white); }
+  .btn-primary:hover { background-color: var(--atomity-gray-800); }
+
+  .btn-secondary,
+  .btn-outline {
+    background-color: transparent;
+    color: var(--atomity-black);
+    box-shadow: inset 0 0 0 1px var(--atomity-gray-300);
+  }
+
+  .btn-secondary:hover,
+  .btn-outline:hover { background-color: var(--atomity-gray-200); }
+
+  .btn-secondary:focus-visible,
+  .btn-outline:focus-visible { box-shadow: inset 0 0 0 1px var(--atomity-gray-300), var(--focus-ring); }
+
+  .btn-green { background-color: var(--atomity-green); color: var(--text-on-green); }
+  .btn-green:hover { background-color: var(--atomity-green-dark); }
+
+  .btn-ghost { background: transparent; color: inherit; padding: 10px 12px; }
+  .btn-ghost:hover { background-color: var(--atomity-gray-100); }
+
+  .btn-on-dark {
+    background: transparent;
+    color: var(--text-on-dark);
+    box-shadow: inset 0 0 0 1px var(--border-on-dark);
+  }
+
+  .btn-on-dark:hover { background-color: var(--surface-on-dark-subtle); }
+
+  .btn-outline-green {
+    background: transparent;
+    color: var(--atomity-green-light);
+    box-shadow: inset 0 0 0 1.5px var(--atomity-green-light);
+  }
+
+  .btn-outline-green:hover { background: var(--atomity-green-light); color: var(--atomity-black); }
+
+  .btn-danger { background-color: var(--color-error); color: #fff; }
+  .btn-danger:hover { background-color: var(--color-error-text); }
+
+  /* Sizes */
+  .btn-sm { padding: 8px 18px; font-size: 11px; gap: 6px; }
+  .btn-sm svg { width: 12px; height: 12px; }
+  .btn-lg { padding: 18px 40px; font-size: 14px; }
+  .btn-block { display: flex; width: 100%; }
+  .btn-icon { padding: 0; width: 44px; height: 44px; }
+  .btn-sm.btn-icon { width: 32px; height: 32px; }
+
+  /* Loading: add .btn-loading and keep the label for width. */
+  .btn-loading { position: relative; color: transparent !important; pointer-events: none; }
+  .btn-loading::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: 2px solid currentColor;
+    border-color: var(--atomity-white) var(--atomity-white) transparent transparent;
+    animation: atomity-spin 0.7s linear infinite;
+  }
+  .btn-green.btn-loading::after,
+  .btn-secondary.btn-loading::after,
+  .btn-outline.btn-loading::after,
+  .btn-ghost.btn-loading::after {
+    border-color: var(--atomity-black) var(--atomity-black) transparent transparent;
+  }
+
+  /* Button row — primary last on the right, secondary beside it. */
+  .btn-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+  }
+
+  /* ── CompactButton ── */
+  .compact-btn {
+    display: inline-flex;
+    align-items: center;
+    align-self: flex-start;
+    gap: 5px;
+    padding: 4px 8px;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+    color: var(--atomity-gray-600);
+    background: transparent;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: color var(--transition-fast), background var(--transition-fast);
+  }
+
+  .compact-btn:hover { color: var(--atomity-gray-900); background: var(--atomity-gray-100); }
+  .compact-btn svg { width: 12px; height: 12px; flex-shrink: 0; }
+  .compact-btn:disabled { opacity: 0.45; cursor: not-allowed; background: transparent; }
+
+  .compact-btn--md { gap: 7px; padding: 7px 12px; font-size: 12px; color: var(--atomity-gray-700); }
+  .compact-btn--md svg:first-child { width: 14px; height: 14px; }
+
+  /* ── IconButton (ghost: no frame at rest, soft fill under the pointer) ── */
+  .icon-btn {
+    --icon-btn-size: 26px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--icon-btn-size);
+    height: var(--icon-btn-size);
+    padding: 0;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: background var(--transition-base), color var(--transition-fast);
+  }
+
+  .icon-btn svg { width: calc(var(--icon-btn-size) * 0.55); height: calc(var(--icon-btn-size) * 0.55); }
+  .icon-btn:hover { background: var(--atomity-gray-100); color: var(--atomity-black); }
+  .icon-btn:disabled { opacity: 0.4; cursor: not-allowed; background: transparent; }
+  .icon-btn--sm { --icon-btn-size: 22px; }
+  .icon-btn--lg { --icon-btn-size: 34px; border-radius: var(--radius-md); }
+  .icon-btn--danger:hover { color: var(--atomity-red); }
+}
+
+/* ═══════════════════════════════════════════════════
+   6. FORM FIELDS
+   Markup:
+     <div class="field">
+       <label class="label">Work email <span class="label-optional">optional</span></label>
+       <input class="input" placeholder="you@company.com">
+       <p class="field-hint">…</p> / <p class="field-error">…</p>
+     </div>
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  .field { margin-bottom: 16px; }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0 16px;
+  }
+
+  @media (min-width: 640px) {
+    .field-row { grid-template-columns: 1fr 1fr; }
+  }
+
+  .label {
+    display: block;
+    margin-bottom: 6px;
+    font-family: var(--font-code);
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--atomity-gray-500);
+  }
+
+  .label-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 6px;
+  }
+
+  .label-row .label { margin-bottom: 0; }
+  .label-row .link { margin-left: auto; font-family: var(--font-code); font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em; }
+
+  .label-optional {
+    margin-left: 8px;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--atomity-gray-400);
+  }
+
+  .input,
+  .select,
+  .textarea {
+    display: block;
+    width: 100%;
+    padding: 12px 16px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    color: var(--atomity-black);
+    background: var(--surface-input);
+    border: 1px solid var(--atomity-gray-200);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .input::placeholder,
+  .textarea::placeholder { color: var(--atomity-gray-400); }
+
+  .input:focus,
+  .select:focus,
+  .textarea:focus {
+    border-color: var(--atomity-black);
+    box-shadow: var(--focus-ring);
+  }
+
+  .input:disabled,
+  .select:disabled,
+  .textarea:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .input--error,
+  .input[aria-invalid="true"],
+  .select[aria-invalid="true"],
+  .textarea[aria-invalid="true"] { border-color: var(--color-error); }
+
+  .input--error:focus,
+  .input[aria-invalid="true"]:focus { box-shadow: var(--color-error-focus-ring); }
+
+  .textarea { min-height: 96px; resize: vertical; line-height: 1.5; }
+
+  /* Native select styled like the input, with a chevron. */
+  .select {
+    appearance: none;
+    padding-right: 40px;
+    cursor: pointer;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23030303' stroke-opacity='0.4' stroke-width='1.75' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+  }
+
+  /* Dense variant — dashboard settings cards. */
+  .input--compact,
+  .select--compact {
+    padding: 7px 10px;
+    font-size: var(--dash-fs-sm);
+    font-weight: 600;
+    background-color: var(--surface-page);
+    border-width: 1.5px;
+    border-color: var(--border-light);
+  }
+
+  .select--compact { padding-right: 32px; background-position: right 10px center; }
+
+  /* Input with an icon/button inside (password toggle, search icon). */
+  .input-wrap { position: relative; }
+  .input-wrap > .input { padding-right: 44px; }
+  .input-wrap--leading > .input { padding-left: 40px; padding-right: 16px; }
+
+  .input-affix {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    padding: 0;
+    color: var(--atomity-gray-400);
+    background: none;
+    border: 0;
+    cursor: pointer;
+    transition: color var(--transition-fast);
+  }
+
+  .input-wrap--leading > .input-affix { right: auto; left: 14px; pointer-events: none; }
+  .input-affix:hover { color: var(--atomity-black); }
+  .input-affix svg { width: 16px; height: 16px; }
+
+  .field-hint {
+    margin-top: 6px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--atomity-gray-400);
+  }
+
+  .field-error {
+    margin-top: 6px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    color: var(--color-error-text);
+  }
+
+  /* Checkbox / radio row. */
+  .check {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    line-height: 1.55;
+    color: var(--atomity-gray-500);
+    cursor: pointer;
+  }
+
+  .check input[type="checkbox"],
+  .check input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    flex-shrink: 0;
+    accent-color: var(--atomity-black);
+    cursor: pointer;
+  }
+
+  /* Switch — <label class="switch"><input type="checkbox"><span></span></label> */
+  .switch {
+    position: relative;
+    display: inline-flex;
+    flex-shrink: 0;
+    width: 34px;
+    height: 20px;
+    cursor: pointer;
+  }
+
+  .switch input { position: absolute; opacity: 0; width: 0; height: 0; }
+
+  .switch span {
+    position: absolute;
+    inset: 0;
+    border-radius: var(--radius-pill);
+    background: var(--atomity-gray-300);
+    transition: background var(--transition-fast);
+  }
+
+  .switch span::after {
+    content: "";
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: var(--surface-input);
+    box-shadow: 0 1px 2px rgba(3, 3, 3, 0.2);
+    transition: transform var(--transition-base);
+  }
+
+  .switch input:checked + span { background: var(--atomity-black); }
+  .switch input:checked + span::after { transform: translateX(14px); }
+  .switch input:focus-visible + span { box-shadow: var(--focus-ring); }
+  .switch input:disabled + span { opacity: 0.5; cursor: not-allowed; }
+
+  /* OTP / verification code boxes. */
+  .otp {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  }
+
+  .otp-box {
+    flex: 1;
+    aspect-ratio: 1 / 1;
+    max-width: 56px;
+    max-height: 56px;
+    min-width: 0;
+    padding: 0;
+    text-align: center;
+    font-size: clamp(16px, 4vw, 20px);
+    font-weight: 700;
+    color: var(--atomity-black);
+    background: var(--surface-input);
+    border: 1px solid var(--atomity-gray-200);
+    border-radius: var(--radius-md);
+    outline: none;
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .otp-box:focus { border-color: var(--atomity-black); box-shadow: var(--focus-ring); }
+  .otp-box--filled { border-color: var(--atomity-black); }
+  .otp-box--error { border-color: var(--color-error); }
+
+  /* Section heading inside a long form, and "OR"-style divider. */
+  .form-section-title { margin-bottom: 4px; font-family: var(--font-title); font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .form-section-sub { margin-bottom: 18px; font-size: 13px; line-height: 1.6; color: var(--atomity-gray-500); }
+
+  .divider-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 28px 0;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--atomity-gray-400);
+  }
+
+  .divider-label::before,
+  .divider-label::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background-color: var(--atomity-gray-200);
+  }
+
+  /* Custom dropdown (listbox) — trigger uses .input.dropdown-trigger. */
+  .dropdown { position: relative; }
+
+  .dropdown-trigger {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    text-align: left;
+    cursor: pointer;
+  }
+
+  .dropdown-trigger > span:first-child { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .dropdown-trigger--empty { color: var(--atomity-gray-400); }
+  .dropdown-chevron { flex-shrink: 0; color: var(--atomity-gray-400); transition: transform var(--transition-fast); }
+  .dropdown[data-open="true"] .dropdown-chevron,
+  .dropdown-chevron--open { transform: rotate(180deg); }
+
+  .dropdown-panel {
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    right: 0;
+    z-index: var(--z-dropdown);
+    max-height: 288px;
+    overflow-y: auto;
+    padding: 12px;
+    background-color: var(--surface-page);
+    border: 1.5px solid var(--border-light);
+    border-radius: 20px;
+    box-shadow: var(--shadow-dropdown);
+    outline: none;
+  }
+
+  .dropdown-option {
+    margin-bottom: 2px;
+    padding: 10px 16px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    border-radius: var(--radius-lg);
+    cursor: pointer;
+  }
+
+  .dropdown-option:last-child { margin-bottom: 0; }
+
+  .dropdown-option:hover,
+  .dropdown-option--active { background-color: rgba(3, 3, 3, 0.05); color: var(--text-primary); }
+
+  .dropdown-option--selected,
+  .dropdown-option[aria-selected="true"] {
+    background-color: var(--atomity-green);
+    color: var(--text-primary);
+    font-weight: 700;
+  }
+
+  .dropdown-group-label {
+    padding: 10px 16px 4px;
+    font-family: var(--font-code);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--atomity-gray-400);
+  }
+
+  /* Inside a dialog the panel sits on the same cream — give it a firmer lift. */
+  [role="dialog"] .dropdown-panel {
+    border-color: var(--atomity-gray-200);
+    box-shadow: 0 18px 44px rgba(3, 3, 3, 0.24), 0 2px 6px rgba(3, 3, 3, 0.08);
+  }
+
+  /* File drop zone. */
+  .dropzone {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    border: 2px dashed var(--atomity-gray-300);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: border-color 200ms ease, background-color 200ms ease;
+  }
+
+  .dropzone:hover,
+  .dropzone--dragging { border-color: var(--atomity-green-dark); background-color: var(--atomity-green-tint); }
+}
+
+/* ═══════════════════════════════════════════════════
+   7. CHIPS, BADGES, AVATAR
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  /* <StatusChip> — verdict pill. Tinted fill, ink label; never colour alone. */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 2px 9px;
+    font-family: var(--font-code);
+    font-size: 10px;
+    font-weight: 700;
+    line-height: 1.5;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    white-space: nowrap;
+    color: var(--text-muted);
+    background: var(--tone-neutral-bg);
+    border-radius: var(--radius-pill);
+  }
+
+  .chip--pass    { background: var(--tone-pass-bg);  color: var(--atomity-black); }
+  .chip--watch   { background: var(--tone-watch-bg); color: var(--atomity-black); }
+  .chip--fail    { background: var(--tone-fail-bg);  color: var(--atomity-black); }
+  .chip--neutral { background: var(--tone-neutral-bg); color: var(--text-muted); }
+  .chip--solid   { background: var(--atomity-green); color: var(--atomity-black); }
+  .chip--dark    { background: var(--atomity-black); color: var(--atomity-white); }
+  .chip--outline { background: transparent; box-shadow: inset 0 0 0 1px var(--border-dark); color: var(--atomity-gray-700); }
+
+  /* Leading status dot: <span class="chip chip--pass"><i class="dot"></i>Live</span> */
+  .dot {
+    display: inline-block;
+    width: 6px;
+    height: 6px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background: currentColor;
+  }
+
+  .dot--pass    { background: var(--atomity-green-dark); }
+  .dot--watch   { background: var(--color-warning); }
+  .dot--fail    { background: var(--color-error); }
+  .dot--live    { background: var(--atomity-green-dark); animation: atomity-pulse 2s ease-in-out infinite; }
+
+  /* Removable selection chip (filters, multi-select). */
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 6px 4px 10px;
+    font-size: 12px;
+    font-weight: 600;
+    background: var(--atomity-gray-100);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-pill);
+  }
+
+  .tag button {
+    display: inline-flex;
+    padding: 2px;
+    color: var(--atomity-gray-400);
+    background: none;
+    border: 0;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+
+  .tag button:hover { color: var(--atomity-black); background: var(--atomity-gray-200); }
+
+  /* Count badge (notifications, tab counts). */
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    font-family: var(--font-code);
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--atomity-white);
+    background: var(--atomity-black);
+    border-radius: var(--radius-pill);
+  }
+
+  .badge--green { background: var(--atomity-green); color: var(--atomity-black); }
+
+  /* <ScenarioBadge> — A/B pill. */
+  .scenario-badge {
+    --scenario-size: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--scenario-size);
+    height: var(--scenario-size);
+    font-family: var(--font-code);
+    font-size: calc(var(--scenario-size) * 0.5);
+    font-weight: 700;
+    border-radius: var(--radius-pill);
+    background: var(--atomity-green);
+    color: var(--atomity-black);
+  }
+
+  .scenario-badge--b { background: var(--atomity-gray-700); color: var(--atomity-white); }
+
+  /* Avatars. .avatar-atomity is the mint disc where the assistant speaks. */
+  .avatar {
+    --avatar-size: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: var(--avatar-size);
+    height: var(--avatar-size);
+    overflow: hidden;
+    font-family: var(--font-code);
+    font-size: calc(var(--avatar-size) * 0.4);
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--atomity-black);
+    background: var(--atomity-gray-100);
+    border-radius: var(--radius-pill);
+  }
+
+  .avatar img { width: 100%; height: 100%; object-fit: cover; }
+  .avatar svg { width: 55%; height: 55%; }
+  .avatar--sm { --avatar-size: 24px; }
+  .avatar--lg { --avatar-size: 40px; }
+  .avatar-atomity { background: var(--atomity-green); color: var(--atomity-black); }
+}
+
+/* ═══════════════════════════════════════════════════
+   8. PANEL / CARD
+   <Panel>: cream card, 1.5px hairline, 12px radius,
+   header with optional grip/icon/title/actions.
+
+     <section class="panel">
+       <header class="panel__header">
+         <svg class="panel__icon">…</svg>
+         <h3 class="panel__title">Spend by Category</h3>
+         <button class="icon-btn icon-btn--sm">…</button>
+       </header>
+       <div class="panel__body">…</div>
+     </section>
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  .panel {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    background: var(--surface-page);
+    border: 1.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .panel--hover:hover { box-shadow: var(--shadow-card-hover); }
+  .panel--dragging { opacity: 0.45; }
+  .panel--overlay { transform: scale(1.02); box-shadow: var(--shadow-drag); transition: none; }
+
+  .panel__header {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    padding: calc(var(--dash-card-pad) - 6px) var(--dash-card-pad);
+    border-bottom: 1px solid var(--border-light);
+    user-select: none;
+  }
+
+  .panel--collapsed .panel__header { border-bottom: none; }
+  .panel--collapsed .panel__body { display: none; }
+
+  .panel__icon { width: 14px; height: 14px; flex-shrink: 0; color: var(--text-muted); }
+
+  .panel__title {
+    flex: 1;
+    min-width: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    font-family: var(--font-display);
+    font-size: calc(var(--dash-fs) + 0.5px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--atomity-gray-900);
+  }
+
+  .panel__grip {
+    display: inline-flex;
+    padding: 2px 4px;
+    margin: -2px -4px;
+    color: var(--atomity-gray-300);
+    border-radius: var(--radius-sm);
+    cursor: grab;
+    touch-action: none;
+    transition: color var(--transition-fast), background var(--transition-fast);
+  }
+
+  .panel__grip:hover { color: var(--atomity-gray-700); background: var(--atomity-gray-100); }
+
+  .panel__body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    min-height: 0;
+    padding: var(--dash-card-pad);
+    overflow-y: auto;
+  }
+
+  .panel__footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    padding: calc(var(--dash-card-pad) - 4px) var(--dash-card-pad);
+    border-top: 1px solid var(--border-light);
+  }
+
+  /* Generic content card (marketing / settings). */
+  .card {
+    padding: 24px;
+    background: var(--surface-page);
+    border: 1.5px solid var(--border-light);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-card);
+  }
+
+  .card--paper { background: var(--surface-paper); }
+  .card--sand  { background: var(--surface-sand); border-color: transparent; box-shadow: none; }
+  .card--mint  { background: var(--atomity-green-light); border-color: transparent; }
+  .card--dark  { background: var(--surface-dark); color: var(--text-on-dark); border-color: var(--surface-dark); }
+  .card--interactive { cursor: pointer; transition: box-shadow var(--transition-base), border-color var(--transition-base), transform var(--transition-base); }
+  .card--interactive:hover { box-shadow: var(--shadow-card-hover); border-color: var(--border-dark); }
+
+  .card__title { margin-bottom: 4px; font-family: var(--font-title); font-size: 17px; font-weight: 700; letter-spacing: -0.01em; }
+  .card__desc  { font-size: 13px; line-height: 1.6; color: var(--atomity-gray-500); }
+
+  /* Recessed well inside a card. */
+  .well {
+    padding: 12px 14px;
+    background: var(--atomity-gray-100);
+    border-radius: var(--radius-md);
+  }
+
+  /* Mint callout behind a positive summary. */
+  .callout {
+    display: flex;
+    gap: 10px;
+    padding: 12px 14px;
+    font-size: 13px;
+    line-height: 1.55;
+    background: var(--atomity-green-tint);
+    border: 1px solid var(--atomity-green-light);
+    border-radius: var(--radius-md);
+  }
+
+  .callout svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; color: var(--atomity-green-dark); }
+  .callout--warning { background: var(--color-warning-bg); border-color: rgba(255, 107, 0, 0.24); }
+  .callout--warning svg { color: var(--color-warning); }
+  .callout--error { background: var(--color-error-bg); border-color: var(--color-error-border); color: var(--color-error-text); }
+  .callout--error svg { color: var(--color-error); }
+  .callout--info { background: var(--atomity-gray-100); border-color: var(--border-light); }
+  .callout--info svg { color: var(--atomity-gray-500); }
+}
+
+/* ═══════════════════════════════════════════════════
+   9. POPOVER & MENU
+     <div class="popover">
+       <div class="micro-label menu__heading">Model</div>
+       <button class="menu-item" aria-pressed="true">
+         <svg class="menu-item__icon">…</svg>
+         <span class="menu-item__text">
+           <span class="menu-item__label">Fast</span>
+           <span class="menu-item__desc">Quick answers</span>
+         </span>
+         <svg class="menu-item__check">…</svg>
+       </button>
+     </div>
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  .popover {
+    min-width: 200px;
+    padding: 8px;
+    background-color: var(--atomity-white-light);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-elevated);
+    z-index: var(--z-dropdown);
+  }
+
+  .menu { display: flex; flex-direction: column; gap: 1px; }
+  .menu__heading { padding: 6px 8px 4px; }
+  .menu__divider { height: 1px; margin: 6px 0; background: var(--border-light); border: 0; }
+
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    padding: 8px;
+    font-family: var(--font-display);
+    text-align: left;
+    color: var(--text-primary);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .menu-item:hover { background: var(--atomity-gray-100); }
+
+  .menu-item[aria-pressed="true"],
+  .menu-item[aria-selected="true"],
+  .menu-item--selected { background: var(--atomity-green-light); }
+
+  .menu-item__icon { width: 16px; height: 16px; flex-shrink: 0; color: var(--text-muted); }
+  .menu-item__text { flex: 1; min-width: 0; }
+  .menu-item__label { display: block; font-size: 13px; font-weight: 500; }
+  .menu-item__desc { display: block; font-size: 11px; color: var(--text-muted); }
+  .menu-item__meta { flex-shrink: 0; font-size: 10px; color: var(--text-muted); }
+  .menu-item__check { width: 14px; height: 14px; flex-shrink: 0; color: var(--atomity-green-dark); visibility: hidden; }
+  .menu-item[aria-pressed="true"] .menu-item__check,
+  .menu-item--selected .menu-item__check { visibility: visible; }
+
+  .menu-item--danger { color: var(--color-error-text); }
+  .menu-item--danger .menu-item__icon { color: var(--color-error); }
+
+  /* Compact, single-line, truncating row for narrow menus. */
+  .menu-item--compact { padding: 6px 8px; }
+  .menu-item--compact .menu-item__label { font-size: 12px; font-weight: 400; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .menu-item--compact .menu-item__icon { width: 13px; height: 13px; }
+  .menu-item--compact .menu-item__check { width: 12px; height: 12px; }
+
+  /* Larger marketing-style dropdown (navbar mobile menu). */
+  .dropdown-menu {
+    padding: 12px;
+    background-color: var(--surface-page);
+    border: 1.5px solid var(--border-light);
+    border-radius: 20px;
+    box-shadow: var(--shadow-dropdown);
+  }
+
+  .dropdown-menu__link {
+    display: block;
+    padding: 10px 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    border-radius: var(--radius-lg);
+  }
+
+  .dropdown-menu__link:hover { background-color: rgba(3, 3, 3, 0.05); color: var(--text-primary); }
+  .dropdown-menu__link--active { background-color: var(--atomity-green); color: var(--text-primary); font-weight: 700; }
+}
+
+/* ═══════════════════════════════════════════════════
+   10. MODAL
+     <div class="modal-backdrop">
+       <div class="modal" role="dialog" aria-modal="true">
+         <div class="modal__header">
+           <h2 class="modal__title">…</h2>
+           <button class="icon-btn icon-btn--sm" aria-label="Close">…</button>
+         </div>
+         <div class="modal__body">…</div>
+         <div class="modal__footer">…</div>
+       </div>
+     </div>
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  .modal-backdrop {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    background: rgba(3, 3, 3, 0.45);
+    animation: atomity-fade-in 200ms ease;
+  }
+
+  /* Softer blurred variant used by the auth flow. */
+  .modal-backdrop--blur {
+    background: rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+  }
+
+  .modal {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: min(900px, 100%);
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+    padding: 26px;
+    background: var(--atomity-white);
+    border: 1.5px solid var(--border-light);
+    border-radius: var(--radius-2xl);
+    box-shadow: var(--shadow-modal);
+    animation: atomity-modal-in 300ms var(--ease-out-soft);
+  }
+
+  .modal--sm { width: min(440px, 100%); }
+  .modal--md { width: min(640px, 100%); }
+
+  /* Centred, spacious card (sign-in, verification). */
+  .modal--hero {
+    width: min(440px, 100%);
+    padding: 48px 40px;
+    gap: 0;
+  }
+
+  .modal__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .modal__title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--atomity-gray-900);
+  }
+
+  .modal--hero .modal__header { display: block; margin-bottom: 28px; text-align: center; }
+  .modal--hero .modal__title { margin-bottom: 4px; font-size: 25px; line-height: 1.2; letter-spacing: -0.02em; color: var(--atomity-black); }
+  .modal__subtitle { font-size: 15px; line-height: 1.55; color: var(--atomity-gray-500); }
+
+  .modal__body { display: flex; flex-direction: column; gap: 12px; }
+
+  .modal__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+
+  .modal__close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
+   11. TOAST
+     <div class="toast-stack" role="status" aria-live="polite">
+       <div class="toast toast--success">
+         <svg class="toast__icon">…</svg>
+         <div class="toast__content">
+           <div class="toast__message">Saved</div>
+           <div class="toast__detail">…</div>
+         </div>
+         <button class="icon-btn icon-btn--sm">…</button>
+       </div>
+     </div>
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  .toast-stack {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: var(--z-toast);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-width: min(420px, calc(100vw - 48px));
+    pointer-events: none;
+  }
+
+  .toast {
+    --toast-accent: var(--atomity-gray-500);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 12px 12px 12px 14px;
+    background: var(--surface-page);
+    background-image: linear-gradient(var(--toast-bg, var(--atomity-gray-100)), var(--toast-bg, var(--atomity-gray-100)));
+    border: 1px solid var(--toast-border, var(--border-light));
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-modal);
+    pointer-events: auto;
+    animation: atomity-toast-in 200ms ease-out;
+  }
+
+  .toast__icon { width: 16px; height: 16px; flex-shrink: 0; margin-top: 1px; color: var(--toast-accent); }
+  .toast__content { flex: 1; min-width: 0; }
+  .toast__message { font-size: 13px; font-weight: 600; color: var(--text-primary); }
+  .toast__detail { margin-top: 2px; font-size: 12px; line-height: 1.45; color: var(--text-muted); }
+
+  .toast--success { --toast-accent: var(--atomity-green-dark); --toast-bg: rgba(151, 221, 177, 0.18); }
+  .toast--error   { --toast-accent: var(--color-error); --toast-bg: var(--color-error-bg); --toast-border: var(--color-error-border); }
+  .toast--warning { --toast-accent: var(--color-warning); --toast-bg: var(--color-warning-bg); }
+  .toast--info    { --toast-accent: var(--atomity-gray-500); }
+}
+
+/* ═══════════════════════════════════════════════════
+   12. TOOLTIP
+   Pure CSS: <span class="tooltip" data-tooltip="Explainer">…</span>
+   or a real element: <div class="tooltip-box" role="tooltip">…</div>
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  .tooltip-box {
+    width: 220px;
+    padding: 8px 10px;
+    font-family: var(--font-display);
+    font-size: var(--dash-fs-sm);
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--atomity-gray-700);
+    white-space: normal;
+    background: var(--surface-page);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-tooltip);
+    z-index: var(--z-toast);
+  }
+
+  .tooltip-box--dark {
+    color: var(--atomity-white);
+    background: var(--atomity-black);
+    border-color: var(--atomity-black);
+  }
+
+  .tooltip {
+    position: relative;
+    display: inline-flex;
+    cursor: help;
+  }
+
+  .tooltip::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    top: calc(100% + 6px);
+    left: 0;
+    z-index: var(--z-toast);
+    width: max-content;
+    max-width: 220px;
+    padding: 8px 10px;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 400;
+    line-height: 1.45;
+    letter-spacing: normal;
+    text-transform: none;
+    color: var(--atomity-gray-700);
+    white-space: normal;
+    background: var(--surface-page);
+    border: 1px solid var(--border-dark);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-tooltip);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-2px);
+    transition: opacity var(--transition-fast), transform var(--transition-fast), visibility var(--transition-fast);
+    pointer-events: none;
+  }
+
+  .tooltip:hover::after,
+  .tooltip:focus-visible::after {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .tooltip--top::after { top: auto; bottom: calc(100% + 6px); }
+  .tooltip--right::after { left: auto; right: 0; }
+}
+
+/* ═══════════════════════════════════════════════════
+   13. DATA DISPLAY
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  /* <DataTable> — put inside a .panel__body. */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-family: var(--font-display);
+  }
+
+  .data-table--fixed { table-layout: fixed; }
+
+  .data-table th {
+    padding: 4px 8px;
+    font-size: calc(var(--dash-fs-sm) - 0.5px);
+    font-weight: 700;
+    text-align: left;
+    white-space: nowrap;
+    color: var(--text-muted);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .data-table td {
+    padding: var(--dash-row-pad-y) 8px;
+    font-size: calc(var(--dash-fs) - 1.5px);
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .data-table tbody tr:last-child td { border-bottom: none; }
+  .data-table--hover tbody tr { transition: background 0.12s ease; }
+  .data-table--hover tbody tr:hover { background: var(--atomity-gray-100); }
+  .data-table--sticky thead th { position: sticky; top: 0; background: var(--surface-page); z-index: 1; }
+
+  .data-table .num,
+  .data-table [data-align="right"] { text-align: right; font-variant-numeric: tabular-nums; }
+  .data-table [data-align="center"] { text-align: center; }
+
+  /* Sortable header button — inherits the th look. */
+  .data-table th button {
+    all: unset;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+    cursor: pointer;
+  }
+
+  .data-table th button::after { content: "\2195"; font-size: 0.85em; opacity: 0.35; }
+  .data-table th[aria-sort="ascending"] button::after { content: "\2191"; opacity: 1; }
+  .data-table th[aria-sort="descending"] button::after { content: "\2193"; opacity: 1; }
+
+  /* <DividedRowList> — label/value rows split by hairlines. */
+  .row-list { display: flex; flex-direction: column; }
+
+  .row-list > * {
+    padding: var(--dash-row-pad-y) 0;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .row-list > *:last-child { border-bottom: none; }
+
+  .row-list--kv > * {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    font-size: var(--dash-fs);
+  }
+
+  .row-list--kv > * > :first-child { color: var(--text-muted); }
+  .row-list--kv > * > :last-child { font-weight: 600; text-align: right; }
+
+  /* Clickable row wash. */
+  .row-hover { transition: background 0.12s ease; cursor: pointer; }
+  .row-hover:hover,
+  .row-hover:focus-visible { background: var(--atomity-gray-100); outline: none; }
+
+  /* <StatTile> — mono eyebrow over a large mono figure. */
+  .stat-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--dash-gap);
+  }
+
+  .stat-tile {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 150px;
+    padding: 10px var(--dash-card-pad);
+    background: var(--surface-page);
+    border: 1.5px solid var(--border-light);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card);
+  }
+
+  .stat-tile__value {
+    font-family: var(--font-code);
+    font-size: var(--dash-kpi-num);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .stat-tile--good .stat-tile__value { color: var(--atomity-green-dark); }
+  .stat-tile__sub { font-size: var(--dash-fs-xs); color: var(--text-muted); }
+
+  .delta { font-family: var(--font-code); font-size: var(--dash-fs-sm); font-weight: 700; }
+  .delta--up { color: var(--color-success); }
+  .delta--down { color: var(--color-error-text); }
+
+  /* Progress / spend bar: <div class="bar"><span style="width:62%"></span></div> */
+  .bar {
+    position: relative;
+    height: var(--dash-bar-h);
+    overflow: hidden;
+    background: var(--atomity-gray-100);
+    border-radius: var(--radius-pill);
+  }
+
+  .bar > span {
+    display: block;
+    height: 100%;
+    background: var(--atomity-green);
+    border-radius: inherit;
+    transition: width var(--transition-slow);
+  }
+
+  .bar--dark > span { background: var(--atomity-black); }
+  .bar--warning > span { background: var(--color-warning); }
+  .bar--error > span { background: var(--color-error); }
+
+  /* Plain hairline divider. */
+  .divider { height: 1px; margin: 16px 0; background: var(--border-light); border: 0; }
+  .divider--vertical { width: 1px; height: auto; margin: 0 12px; align-self: stretch; }
+}
+
+/* ═══════════════════════════════════════════════════
+   14. FEEDBACK
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  /* <EmptyState> — the dashed "nothing here yet" box. */
+  .empty-state {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 28px 20px;
+    text-align: center;
+    border: 1.5px dashed var(--border-light);
+    border-radius: var(--radius-lg);
+  }
+
+  .empty-state__icon { width: 20px; height: 20px; color: var(--atomity-gray-400); }
+  .empty-state__title { font-size: var(--dash-fs); font-weight: 700; }
+  .empty-state__desc { max-width: 320px; font-size: var(--dash-fs-sm); color: var(--text-muted); }
+
+  /* Small ink pill CTA used inside empty states. */
+  .pill-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 4px;
+    padding: 6px 13px;
+    font-size: var(--dash-fs-sm);
+    font-weight: 600;
+    color: var(--text-on-dark);
+    background: var(--atomity-black);
+    border: none;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: background var(--transition-fast);
+  }
+
+  .pill-cta:hover { background: var(--atomity-gray-800); }
+
+  /* Inline alert banner. */
+  .alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-primary);
+    background: var(--atomity-gray-100);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-md);
+  }
+
+  .alert svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 2px; }
+  .alert--error { color: var(--color-error-text); background: var(--color-error-bg); border-color: var(--color-error-border); }
+  .alert--error svg { color: var(--color-error); }
+  .alert--success { background: rgba(151, 221, 177, 0.18); }
+  .alert--success svg { color: var(--atomity-green-dark); }
+  .alert--warning { background: var(--color-warning-bg); border-color: rgba(255, 107, 0, 0.24); }
+  .alert--warning svg { color: var(--color-warning); }
+
+  /* Spinner. */
+  .spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+    border: 2px solid var(--atomity-gray-200);
+    border-top-color: var(--atomity-black);
+    border-radius: 50%;
+    animation: atomity-spin 0.7s linear infinite;
+  }
+
+  .spinner--lg { width: 28px; height: 28px; border-width: 2.5px; }
+  .spinner--on-dark { border-color: rgba(255, 255, 255, 0.2); border-top-color: var(--atomity-white); }
+
+  /* Skeleton placeholder. */
+  .skeleton {
+    display: block;
+    min-height: 12px;
+    background: linear-gradient(90deg, var(--atomity-gray-100) 0%, var(--atomity-white-light) 50%, var(--atomity-gray-100) 100%);
+    background-size: 200% 100%;
+    border-radius: var(--radius-sm);
+    animation: atomity-shimmer 1.4s ease-in-out infinite;
+  }
+
+  /* Full-page loading screen — put the wordmark SVG inside .loading-screen__logo. */
+  .loading-screen {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-overlay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--surface-page);
+  }
+
+  .loading-screen__logo { animation: atomity-logo-fill 1.5s ease-in-out infinite alternate; }
+}
+
+/* ═══════════════════════════════════════════════════
+   15. NAVIGATION
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  /* Floating pill navbar (marketing site). */
+  .nav-pill {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    padding: 6px 8px;
+    background-color: var(--surface-page);
+    border: 1.5px solid var(--border-light);
+    border-radius: var(--radius-pill);
+    box-shadow: 0 2px 10px rgba(3, 3, 3, 0.10);
+    transition: box-shadow var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .nav-pill:hover { box-shadow: 0 6px 20px rgba(3, 3, 3, 0.10); border-color: var(--border-dark); }
+
+  .nav-link {
+    padding: 6px 14px;
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-muted);
+    border-radius: var(--radius-pill);
+    transition: color var(--transition-fast), background var(--transition-fast);
+  }
+
+  .nav-link:hover { color: var(--text-primary); }
+  .nav-link--active,
+  .nav-link[aria-current="page"] { color: var(--text-primary); font-weight: 700; }
+
+  /* Mint "Try now" pill in the navbar. */
+  .nav-cta {
+    padding: 6px 20px;
+    font-family: var(--font-title);
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    background-color: var(--atomity-green);
+    border: none;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: background-color var(--transition-fast), transform var(--transition-fast), box-shadow var(--transition-fast);
+  }
+
+  .nav-cta:hover { transform: scale(1.05); background-color: var(--atomity-green-dark); box-shadow: 0 4px 16px rgba(151, 221, 177, 0.5); }
+  .nav-cta:active { transform: scale(0.96); }
+
+  /* App sidebar nav item. */
+  .sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 7px 10px;
+    font-size: var(--dash-fs);
+    font-weight: 500;
+    color: var(--atomity-gray-600);
+    border-radius: var(--radius-md);
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .sidebar-link svg { width: 16px; height: 16px; flex-shrink: 0; }
+  .sidebar-link:hover { background: var(--atomity-gray-100); color: var(--atomity-black); }
+  .sidebar-link--active,
+  .sidebar-link[aria-current="page"] { background: var(--atomity-green-light); color: var(--atomity-black); font-weight: 700; }
+
+  /* Segmented control / tabs. */
+  .segmented {
+    display: inline-flex;
+    width: fit-content;
+    gap: 2px;
+    padding: 3px;
+    background: var(--atomity-gray-100);
+    border-radius: var(--radius-pill);
+  }
+
+  .segmented > button,
+  .segmented > a {
+    padding: 5px 12px;
+    font-family: var(--font-code);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--text-muted);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-pill);
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+  }
+
+  .segmented > :hover { color: var(--text-primary); }
+  .segmented > [aria-selected="true"],
+  .segmented > [aria-pressed="true"],
+  .segmented > .is-active { background: var(--surface-page); color: var(--text-primary); box-shadow: var(--shadow-card), 0 0 0 1px var(--border-light); }
+
+  /* Underline tabs. */
+  .tabs {
+    display: flex;
+    gap: 20px;
+    border-bottom: 1px solid var(--border-light);
+  }
+
+  .tabs > button,
+  .tabs > a {
+    margin-bottom: -1px;
+    padding: 10px 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-muted);
+    background: none;
+    border: none;
+    border-bottom: 2px solid transparent;
+    cursor: pointer;
+    transition: color var(--transition-fast), border-color var(--transition-fast);
+  }
+
+  .tabs > :hover { color: var(--text-primary); }
+  .tabs > [aria-selected="true"],
+  .tabs > .is-active { color: var(--text-primary); font-weight: 700; border-bottom-color: var(--atomity-green-dark); }
+
+  /* Step dots (wizards). */
+  .step-dots { display: flex; justify-content: center; gap: 6px; }
+  .step-dot { width: 8px; height: 4px; background-color: var(--atomity-gray-300); border-radius: var(--radius-pill); transition: all 300ms; }
+  .step-dot--active { width: 20px; background-color: var(--atomity-black); }
+  .step-dot--done { background-color: var(--atomity-green); }
+
+  /* Breadcrumb. */
+  .breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 12px; color: var(--text-muted); }
+  .breadcrumb a:hover { color: var(--text-primary); text-decoration: underline; text-underline-offset: 3px; }
+  .breadcrumb [aria-current="page"] { color: var(--text-primary); font-weight: 600; }
+}
+
+/* ═══════════════════════════════════════════════════
+   16. DECORATIVE & UTILITIES
+   ═══════════════════════════════════════════════════ */
+
+@layer components {
+  /* Dashed 150px square grid texture — absolute-fill a positioned parent.
+     Never behind running text. Line colour follows --backdrop-grid-line-color. */
+  .backdrop-grid {
+    position: absolute;
+    inset: 0;
+    z-index: var(--z-base);
+    pointer-events: none;
+    background-color: var(--backdrop-grid-line-color);
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cpath d='M0 1H150M1 0V150' stroke='%23000' stroke-width='2' stroke-dasharray='8 8' fill='none'/%3E%3C/svg%3E");
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cpath d='M0 1H150M1 0V150' stroke='%23000' stroke-width='2' stroke-dasharray='8 8' fill='none'/%3E%3C/svg%3E");
+    -webkit-mask-size: var(--backdrop-grid-size) var(--backdrop-grid-size);
+    mask-size: var(--backdrop-grid-size) var(--backdrop-grid-size);
+  }
+
+  .backdrop-grid--dark { --backdrop-grid-line-color: var(--backdrop-grid-line-color-on-dark); }
+
+  /* Fade the grid out of the middle where content sits. */
+  .backdrop-grid--fade-center {
+    -webkit-mask-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cpath d='M0 1H150M1 0V150' stroke='%23000' stroke-width='2' stroke-dasharray='8 8' fill='none'/%3E%3C/svg%3E"),
+      radial-gradient(ellipse 60% 55% at 50% 50%, transparent 30%, #000 85%);
+    -webkit-mask-composite: source-in;
+    mask-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='150'%3E%3Cpath d='M0 1H150M1 0V150' stroke='%23000' stroke-width='2' stroke-dasharray='8 8' fill='none'/%3E%3C/svg%3E"),
+      radial-gradient(ellipse 60% 55% at 50% 50%, transparent 30%, #000 85%);
+    mask-composite: intersect;
+    -webkit-mask-size: var(--backdrop-grid-size) var(--backdrop-grid-size), 100% 100%;
+    mask-size: var(--backdrop-grid-size) var(--backdrop-grid-size), 100% 100%;
+    -webkit-mask-repeat: repeat, no-repeat;
+    mask-repeat: repeat, no-repeat;
+  }
+
+  @media (max-width: 1023px) { :root { --backdrop-grid-size: 123px; } }
+  @media (max-width: 639px)  { :root { --backdrop-grid-size: 108px; } }
+
+  /* Dark brand surface (sign-in side panel, final CTA). */
+  .surface-dark {
+    position: relative;
+    color: var(--text-on-dark);
+    background-color: var(--surface-dark);
+  }
+
+  .surface-dark .link { color: var(--text-on-dark); }
+  .surface-dark .micro-label,
+  .surface-dark .eyebrow { color: rgba(246, 244, 236, 0.6); }
+
+  .surface-paper { background-color: var(--surface-paper); }
+  .surface-sand { background-color: var(--surface-sand); }
+  .surface-mint { background-color: var(--atomity-green); color: var(--atomity-black); }
+}
+
+@layer utilities {
+  .container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--container-padding);
+  }
+
+  .section    { padding-block: var(--space-section-md); }
+  .section-sm { padding-block: var(--space-section-sm); }
+  .section-lg { padding-block: var(--space-section-lg); }
+
+  .stack    { display: flex; flex-direction: column; gap: var(--stack-gap, 12px); }
+  .cluster  { display: flex; flex-wrap: wrap; align-items: center; gap: var(--cluster-gap, 8px); }
+  .grid-auto { display: grid; grid-template-columns: repeat(auto-fill, minmax(var(--grid-min, 240px), 1fr)); gap: var(--dash-gap); }
+
+  .no-scrollbar { scrollbar-width: none; -ms-overflow-style: none; }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+
+  .truncate { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .tabular  { font-variant-numeric: tabular-nums; }
+  .font-code { font-family: var(--font-code); }
+  .font-display { font-family: var(--font-display); }
+  .font-body { font-family: var(--font-body); }
+
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+
+  .animate-fade-in-up { animation: atomity-fade-in-up 0.6s ease forwards; }
+  .animate-spin { animation: atomity-spin 0.7s linear infinite; }
+  .animate-pulse { animation: atomity-pulse 2s ease-in-out infinite; }
+}
+
+/* ═══════════════════════════════════════════════════
+   KEYFRAMES
+   ═══════════════════════════════════════════════════ */
+
+@keyframes atomity-spin { to { transform: rotate(360deg); } }
+
+@keyframes atomity-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.35; }
+}
+
+@keyframes atomity-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes atomity-fade-in-up {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes atomity-modal-in {
+  from { opacity: 0; transform: scale(0.98); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes atomity-toast-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes atomity-shimmer {
+  from { background-position: 200% 0; }
+  to { background-position: -200% 0; }
+}
+
+@keyframes atomity-logo-fill {
+  from { clip-path: inset(0 100% 0 0); }
+  to { clip-path: inset(0 0 0 0); }
+}

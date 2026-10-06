@@ -1,0 +1,176 @@
+{
+  "schema_version": "1.0",
+  "synthetic": true,
+  "as_of": "2026-10-06",
+  "instructions": "All statements and metadata are fictional. Metadata is trusted input to this gate, not independently verified evidence. expected_decision is test-only: do not pass it to the evaluator.",
+  "demo_policy": {
+    "news_max_event_age_days": 30,
+    "regulation_rule": "Evaluate current_status and effective_from. Do not reject current law solely for an old publication date.",
+    "unknown_required_temporal_metadata": "human_review",
+    "weights_and_threshold": "Candidate defines and justifies a provisional configuration. These routing expectations do not calibrate it."
+  },
+  "cases": [
+    {
+      "id": "current-news",
+      "statement": "Fictional Authority reports a region availability change.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "news",
+        "published_at": "2026-10-04",
+        "event_date": "2026-10-03",
+        "effective_from": null,
+        "last_verified_at": "2026-10-06",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "pass"
+    },
+    {
+      "id": "old-law-current",
+      "statement": "Fictional Regulation A is still in force and applicable.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "regulation",
+        "published_at": "2021-01-01",
+        "event_date": "2021-01-01",
+        "effective_from": "2021-06-01",
+        "last_verified_at": "2026-10-06",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "pass"
+    },
+    {
+      "id": "recent-article-old-event",
+      "statement": "A new article describes an old provider event as breaking news.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "news",
+        "published_at": "2026-10-05",
+        "event_date": "2025-01-01",
+        "effective_from": null,
+        "last_verified_at": "2026-10-06",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "revise"
+    },
+    {
+      "id": "unknown-date",
+      "statement": "The date of the fictional provider event is unavailable.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "news",
+        "published_at": "2026-10-04",
+        "event_date": null,
+        "effective_from": null,
+        "last_verified_at": "2026-10-06",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "human_review"
+    },
+    {
+      "id": "unsupported-claim",
+      "statement": "The draft asserts a 10 percent saving absent from its evidence.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "news",
+        "published_at": "2026-10-04",
+        "event_date": "2026-10-03",
+        "effective_from": null,
+        "last_verified_at": "2026-10-06",
+        "current_status": "current",
+        "supported": false,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "revise"
+    },
+    {
+      "id": "superseded-source",
+      "statement": "An older fictional rule has been replaced.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "regulation",
+        "published_at": "2026-10-04",
+        "event_date": "2026-10-03",
+        "effective_from": null,
+        "last_verified_at": "2026-10-06",
+        "current_status": "superseded",
+        "supported": true,
+        "superseded": true,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "revise"
+    },
+    {
+      "id": "competitor-promotion",
+      "statement": "Fictional RivalCloud claims its own product saves 10 percent.",
+      "metadata": {
+        "source_type": "competitor",
+        "content_type": "news",
+        "published_at": "2026-10-04",
+        "event_date": "2026-10-03",
+        "effective_from": null,
+        "last_verified_at": "2026-10-06",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": true
+      },
+      "expected_decision": "reject"
+    },
+    {
+      "id": "conflicting-evidence",
+      "statement": "Two fictional authorities disagree about the same claim.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "news",
+        "published_at": "2026-10-04",
+        "event_date": "2026-10-03",
+        "effective_from": null,
+        "last_verified_at": "2026-10-06",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": true,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "human_review"
+    },
+    {
+      "id": "future-rule",
+      "statement": "The fictional rule is adopted and will apply from 2027-01-01, not today.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "regulation",
+        "published_at": "2026-10-04",
+        "event_date": "2026-10-03",
+        "effective_from": "2027-01-01",
+        "last_verified_at": "2026-10-06",
+        "current_status": "adopted_not_applicable",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "pass"
+    }
+  ]
+}
