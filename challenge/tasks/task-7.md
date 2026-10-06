@@ -81,7 +81,7 @@ A conceptual structure could be:
 └─────────────────────────────────────┘
 ```
 
-The exact layout is determined by the supplied design foundation or, where unavailable, the neutral demo theme described below.
+The exact layout is determined by the supplied design foundation described below.
 
 ---
 
@@ -240,25 +240,22 @@ The renderer should not silently rewrite:
 
 # Design Foundation
 
-Where available, use the supplied design foundation:
+Use the supplied Atomity design foundation:
 
 ```text
-design/tokens.json
-design/tokens.css
+design/
+├── atomity.css
+├── atomity_logo.svg
+└── fonts/
 ```
 
-The Atomity design system, including components and usage guidance, is documented in the Atomity Storybook: [github.com/atomityhq/storybook](https://github.com/atomityhq/storybook).
+* [`design/atomity.css`](../../design/atomity.css): the Atomity design system as a single stylesheet with no build step. It defines the font faces, the design tokens as CSS custom properties, base typography and ready-made component styles.
+* [`design/atomity_logo.svg`](../../design/atomity_logo.svg): the approved logo.
+* [`design/fonts/`](../../design/fonts/): the font files loaded by `atomity.css`.
 
-The broader repository may also provide:
+The Atomity design system, including components and usage guidance, is documented in the Atomity Storybook: [github.com/atomityhq/storybook](https://github.com/atomityhq/storybook). Use it as the visual reference for how the tokens and components should look and be combined.
 
-* Approved logo assets in SVG format.
-* Approved fonts or font-loading instructions.
-* Logo clear-space rules.
-* Logo placement rules.
-* A minimal HTML page shell.
-* Example content JSON.
-* A visual reference.
-* A browser-rendering command.
+Link `atomity.css` from the template rather than copying its values. Because `atomity.css` loads its fonts from `./fonts/` relative to itself, reference it in place (or make sure the fonts resolve) so the rendered output uses the real typefaces.
 
 The supplied design foundation is **not** a finished renderer.
 
@@ -274,7 +271,7 @@ The candidate remains responsible for:
 
 # Design Tokens
 
-Use the supplied design-token system rather than hardcoding brand colours throughout the template.
+Use the tokens defined in `atomity.css` rather than hardcoding brand colours, fonts or spacing throughout the template.
 
 Keep these concerns separate:
 
@@ -286,50 +283,39 @@ Layout
 Design Tokens
 ```
 
-A token structure may include groups such as:
+The tokens are CSS custom properties on `:root`, grouped as follows (examples only; see `atomity.css` for the full set):
 
-```json
-{
-  "colour": {
-    "background": "...",
-    "surface": "...",
-    "text": "...",
-    "muted_text": "...",
-    "accent": "..."
-  },
-  "typography": {
-    "heading_font": "...",
-    "body_font": "...",
-    "scale": {}
-  },
-  "spacing": {},
-  "radius": {},
-  "logo": {
-    "asset": "...",
-    "clear_space": "..."
-  }
+| Group | Example tokens |
+| ----- | -------------- |
+| Brand colours | `--atomity-green`, `--atomity-black`, `--atomity-white` |
+| Surfaces | `--surface-page`, `--surface-paper`, `--surface-dark` |
+| Text | `--text-primary`, `--text-secondary`, `--text-muted`, `--text-on-dark` |
+| Borders | `--border-light`, `--border-dark` |
+| Typography | `--font-title`, `--font-display`, `--font-body`, `--font-code` |
+| Radius | `--radius-sm` … `--radius-2xl`, `--radius-pill` |
+| Layout and spacing | `--container-padding`, `--space-section-sm`, `--space-section-md` |
+| Shadows | `--shadow-card`, `--shadow-elevated` |
+
+Reference tokens with `var(...)`, for example:
+
+```css
+.post-title {
+  font-family: var(--font-title);
+  color: var(--text-primary);
 }
 ```
 
-Do not assume that the example values above are official design values.
+Where the template needs a value the stylesheet does not define, such as the canvas size or logo clear space, keep it in the template's own design configuration, derive it from existing tokens where possible, and document it.
 
 ---
 
-# If the Atomity Design Kit Is Absent
+# Brand Identity
 
-If the repository does not contain the expected Atomity design assets:
+Use only the identity supplied in `design/` and documented in the Storybook.
 
-**Do not invent an official Atomity identity.**
+**Do not invent additional official Atomity brand assets**, such as alternative logos, colours or fonts.
 
-Instead, use a clearly labelled:
-
-```text
-Neutral Demo Theme
-```
-
-The neutral theme should exist only to demonstrate the rendering pipeline.
-
-Brand conformity cannot be assessed until the actual design assets are supplied.
+If a required design input is genuinely missing from both, use a clearly labelled neutral value for that input, document the gap, and do not present it as an official Atomity design value.
 
 ---
 
@@ -515,7 +501,7 @@ Where supplied, these include:
 * One example layout.
 * Approved sample text.
 
-These assets should live under the repository's `design/` area where applicable.
+Reference the supplied assets from the repository's `design/` folder rather than copying or modifying them. Keep any template-specific design configuration inside your submission folder.
 
 Do not create fake official brand assets when they have not been supplied.
 
