@@ -1,0 +1,20 @@
+{
+  "content_item": {
+    "content_id": "content-001",
+    "text": "A practical guide to preparing a home workspace for focused work."
+  },
+  "scenarios": {
+    "pass": {
+      "description": "Immediate human review",
+      "decisions": ["human_review"]
+    },
+    "revise-once": {
+      "description": "One revision followed by human review",
+      "decisions": ["revise", "human_review"]
+    },
+    "retry-limit": {
+      "description": "Repeated revisions until the workflow limit",
+      "decisions": ["revise", "revise", "revise"]
+    }
+  }
+}
