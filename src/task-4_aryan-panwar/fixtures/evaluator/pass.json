@@ -1,0 +1,5 @@
+{
+  "responses": [
+    {"decision": "human_review", "feedback": "Claims match the evidence pack; ready for a human reviewer."}
+  ]
+}

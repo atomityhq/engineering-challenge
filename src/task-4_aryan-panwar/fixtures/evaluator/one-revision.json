@@ -1,0 +1,6 @@
+{
+  "responses": [
+    {"decision": "revise", "feedback": "Add the effective date to the opening line."},
+    {"decision": "human_review", "feedback": "Effective date added; ready for a human reviewer."}
+  ]
+}

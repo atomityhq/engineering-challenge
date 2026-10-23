@@ -1,0 +1,50 @@
+[
+  {
+    "seq": 0,
+    "event": "evaluation_completed",
+    "revision_count": 0,
+    "detail": {
+      "decision": "revise",
+      "feedback": "Add the effective date to the opening line."
+    }
+  },
+  {
+    "seq": 1,
+    "event": "revision_completed",
+    "revision_count": 1,
+    "detail": {
+      "attempt": 1,
+      "feedback": "Add the effective date to the opening line."
+    }
+  },
+  {
+    "seq": 2,
+    "event": "evaluation_completed",
+    "revision_count": 1,
+    "detail": {
+      "decision": "human_review",
+      "feedback": "Effective date added; ready for a human reviewer."
+    }
+  },
+  {
+    "seq": 3,
+    "event": "human_review_required",
+    "revision_count": 1,
+    "detail": {}
+  },
+  {
+    "seq": 4,
+    "event": "human_approved",
+    "revision_count": 1,
+    "detail": {
+      "decision": "approve",
+      "reviewer": "cli"
+    }
+  },
+  {
+    "seq": 5,
+    "event": "workflow_completed",
+    "revision_count": 1,
+    "detail": {}
+  }
+]

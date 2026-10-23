@@ -1,0 +1,116 @@
+### 1. One revision, pause at human review, restart, approve
+
+$ python -m review_workflow run --content fixtures/content/content-001.json --evaluator fixtures/evaluator/one-revision.json --run-id run-001
+Run run-001 started for content-001
+Evaluation completed (revisions so far: 0)
+  Decision: revise
+Revision attempt: 1
+Evaluation completed (revisions so far: 1)
+  Decision: human_review
+Human review required
+Checkpoint saved: 1f1ce92e-097a-6960-8004-f4ea6c3adb11
+Workflow paused.
+Status: awaiting_review  (state + event log: examples/output/runs/run-001/)
+[exit 0]
+# (process exited; the next command is a new process)
+
+$ python -m review_workflow resume run-001 --decision approve
+Loaded checkpoint 1f1ce92e-097a-6960-8004-f4ea6c3adb11
+Current stage: awaiting_review
+Approved by cli.
+Workflow completed.
+Status: completed  (state + event log: examples/output/runs/run-001/)
+[exit 0]
+
+### 2. Duplicate approval of a completed run
+
+$ python -m review_workflow approve run-001
+Loaded checkpoint 1f1ce92e-0f0d-6be5-8006-29dd549f883c
+Current stage: completed
+Run already finished (completed); nothing to do.
+Status: completed  (state + event log: examples/output/runs/run-001/)
+[exit 0]
+
+### 3. Normal pass straight to review, then reject
+
+$ python -m review_workflow run --content fixtures/content/content-001.json --evaluator fixtures/evaluator/pass.json --run-id run-002
+Run run-002 started for content-001
+Evaluation completed (revisions so far: 0)
+  Decision: human_review
+Human review required
+Checkpoint saved: 1f1ce92e-192b-6efc-8002-fe7641de098e
+Workflow paused.
+Status: awaiting_review  (state + event log: examples/output/runs/run-002/)
+[exit 0]
+
+$ python -m review_workflow resume run-002 --decision reject --note Angle does not fit this week
+Loaded checkpoint 1f1ce92e-192b-6efc-8002-fe7641de098e
+Current stage: awaiting_review
+Rejected by cli.
+Workflow finished: content rejected.
+Status: rejected  (state + event log: examples/output/runs/run-002/)
+[exit 0]
+
+### 4. Evaluator always asks for revision: stops at 2
+
+$ python -m review_workflow run --content fixtures/content/content-001.json --evaluator fixtures/evaluator/always-revise.json --run-id run-003
+Run run-003 started for content-001
+Evaluation completed (revisions so far: 0)
+  Decision: revise
+Revision attempt: 1
+Evaluation completed (revisions so far: 1)
+  Decision: revise
+Revision attempt: 2
+Evaluation completed (revisions so far: 2)
+  Decision: revise
+Maximum revision attempts reached (2).
+Workflow stopped.
+Status: stopped_revision_limit  (state + event log: examples/output/runs/run-003/)
+[exit 0]
+
+### 5. Malformed input
+
+$ python -m review_workflow run --content fixtures/content/malformed-missing-body.json --evaluator fixtures/evaluator/pass.json
+Invalid input, workflow not started:
+1 validation error for ContentItem
+body
+  Field required [type=missing, input_value={'content_id': 'content-0...tent item with no body'}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.14/v/missing
+[exit 2]
+
+$ python -m review_workflow run --content fixtures/content/malformed-bad-id.json --evaluator fixtures/evaluator/pass.json
+Invalid input, workflow not started:
+2 validation errors for ContentItem
+content_id
+  String should match pattern '^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$' [type=string_pattern_mismatch, input_value='../../etc/passwd', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.14/v/string_pattern_mismatch
+publish_now
+  Extra inputs are not permitted [type=extra_forbidden, input_value=True, input_type=bool]
+    For further information visit https://errors.pydantic.dev/2.14/v/extra_forbidden
+[exit 2]
+
+$ python -m review_workflow run --content fixtures/content/content-001.json --evaluator fixtures/evaluator/malformed.json --run-id run-bad
+Invalid input, workflow not started:
+2 validation errors for EvaluatorScript
+responses.0.decision
+  Input should be 'revise' or 'human_review' [type=literal_error, input_value='publish', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.14/v/literal_error
+responses.0.feedback
+  String should have at least 1 character [type=string_too_short, input_value='', input_type=str]
+    For further information visit https://errors.pydantic.dev/2.14/v/string_too_short
+[exit 2]
+
+### 6. Left paused at human review (inspect runs/run-004/state.json)
+
+$ python -m review_workflow run --content fixtures/content/content-001.json --evaluator fixtures/evaluator/one-revision.json --run-id run-004
+Run run-004 started for content-001
+Evaluation completed (revisions so far: 0)
+  Decision: revise
+Revision attempt: 1
+Evaluation completed (revisions so far: 1)
+  Decision: human_review
+Human review required
+Checkpoint saved: 1f1ce92e-38f3-6543-8004-3e5dec49d882
+Workflow paused.
+Status: awaiting_review  (state + event log: examples/output/runs/run-004/)
+[exit 0]

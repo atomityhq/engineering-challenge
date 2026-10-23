@@ -1,0 +1,63 @@
+[
+  {
+    "seq": 0,
+    "event": "evaluation_completed",
+    "revision_count": 0,
+    "detail": {
+      "decision": "revise",
+      "feedback": "Source note is still missing."
+    }
+  },
+  {
+    "seq": 1,
+    "event": "revision_completed",
+    "revision_count": 1,
+    "detail": {
+      "attempt": 1,
+      "feedback": "Source note is still missing."
+    }
+  },
+  {
+    "seq": 2,
+    "event": "evaluation_completed",
+    "revision_count": 1,
+    "detail": {
+      "decision": "revise",
+      "feedback": "Source note is still missing."
+    }
+  },
+  {
+    "seq": 3,
+    "event": "revision_completed",
+    "revision_count": 2,
+    "detail": {
+      "attempt": 2,
+      "feedback": "Source note is still missing."
+    }
+  },
+  {
+    "seq": 4,
+    "event": "evaluation_completed",
+    "revision_count": 2,
+    "detail": {
+      "decision": "revise",
+      "feedback": "Source note is still missing."
+    }
+  },
+  {
+    "seq": 5,
+    "event": "revision_limit_reached",
+    "revision_count": 2,
+    "detail": {
+      "max_revisions": 2
+    }
+  },
+  {
+    "seq": 6,
+    "event": "workflow_stopped",
+    "revision_count": 2,
+    "detail": {
+      "reason": "evaluator still requested revision after the maximum number of revisions"
+    }
+  }
+]

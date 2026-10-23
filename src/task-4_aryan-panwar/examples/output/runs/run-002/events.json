@@ -1,0 +1,33 @@
+[
+  {
+    "seq": 0,
+    "event": "evaluation_completed",
+    "revision_count": 0,
+    "detail": {
+      "decision": "human_review",
+      "feedback": "Claims match the evidence pack; ready for a human reviewer."
+    }
+  },
+  {
+    "seq": 1,
+    "event": "human_review_required",
+    "revision_count": 0,
+    "detail": {}
+  },
+  {
+    "seq": 2,
+    "event": "human_rejected",
+    "revision_count": 0,
+    "detail": {
+      "decision": "reject",
+      "reviewer": "cli",
+      "note": "Angle does not fit this week"
+    }
+  },
+  {
+    "seq": 3,
+    "event": "workflow_rejected",
+    "revision_count": 0,
+    "detail": {}
+  }
+]

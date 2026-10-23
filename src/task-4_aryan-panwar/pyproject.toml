@@ -1,0 +1,23 @@
+[project]
+name = "review-workflow"
+version = "0.1.0"
+description = "Task 4: resumable LangGraph review workflow with a persisted human-review boundary"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "langgraph>=1.2.16",
+    "langgraph-checkpoint-sqlite>=3.1.2",
+    "pydantic>=2.14.1",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+testpaths = ["tests"]
