@@ -1,0 +1,10 @@
+[project]
+name = "atomity-task-8-audit-replay"
+version = "1.0.0"
+description = "Deterministic local workflow audit and replay challenge submission"
+requires-python = ">=3.10"
+dependencies = []
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"

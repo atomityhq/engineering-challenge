@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "case_id": "malformed-input",
+  "lead": {
+    "name": "Broken Example",
+    "email": "broken@example.test",
+    "employees": "many",
+    "service": "Lead automation",
+    "message": "Company field and integer employee count are required."
+  },
+  "metadata": {
+    "simulate_failure": false
+  }
+}

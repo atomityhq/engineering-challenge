@@ -1,0 +1,14 @@
+{
+  "case_id": "successful-run",
+  "company": "Analytical Engines Ltd",
+  "contact": "Ada Lovelace",
+  "qualification": {
+    "category": "high_value",
+    "priority": "high",
+    "reason": "Employee count meets the configured threshold (100).",
+    "score": 85
+  },
+  "route": "high_value",
+  "service": "AI workflow automation",
+  "summary": "Analytical Engines Ltd requested AI workflow automation. Route: high_value (score 85)."
+}

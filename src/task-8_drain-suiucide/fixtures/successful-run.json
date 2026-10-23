@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "case_id": "successful-run",
+  "lead": {
+    "name": "  Ada   Lovelace ",
+    "email": "ADA@example.test",
+    "company": "Analytical Engines Ltd",
+    "employees": 300,
+    "service": "AI workflow automation",
+    "message": "We want to automate incoming lead qualification."
+  },
+  "metadata": {
+    "simulate_failure": false,
+    "debug_note": "FAKE_API_KEY=synthetic-secret-123"
+  }
+}

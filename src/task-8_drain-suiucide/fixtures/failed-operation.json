@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "case_id": "failed-operation",
+  "lead": {
+    "name": "Grace Hopper",
+    "email": "grace@example.test",
+    "company": "Compiler Systems Ltd",
+    "employees": 80,
+    "service": "Data processing automation",
+    "message": "We need to route requests to the right team."
+  },
+  "metadata": {
+    "simulate_failure": true,
+    "debug_note": "FAKE_API_KEY=synthetic-secret-123"
+  }
+}

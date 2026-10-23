@@ -1,0 +1,10 @@
+{
+  "config_version": "demo-v1",
+  "high_value_min_employees": 100,
+  "operation_order": [
+    "prepare",
+    "enrich",
+    "summarize"
+  ],
+  "schema_version": "1.0"
+}
