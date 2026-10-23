@@ -28,7 +28,7 @@ Expected summary: `status: success`, three operation records. Inspect these file
 - `.runs/successful-run/audit.json` — machine-readable audit manifest
 - `.runs/successful-run/events.jsonl` — separate execution event log
 - `.runs/successful-run/artifacts/` — sanitised operation inputs and outputs
-- `.runs/successful-run/source_fixture.json` — fixture actually used (contains only a deliberately fake credential marker)
+- `.runs/successful-run/source_fixture.json` — redacted fixture copy used for offline replay
 - `.runs/successful-run/config.json` — versioned deterministic configuration
 
 Replay the run offline:
@@ -133,9 +133,9 @@ Validated local fixture + versioned config
 
 ### Replay and integrity
 
-Replay first validates all referenced files and their SHA-256 hashes, rejects path traversal outside the run directory, loads the recorded fixture/configuration, and reruns the same deterministic operation sequence. It compares newly produced outputs with the saved outputs. The replay path contains no network or model client; the tests patch common network entry points to raise if called.
+Replay first verifies the SHA-256 hashes of the saved configuration, source fixture, and referenced operation input/output artifacts. It rejects artifact paths that escape the run directory, loads the saved fixture and configuration, re-runs the deterministic operations locally, and compares the sanitised replay outputs with the saved outputs. The replay path does not use network or model clients; the tests block common socket and HTTP entry points to detect accidental external calls.
 
-The original fixture is retained so the run can be reconstructed. Its supplied secret-looking value is synthetic; audit-boundary snapshots redact it. Hashes are calculated from the actual bytes of persisted files, not from the expected values.
+The saved `source_fixture.json` is a redacted copy of the validated fixture, preventing planted credential-like values from being persisted in the run directory. The synthetic `metadata.debug_note` field is not used by workflow operations, so redacting it does not change their results or deterministic replay. The original synthetic marker remains in the source fixtures under `fixtures/` to exercise redaction. Hashes are calculated from the actual bytes of persisted files. Redaction is heuristic and cannot guarantee detection of every possible secret format.
 
 ### Redaction boundary
 
