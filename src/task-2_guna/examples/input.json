@@ -1,0 +1,29 @@
+
+{
+  "sources": [
+    {
+      "source_id": "demo-source-1",
+      "locator": "paragraph-1",
+      "excerpt": "Cloud costs increased by 20% in September."
+    },
+    {
+      "source_id": "demo-source-2",
+      "locator": "paragraph-2",
+      "excerpt": "Cloud costs decreased by 10% in September."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "demo-claim-1",
+      "text": "Cloud costs increased by 20% in September.",
+      "source_ids": ["demo-source-1"],
+      "classification": "fact"
+    },
+    {
+      "claim_id": "demo-claim-2",
+      "text": "Cloud costs changed in September.",
+      "source_ids": ["demo-source-1", "demo-source-2"],
+      "classification": "fact"
+    }
+  ]
+}

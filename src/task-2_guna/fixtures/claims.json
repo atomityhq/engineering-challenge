@@ -1,0 +1,63 @@
+
+{
+  "sources": [
+    {
+      "source_id": "source-001",
+      "locator": "paragraph-1",
+      "excerpt": "Cloud costs increased by 20% in September."
+    },
+    {
+      "source_id": "source-002",
+      "locator": "paragraph-4",
+      "excerpt": "Cloud costs decreased by 10% in September."
+    },
+    {
+      "source_id": "source-003",
+      "locator": "paragraph-2",
+      "excerpt": "The regulation was published on 1 June."
+    },
+    {
+      "source_id": "source-004",
+      "locator": "paragraph-5",
+      "excerpt": "Cloud costs increased during September."
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "claim-001",
+      "text": "Cloud costs increased by 20% in September.",
+      "source_ids": ["source-001"],
+      "classification": "fact"
+    },
+    {
+      "claim_id": "claim-002",
+      "text": "Cloud costs increased by 30% in September.",
+      "source_ids": ["source-004"],
+      "classification": "fact"
+    },
+    {
+      "claim_id": "claim-003",
+      "text": "Cloud costs increased by 20%.",
+      "source_ids": ["source-missing"],
+      "classification": "fact"
+    },
+    {
+      "claim_id": "claim-004",
+      "text": "Cloud costs changed in September.",
+      "source_ids": ["source-001", "source-002"],
+      "classification": "fact"
+    },
+    {
+      "claim_id": "claim-005",
+      "text": "The regulation will significantly increase cloud migration costs.",
+      "source_ids": ["source-003"],
+      "classification": "fact"
+    },
+    {
+      "claim_id": "claim-006",
+      "text": "",
+      "source_ids": ["source-001"],
+      "classification": "fact"
+    }
+  ]
+}
