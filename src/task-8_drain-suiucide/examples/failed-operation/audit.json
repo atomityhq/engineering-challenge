@@ -1,0 +1,38 @@
+{
+  "case_id": "failed-operation",
+  "config_ref": "config.json",
+  "config_sha256": "26abdf220233a7e391deb92ec32af0f2bb6bd10de8ab8df7a3de14edc25c3ef9",
+  "config_version": "demo-v1",
+  "created_at": "2026-10-23T10:28:22+00:00",
+  "final_output_ref": "artifacts/op-001-output.json",
+  "operations": [
+    {
+      "error_code": null,
+      "error_message": null,
+      "input_ref": "artifacts/op-001-input.json",
+      "input_sha256": "91bdd68da29fb2d9997973dffa4bc04789751b985f11f9fd7fefdba5dd965e15",
+      "name": "prepare",
+      "operation_id": "op-001",
+      "output_ref": "artifacts/op-001-output.json",
+      "output_sha256": "fe4499488d27eba6b5b22eb788146ba8173b0c3ef8e678954b266584610a065f",
+      "status": "success"
+    },
+    {
+      "error_code": "SYNTHETIC_FAILURE",
+      "error_message": "Synthetic failure requested by fixture.",
+      "input_ref": "artifacts/op-002-input.json",
+      "input_sha256": "3ab3784c8ea6290e8113ce4e485470a1bbfaa9b7b9335ea6866b3e1add49d2f2",
+      "name": "enrich",
+      "operation_id": "op-002",
+      "output_ref": null,
+      "output_sha256": null,
+      "status": "failed"
+    }
+  ],
+  "redaction_policy": "credential-assignment-v1",
+  "run_id": "example-failed-001",
+  "schema_version": "1.0",
+  "source_fixture_ref": "source_fixture.json",
+  "source_fixture_sha256": "91bdd68da29fb2d9997973dffa4bc04789751b985f11f9fd7fefdba5dd965e15",
+  "status": "failed"
+}

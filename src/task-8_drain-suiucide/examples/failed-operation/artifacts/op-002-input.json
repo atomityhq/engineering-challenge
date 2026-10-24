@@ -1,0 +1,12 @@
+{
+  "case_id": "failed-operation",
+  "lead": {
+    "company": "Compiler Systems Ltd",
+    "email": "grace@example.test",
+    "employees": 80,
+    "message": "We need to route requests to the right team.",
+    "name": "Grace Hopper",
+    "service": "Data processing automation"
+  },
+  "simulate_failure": true
+}

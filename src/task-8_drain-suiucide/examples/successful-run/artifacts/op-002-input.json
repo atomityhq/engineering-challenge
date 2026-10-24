@@ -1,0 +1,12 @@
+{
+  "case_id": "successful-run",
+  "lead": {
+    "company": "Analytical Engines Ltd",
+    "email": "ada@example.test",
+    "employees": 300,
+    "message": "We want to automate incoming lead qualification.",
+    "name": "Ada Lovelace",
+    "service": "AI workflow automation"
+  },
+  "simulate_failure": false
+}

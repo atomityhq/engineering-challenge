@@ -1,0 +1,5 @@
+{"event": "operation_started", "input_ref": "artifacts/op-001-input.json", "operation": "prepare", "operation_id": "op-001", "run_id": "example-failed-001", "timestamp": "2026-10-23T10:28:22+00:00"}
+{"event": "operation_succeeded", "operation": "prepare", "operation_id": "op-001", "output_ref": "artifacts/op-001-output.json", "output_sha256": "fe4499488d27eba6b5b22eb788146ba8173b0c3ef8e678954b266584610a065f", "run_id": "example-failed-001", "timestamp": "2026-10-23T10:28:22+00:00"}
+{"event": "operation_started", "input_ref": "artifacts/op-002-input.json", "operation": "enrich", "operation_id": "op-002", "run_id": "example-failed-001", "timestamp": "2026-10-23T10:28:22+00:00"}
+{"error_code": "SYNTHETIC_FAILURE", "error_message": "Synthetic failure requested by fixture.", "event": "operation_failed", "operation": "enrich", "operation_id": "op-002", "run_id": "example-failed-001", "timestamp": "2026-10-23T10:28:22+00:00"}
+{"event": "run_completed", "operation_count": 2, "run_id": "example-failed-001", "status": "failed", "timestamp": "2026-10-23T10:28:22+00:00"}

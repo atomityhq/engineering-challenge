@@ -1,0 +1,49 @@
+{
+  "case_id": "successful-run",
+  "config_ref": "config.json",
+  "config_sha256": "26abdf220233a7e391deb92ec32af0f2bb6bd10de8ab8df7a3de14edc25c3ef9",
+  "config_version": "demo-v1",
+  "created_at": "2026-10-23T10:28:21+00:00",
+  "final_output_ref": "artifacts/op-003-output.json",
+  "operations": [
+    {
+      "error_code": null,
+      "error_message": null,
+      "input_ref": "artifacts/op-001-input.json",
+      "input_sha256": "fd2a3011f9b3f52b9604825fcc910413ef0f340045645b91aa47d7526230c57e",
+      "name": "prepare",
+      "operation_id": "op-001",
+      "output_ref": "artifacts/op-001-output.json",
+      "output_sha256": "97e778d6a4894b0e451a5306dcaefe7095d6a8c10a3398b2e0e6bfc98f1f633d",
+      "status": "success"
+    },
+    {
+      "error_code": null,
+      "error_message": null,
+      "input_ref": "artifacts/op-002-input.json",
+      "input_sha256": "217f0e81ee12f74e82ebc1f72e5220c11cdef12705009ef92ac9c6c000c08720",
+      "name": "enrich",
+      "operation_id": "op-002",
+      "output_ref": "artifacts/op-002-output.json",
+      "output_sha256": "6170f043a6bcf3fa4a092feea0c7e41415e3a5ebe42808d05f8b9d4f8a26840b",
+      "status": "success"
+    },
+    {
+      "error_code": null,
+      "error_message": null,
+      "input_ref": "artifacts/op-003-input.json",
+      "input_sha256": "6170f043a6bcf3fa4a092feea0c7e41415e3a5ebe42808d05f8b9d4f8a26840b",
+      "name": "summarize",
+      "operation_id": "op-003",
+      "output_ref": "artifacts/op-003-output.json",
+      "output_sha256": "7799cca179e5e9a0e5eba3b9e40c768bb1498f2097eb01db710736218d1bbc70",
+      "status": "success"
+    }
+  ],
+  "redaction_policy": "credential-assignment-v1",
+  "run_id": "example-success-001",
+  "schema_version": "1.0",
+  "source_fixture_ref": "source_fixture.json",
+  "source_fixture_sha256": "fd2a3011f9b3f52b9604825fcc910413ef0f340045645b91aa47d7526230c57e",
+  "status": "success"
+}

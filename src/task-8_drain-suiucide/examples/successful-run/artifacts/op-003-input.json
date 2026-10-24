@@ -1,0 +1,17 @@
+{
+  "case_id": "successful-run",
+  "lead": {
+    "company": "Analytical Engines Ltd",
+    "email": "ada@example.test",
+    "employees": 300,
+    "message": "We want to automate incoming lead qualification.",
+    "name": "Ada Lovelace",
+    "service": "AI workflow automation"
+  },
+  "qualification": {
+    "category": "high_value",
+    "priority": "high",
+    "reason": "Employee count meets the configured threshold (100).",
+    "score": 85
+  }
+}
