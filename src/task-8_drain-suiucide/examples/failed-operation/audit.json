@@ -3,7 +3,7 @@
   "config_ref": "config.json",
   "config_sha256": "26abdf220233a7e391deb92ec32af0f2bb6bd10de8ab8df7a3de14edc25c3ef9",
   "config_version": "demo-v1",
-  "created_at": "2026-10-23T05:01:31+00:00",
+  "created_at": "2026-10-23T10:28:22+00:00",
   "final_output_ref": "artifacts/op-001-output.json",
   "operations": [
     {
@@ -33,6 +33,6 @@
   "run_id": "example-failed-001",
   "schema_version": "1.0",
   "source_fixture_ref": "source_fixture.json",
-  "source_fixture_sha256": "f3b2761a16b7beb17a81fac45a2085f31f5795278c9c699a1c16c44fdb2bfbe5",
+  "source_fixture_sha256": "91bdd68da29fb2d9997973dffa4bc04789751b985f11f9fd7fefdba5dd965e15",
   "status": "failed"
 }

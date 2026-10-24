@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import math
 from dataclasses import dataclass
 from typing import Any, Literal
 
@@ -32,6 +33,53 @@ def _is_sha256(value: Any) -> bool:
         and len(value) == 64
         and all(char in "0123456789abcdefABCDEF" for char in value)
     )
+
+
+def _is_json_value(
+    value: Any,
+    ancestors: set[int] | None = None,
+) -> bool:
+    """Return whether a value contains only strict, finite JSON values."""
+    if value is None or isinstance(value, (str, bool, int)):
+        return True
+
+    if isinstance(value, float):
+        return math.isfinite(value)
+
+    active_ancestors = ancestors if ancestors is not None else set()
+
+    if isinstance(value, list):
+        identity = id(value)
+        if identity in active_ancestors:
+            return False
+
+        active_ancestors.add(identity)
+        try:
+            return all(
+                _is_json_value(item, active_ancestors)
+                for item in value
+            )
+        finally:
+            active_ancestors.remove(identity)
+
+    if isinstance(value, dict):
+        if not all(isinstance(key, str) for key in value):
+            return False
+
+        identity = id(value)
+        if identity in active_ancestors:
+            return False
+
+        active_ancestors.add(identity)
+        try:
+            return all(
+                _is_json_value(item, active_ancestors)
+                for item in value.values()
+            )
+        finally:
+            active_ancestors.remove(identity)
+
+    return False
 
 
 @dataclass(frozen=True)
@@ -199,6 +247,8 @@ class WorkflowConfig:
 
 @dataclass(frozen=True)
 class OperationRecord:
+    """Persisted audit record for one workflow operation."""
+
     operation_id: str
     name: str
     status: OperationStatus
@@ -313,6 +363,168 @@ class OperationRecord:
             "error_code": self.error_code,
             "error_message": self.error_message,
         }
+
+
+@dataclass(frozen=True)
+class OperationResult:
+    """Typed result envelope for a successful or failed operation."""
+
+    status: OperationStatus
+    output: dict[str, Any] | None = None
+    error_code: str | None = None
+    error_message: str | None = None
+
+    def __post_init__(self) -> None:
+        """Prevent invalid states, including direct dataclass construction."""
+        if self.status == "success":
+            if not isinstance(self.output, dict) or not _is_json_value(
+                self.output
+            ):
+                raise ContractError(
+                    "successful operation result requires a valid JSON object"
+                )
+
+            if self.error_code is not None or self.error_message is not None:
+                raise ContractError(
+                    "successful operation result must not contain failure details"
+                )
+
+        elif self.status == "failed":
+            if self.output is not None:
+                raise ContractError(
+                    "failed operation result must not contain output"
+                )
+
+            if not _is_non_empty_string(self.error_code):
+                raise ContractError(
+                    "failed operation result requires a non-empty error_code"
+                )
+
+            if not _is_non_empty_string(self.error_message):
+                raise ContractError(
+                    "failed operation result requires a non-empty error_message"
+                )
+
+        else:
+            raise ContractError(
+                "operation result status must be 'success' or 'failed'"
+            )
+
+    @classmethod
+    def success(cls, output: Any) -> "OperationResult":
+        if not isinstance(output, dict) or not _is_json_value(output):
+            raise ContractError(
+                "successful operation result requires a valid JSON object"
+            )
+
+        return cls(
+            status="success",
+            output=dict(output),
+        )
+
+    @classmethod
+    def failure(
+        cls,
+        error_code: str,
+        error_message: str,
+    ) -> "OperationResult":
+        if not _is_non_empty_string(error_code):
+            raise ContractError(
+                "failed operation result requires a non-empty error_code"
+            )
+
+        if not _is_non_empty_string(error_message):
+            raise ContractError(
+                "failed operation result requires a non-empty error_message"
+            )
+
+        return cls(
+            status="failed",
+            error_code=error_code,
+            error_message=error_message,
+        )
+
+    @classmethod
+    def from_dict(cls, value: Any) -> "OperationResult":
+        if not isinstance(value, dict):
+            raise ContractError(
+                "operation result must be a JSON object"
+            )
+
+        if not all(isinstance(key, str) for key in value):
+            raise ContractError(
+                "operation result keys must be strings"
+            )
+
+        allowed_fields = {
+            "status",
+            "output",
+            "error_code",
+            "error_message",
+        }
+        unknown_fields = set(value) - allowed_fields
+        if unknown_fields:
+            raise ContractError(
+                "operation result contains unknown fields: "
+                f"{sorted(unknown_fields)!r}"
+            )
+
+        status = value.get("status")
+
+        if status == "success":
+            if "error_code" in value or "error_message" in value:
+                raise ContractError(
+                    "successful operation result must omit failure fields"
+                )
+
+            output = value.get("output")
+            if not isinstance(output, dict):
+                raise ContractError(
+                    "successful operation result requires object output"
+                )
+
+            return cls.success(output)
+
+        if status == "failed":
+            if "output" in value:
+                raise ContractError(
+                    "failed operation result must omit the output field"
+                )
+
+            error_code = value.get("error_code")
+            error_message = value.get("error_message")
+
+            if not _is_non_empty_string(error_code):
+                raise ContractError(
+                    "failed operation result requires a non-empty error_code"
+                )
+
+            if not _is_non_empty_string(error_message):
+                raise ContractError(
+                    "failed operation result requires a non-empty error_message"
+                )
+
+            return cls.failure(error_code, error_message)
+
+        raise ContractError(
+            "operation result status must be 'success' or 'failed'"
+        )
+
+    def to_dict(self) -> dict[str, Any]:
+        result: dict[str, Any] = {
+            "status": self.status,
+        }
+
+        if self.output is not None:
+            result["output"] = self.output
+
+        if self.error_code is not None:
+            result["error_code"] = self.error_code
+
+        if self.error_message is not None:
+            result["error_message"] = self.error_message
+
+        return result
 
 
 @dataclass(frozen=True)
@@ -479,7 +691,7 @@ class AuditManifest:
 
     def to_dict(self) -> dict[str, Any]:
         return {
-            "schema_version": self.schema_version,
+            "schema_version": "1.0",
             "run_id": self.run_id,
             "case_id": self.case_id,
             "status": self.status,

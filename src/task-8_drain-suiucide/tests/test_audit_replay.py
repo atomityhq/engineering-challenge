@@ -1,3 +1,5 @@
+"""Integration tests for workflow auditing and offline replay."""
+
 from __future__ import annotations
 
 import json
@@ -182,6 +184,62 @@ class AuditReplayTests(unittest.TestCase):
             self.assertEqual(replay.status, "match", replay.to_dict())
             self.assertEqual(replay.operations_replayed, 3)
 
+    def test_unexpected_operation_exception_is_sanitized_and_replayed(
+        self,
+    ) -> None:
+        def prepare_with_unexpected_error(payload, config):
+            # Deliberately include a synthetic secret in the exception text.
+            # The raw exception message must never be persisted.
+            raise RuntimeError(
+                f"Internal error details: {FAKE_SECRET}"
+            )
+
+        with TemporaryDirectory() as temp:
+            run_dir = Path(temp) / "unexpected-error-run"
+
+            with patch.dict(
+                workflow_module.OPERATIONS,
+                {"prepare": prepare_with_unexpected_error},
+            ):
+                manifest = run_workflow(
+                    FIXTURES / "successful-run.json",
+                    run_dir,
+                    run_id="test-unexpected-error-001",
+                )
+
+                self.assertEqual(manifest["status"], "failed")
+                self.assertEqual(len(manifest["operations"]), 1)
+
+                failed = manifest["operations"][0]
+                self.assertEqual(failed["name"], "prepare")
+                self.assertEqual(failed["status"], "failed")
+                self.assertEqual(
+                    failed["error_code"],
+                    "UNEXPECTED_OPERATION_ERROR",
+                )
+                self.assertEqual(
+                    failed["error_message"],
+                    "Unexpected operation error (RuntimeError).",
+                )
+                self.assertIsNone(failed["output_ref"])
+
+                # No saved artifact or log should contain the raw secret.
+                for path in run_dir.rglob("*"):
+                    if path.is_file():
+                        content = path.read_text(encoding="utf-8")
+                        self.assertNotIn(
+                            FAKE_SECRET,
+                            content,
+                            f"secret leaked into {path}",
+                        )
+
+                replay = replay_workflow(run_dir)
+
+            self.assertEqual(replay.status, "match", replay.to_dict())
+            self.assertEqual(replay.operations_replayed, 1)
+            self.assertEqual(replay.external_calls, 0)
+            self.assertEqual(replay.differences, ())
+
     def test_altered_artifact_is_detected_and_replay_is_blocked(
         self,
     ) -> None:
@@ -255,6 +313,48 @@ class AuditReplayTests(unittest.TestCase):
             self.assertIn(
                 "AUDIT_MANIFEST_INVALID",
                 replay.differences,
+            )
+
+    def test_replay_rejects_extra_operation_record(self) -> None:
+        with TemporaryDirectory() as temp:
+            run_dir = Path(temp) / "extra-operation-run"
+            run_workflow(
+                FIXTURES / "successful-run.json",
+                run_dir,
+                run_id="test-extra-operation-001",
+            )
+
+            manifest_path = run_dir / "audit.json"
+            manifest = json.loads(
+                manifest_path.read_text(encoding="utf-8")
+            )
+
+            # The extra record reuses valid artifact references/hashes.
+            # It is structurally valid but exceeds the configured workflow.
+            extra_record = dict(manifest["operations"][-1])
+            extra_record["operation_id"] = "op-004"
+            manifest["operations"].append(extra_record)
+
+            manifest_path.write_text(
+                json.dumps(manifest, indent=2),
+                encoding="utf-8",
+            )
+
+            # Artifact hashes remain valid; replay must catch the record count.
+            self.assertEqual(verify_integrity(run_dir), [])
+
+            replay = replay_workflow(run_dir)
+            self.assertEqual(
+                replay.status,
+                "invalid",
+                replay.to_dict(),
+            )
+            self.assertTrue(
+                any(
+                    "EXTRA_OPERATION_RECORDS" in difference
+                    for difference in replay.differences
+                ),
+                replay.to_dict(),
             )
 
     def test_malformed_input_fails_before_run_directory_is_created(

@@ -16,11 +16,13 @@ from .contracts import (
     AuditManifest,
     ContractError,
     OperationRecord,
+    OperationResult,
     ReplayResult,
     WorkflowConfig,
     WorkflowFixture,
 )
 from .security import redact
+
 
 DEFAULT_CONFIG: dict[str, Any] = {
     "schema_version": "1.0",
@@ -235,6 +237,32 @@ OPERATIONS: dict[
 }
 
 
+def _execute_operation(
+    name: str,
+    payload: dict[str, Any],
+    config: WorkflowConfig,
+) -> OperationResult:
+    """Execute an operation and normalise its outcome into a typed result."""
+    try:
+        output = OPERATIONS[name](payload, config)
+        return OperationResult.success(output)
+
+    except WorkflowOperationError as exc:
+        return OperationResult.failure(
+            error_code=exc.code,
+            error_message=exc.public_message,
+        )
+
+    except Exception as exc:
+        # Do not persist raw exception text, payloads, or tracebacks.
+        return OperationResult.failure(
+            error_code="UNEXPECTED_OPERATION_ERROR",
+            error_message=(
+                f"Unexpected operation error ({exc.__class__.__name__})."
+            ),
+        )
+
+
 def _append_event(
     path: Path,
     event: dict[str, Any] | AuditEvent,
@@ -323,10 +351,9 @@ def _write_run(
             },
         )
 
-        try:
-            output = OPERATIONS[name](raw_input, config)
+        result = _execute_operation(name, raw_input, config)
 
-        except WorkflowOperationError as exc:
+        if result.status == "failed":
             run_status = "failed"
 
             operation_record = OperationRecord(
@@ -337,8 +364,8 @@ def _write_run(
                 input_sha256=input_sha,
                 output_ref=None,
                 output_sha256=None,
-                error_code=exc.code,
-                error_message=exc.public_message,
+                error_code=result.error_code,
+                error_message=result.error_message,
             )
             operations.append(operation_record.to_dict())
 
@@ -349,46 +376,20 @@ def _write_run(
                     "operation_id": operation_id,
                     "event": "operation_failed",
                     "operation": name,
-                    "error_code": exc.code,
-                    "error_message": exc.public_message,
+                    "error_code": result.error_code,
+                    "error_message": result.error_message,
                     "timestamp": utc_now(),
                 },
             )
             break
 
-        except Exception as exc:
-            # Never write raw tracebacks or operation payloads to audit records.
-            run_status = "failed"
-            safe_message = (
-                f"Unexpected operation error ({exc.__class__.__name__})."
+        output = result.output
+        if output is None:
+            # OperationResult should prevent this state. Keep the guard here
+            # so a future contract change cannot create a false success.
+            raise ContractError(
+                "successful operation result must contain an output object"
             )
-
-            operation_record = OperationRecord(
-                operation_id=operation_id,
-                name=name,
-                status="failed",
-                input_ref=input_ref,
-                input_sha256=input_sha,
-                output_ref=None,
-                output_sha256=None,
-                error_code="UNEXPECTED_OPERATION_ERROR",
-                error_message=safe_message,
-            )
-            operations.append(operation_record.to_dict())
-
-            _append_event(
-                event_path,
-                {
-                    "run_id": run_id,
-                    "operation_id": operation_id,
-                    "event": "operation_failed",
-                    "operation": name,
-                    "error_code": "UNEXPECTED_OPERATION_ERROR",
-                    "error_message": safe_message,
-                    "timestamp": utc_now(),
-                },
-            )
-            break
 
         output_ref = f"artifacts/{operation_id}-output.json"
         output_sha = write_json(
@@ -420,7 +421,7 @@ def _write_run(
             },
         )
 
-        # Keep the original in-memory result for the next operation.
+        # Pass the original, unredacted result to the next operation.
         current = output
         previous_output_ref = output_ref
 
@@ -558,7 +559,7 @@ def verify_integrity(run_dir: Path) -> list[str]:
 
 
 def replay_workflow(run_dir: Path) -> ReplayResult:
-    """Replay from saved local data, verify integrity, and compare outputs."""
+    """Replay saved local data, verify integrity, and compare outputs."""
     run_dir = Path(run_dir)
 
     integrity_failures = verify_integrity(run_dir)
@@ -610,10 +611,46 @@ def replay_workflow(run_dir: Path) -> ReplayResult:
             differences=("CONFIG_VERSION_MISMATCH",),
         )
 
+    records = manifest["operations"]
+    expected_order = list(config.operation_order)
+
+    # A valid replay can contain at most one record per configured operation.
+    if len(records) > len(expected_order):
+        return ReplayResult(
+            run_id=manifest["run_id"],
+            status="invalid",
+            operations_replayed=0,
+            external_calls=0,
+            differences=("EXTRA_OPERATION_RECORDS",),
+        )
+
+    recorded_names = [record["name"] for record in records]
+    expected_prefix = expected_order[:len(records)]
+
+    if recorded_names != expected_prefix:
+        return ReplayResult(
+            run_id=manifest["run_id"],
+            status="mismatch",
+            operations_replayed=0,
+            external_calls=0,
+            differences=("OPERATION_ORDER_MISMATCH",),
+        )
+
+    if (
+        manifest["status"] == "success"
+        and len(records) != len(expected_order)
+    ):
+        return ReplayResult(
+            run_id=manifest["run_id"],
+            status="mismatch",
+            operations_replayed=0,
+            external_calls=0,
+            differences=("INCOMPLETE_SUCCESSFUL_REPLAY",),
+        )
+
     current: dict[str, Any] = fixture.to_dict()
     replay_count = 0
     differences: list[str] = []
-    records = manifest["operations"]
 
     for index, name in enumerate(config.operation_order):
         if index >= len(records):
@@ -621,9 +658,6 @@ def replay_workflow(run_dir: Path) -> ReplayResult:
             break
 
         record = records[index]
-        if record["name"] != name:
-            differences.append(f"OPERATION_ORDER_MISMATCH:{name}")
-            break
 
         if index == 0:
             operation_input = current
@@ -639,35 +673,17 @@ def replay_workflow(run_dir: Path) -> ReplayResult:
         else:
             operation_input = current
 
-        try:
-            replay_output = OPERATIONS[name](operation_input, config)
-
-        except WorkflowOperationError as exc:
-            replay_count += 1
-            if (
-                record["status"] != "failed"
-                or record["error_code"] != exc.code
-            ):
-                differences.append(
-                    f"FAILURE_REPLAY_MISMATCH:{name}"
-                )
-            break
-
-        except Exception as exc:
-            replay_count += 1
-            expected_code = "UNEXPECTED_OPERATION_ERROR"
-
-            if (
-                record["status"] != "failed"
-                or record["error_code"] != expected_code
-            ):
-                differences.append(
-                    "FAILURE_REPLAY_MISMATCH:"
-                    f"{name}:{exc.__class__.__name__}"
-                )
-            break
-
+        result = _execute_operation(name, operation_input, config)
         replay_count += 1
+
+        if result.status == "failed":
+            if (
+                record["status"] != "failed"
+                or record["error_code"] != result.error_code
+                or record["error_message"] != result.error_message
+            ):
+                differences.append(f"FAILURE_REPLAY_MISMATCH:{name}")
+            break
 
         if record["status"] != "success":
             differences.append(
@@ -681,16 +697,29 @@ def replay_workflow(run_dir: Path) -> ReplayResult:
             )
             break
 
-        saved_output = read_json(
-            _contained_path(run_dir, record["output_ref"])
-        )
+        replay_output = result.output
+        if replay_output is None:
+            differences.append(
+                f"REPLAY_OUTPUT_MISSING:{name}"
+            )
+            break
+
+        try:
+            saved_output = read_json(
+                _contained_path(run_dir, record["output_ref"])
+            )
+        except ContractError:
+            differences.append(
+                f"SAVED_OUTPUT_UNREADABLE:{name}"
+            )
+            break
 
         # The saved output is redacted; compare the redacted replay output.
         if redact(replay_output) != saved_output:
             differences.append(f"OUTPUT_MISMATCH:{name}")
             break
 
-        # The next operation must receive the unredacted in-memory result.
+        # Pass the original, unredacted result to the next operation.
         current = replay_output
 
     if not differences:

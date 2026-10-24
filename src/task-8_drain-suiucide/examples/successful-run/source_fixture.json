@@ -9,7 +9,7 @@
     "service": "AI workflow automation"
   },
   "metadata": {
-    "debug_note": "FAKE_API_KEY=synthetic-secret-123",
+    "debug_note": "FAKE_API_KEY=[REDACTED]",
     "simulate_failure": false
   },
   "schema_version": "1.0"
