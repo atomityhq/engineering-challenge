@@ -1,0 +1,9 @@
+{
+  "scenario": "pass",
+  "responses": [
+    {
+      "decision": "human_review",
+      "reasons": ["Claims match the cited evidence", "Clear and on topic"]
+    }
+  ]
+}

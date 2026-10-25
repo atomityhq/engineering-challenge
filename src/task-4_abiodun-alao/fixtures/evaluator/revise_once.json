@@ -1,0 +1,13 @@
+{
+  "scenario": "revise_once",
+  "responses": [
+    {
+      "decision": "revise",
+      "reasons": ["The 18% figure needs its date range"]
+    },
+    {
+      "decision": "human_review",
+      "reasons": ["Date range added; claims now match evidence"]
+    }
+  ]
+}

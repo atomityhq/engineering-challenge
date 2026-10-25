@@ -1,0 +1,6 @@
+{
+  "content_id": "content-001",
+  "title": "Cloud GPU prices fell 18% this quarter",
+  "body": "Spot prices for A100 instances dropped 18% quarter on quarter across three major providers, according to the supplied pricing snapshots. Teams running batch training jobs can lower costs by shifting work to off-peak windows.",
+  "evidence_ids": ["ev-101", "ev-102"]
+}

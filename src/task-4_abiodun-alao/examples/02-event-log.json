@@ -1,0 +1,81 @@
+[
+  {
+    "seq": 12,
+    "event": "run_started",
+    "content_id": "content-001",
+    "max_revisions": 2,
+    "scenario": "always_revise",
+    "at": "2026-10-25T12:22:17.486661+00:00"
+  },
+  {
+    "seq": 13,
+    "event": "evaluation_completed",
+    "attempt": 1,
+    "decision": "revise",
+    "reasons": [
+      "Unsupported claim in sentence 2"
+    ],
+    "revision_count": 0,
+    "at": "2026-10-25T12:22:17.491911+00:00"
+  },
+  {
+    "seq": 14,
+    "event": "revision_requested",
+    "feedback": [
+      "Unsupported claim in sentence 2"
+    ],
+    "revision_count": 1,
+    "at": "2026-10-25T12:22:17.496696+00:00"
+  },
+  {
+    "seq": 15,
+    "event": "revision_completed",
+    "revision_count": 1,
+    "at": "2026-10-25T12:22:17.497388+00:00"
+  },
+  {
+    "seq": 16,
+    "event": "evaluation_completed",
+    "attempt": 2,
+    "decision": "revise",
+    "reasons": [
+      "Unsupported claim in sentence 2"
+    ],
+    "revision_count": 1,
+    "at": "2026-10-25T12:22:17.498544+00:00"
+  },
+  {
+    "seq": 17,
+    "event": "revision_requested",
+    "feedback": [
+      "Unsupported claim in sentence 2"
+    ],
+    "revision_count": 2,
+    "at": "2026-10-25T12:22:17.500900+00:00"
+  },
+  {
+    "seq": 18,
+    "event": "revision_completed",
+    "revision_count": 2,
+    "at": "2026-10-25T12:22:17.501463+00:00"
+  },
+  {
+    "seq": 19,
+    "event": "evaluation_completed",
+    "attempt": 3,
+    "decision": "revise",
+    "reasons": [
+      "Unsupported claim in sentence 2"
+    ],
+    "revision_count": 2,
+    "at": "2026-10-25T12:22:17.502608+00:00"
+  },
+  {
+    "seq": 20,
+    "event": "revision_limit_reached",
+    "max_revisions": 2,
+    "reason": "Evaluator still requested revision after 2 revision attempt(s) (3 evaluations)",
+    "revision_count": 2,
+    "at": "2026-10-25T12:22:17.503707+00:00"
+  }
+]

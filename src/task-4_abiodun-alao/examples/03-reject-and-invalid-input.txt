@@ -1,0 +1,53 @@
+# Prompt-injection content, a rejection, and inputs that are refused before anything starts.
+
+$ python -m workflow run content-002 --scenario pass
+Run started: content content-002, scenario pass, max revisions 2
+
+Evaluation completed (attempt 1)
+Decision: human_review
+Reasons: Claims match the cited evidence; Clear and on topic
+
+Human review required
+Checkpoint saved (version 1)
+
+Workflow paused.
+Resume with: python -m workflow resume content-002
+(exit code: 0)
+
+$ python -m workflow resume content-002 --decision reject --reviewer ada --note "Body contains instructions aimed at the reviewer"
+Loaded checkpoint
+Current stage: human_review
+
+Rejected by ada. Note: Body contains instructions aimed at the reviewer
+(exit code: 0)
+
+$ python -m workflow run fixtures/content/malformed/missing-body.json
+Invalid input (fixtures/content/malformed/missing-body.json):
+  - body: Field required
+(exit code: 2)
+
+$ python -m workflow run fixtures/content/malformed/bad-id-and-empty-title.json
+Invalid input (fixtures/content/malformed/bad-id-and-empty-title.json):
+  - content_id: String should match pattern '^[a-z0-9][a-z0-9-]{2,63}$'
+  - title: String should have at least 1 character
+(exit code: 2)
+
+$ python -m workflow run fixtures/content/malformed/unknown-field.json
+Invalid input (fixtures/content/malformed/unknown-field.json):
+  - status: Extra inputs are not permitted
+(exit code: 2)
+
+$ python -m workflow run fixtures/content/malformed/not-json.json
+Invalid input (fixtures/content/malformed/not-json.json):
+  - not valid JSON: Expecting property name enclosed in double quotes (line 1)
+(exit code: 2)
+
+$ python -m workflow run content-001 --scenario does-not-exist --run-id typo-001
+Invalid input (--scenario does-not-exist):
+  - unknown scenario; choose one of: always_revise, pass, revise_once
+(exit code: 2)
+
+$ python -m workflow resume nope-001 --decision approve
+Error: No run named nope-001
+(exit code: 1)
+

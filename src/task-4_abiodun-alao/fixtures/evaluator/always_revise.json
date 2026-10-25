@@ -1,0 +1,6 @@
+{
+  "scenario": "always_revise",
+  "responses": [
+    { "decision": "revise", "reasons": ["Unsupported claim in sentence 2"] }
+  ]
+}

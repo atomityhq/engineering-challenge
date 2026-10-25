@@ -1,0 +1,58 @@
+# Happy path with one revision, a restart, approval and a duplicate approval.
+# Every command below is a separate OS process; only data/workflow.db is shared.
+
+$ python -m workflow run content-001
+Run started: content content-001, scenario revise_once, max revisions 2
+
+Evaluation completed (attempt 1)
+Decision: revise
+Reasons: The 18% figure needs its date range
+
+Revision attempt: 1
+
+Evaluation completed (attempt 2)
+Decision: human_review
+Reasons: Date range added; claims now match evidence
+
+Human review required
+Checkpoint saved (version 1)
+
+Workflow paused.
+Resume with: python -m workflow resume content-001
+(exit code: 0)
+
+$ python -m workflow status content-001
+{
+  "run_id": "content-001",
+  "status": "awaiting_review",
+  "paused_for_review": true,
+  "revision_count": 1,
+  "evaluation_count": 2,
+  "stop_reason": null
+}
+(exit code: 0)
+
+$ python -m workflow resume content-001 --decision approve --reviewer ada
+Loaded checkpoint
+Current stage: human_review
+
+Approved by ada.
+
+Workflow completed.
+(exit code: 0)
+
+$ python -m workflow resume content-001 --decision approve --reviewer ada
+Already completed: nothing to do. No duplicate completion was recorded.
+(exit code: 0)
+
+$ python -m workflow status content-001
+{
+  "run_id": "content-001",
+  "status": "completed",
+  "paused_for_review": false,
+  "revision_count": 1,
+  "evaluation_count": 2,
+  "stop_reason": null
+}
+(exit code: 0)
+

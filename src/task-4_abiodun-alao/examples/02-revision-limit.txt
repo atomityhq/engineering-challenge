@@ -1,0 +1,36 @@
+# Evaluator that always asks for revision: stops after the 2-revision limit.
+
+$ python -m workflow run content-001 --scenario always_revise --run-id limit-001
+Run started: content content-001, scenario always_revise, max revisions 2
+
+Evaluation completed (attempt 1)
+Decision: revise
+Reasons: Unsupported claim in sentence 2
+
+Revision attempt: 1
+
+Evaluation completed (attempt 2)
+Decision: revise
+Reasons: Unsupported claim in sentence 2
+
+Revision attempt: 2
+
+Evaluation completed (attempt 3)
+Decision: revise
+Reasons: Unsupported claim in sentence 2
+
+Maximum revision attempts reached.
+Workflow stopped: Evaluator still requested revision after 2 revision attempt(s) (3 evaluations)
+(exit code: 0)
+
+$ python -m workflow status limit-001
+{
+  "run_id": "limit-001",
+  "status": "revision_limit_reached",
+  "paused_for_review": false,
+  "revision_count": 2,
+  "evaluation_count": 3,
+  "stop_reason": "Evaluator still requested revision after 2 revision attempt(s) (3 evaluations)"
+}
+(exit code: 0)
+

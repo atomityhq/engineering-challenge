@@ -1,0 +1,95 @@
+[
+  {
+    "seq": 1,
+    "event": "run_started",
+    "content_id": "content-001",
+    "max_revisions": 2,
+    "scenario": "revise_once",
+    "at": "2026-10-25T12:22:12.882168+00:00"
+  },
+  {
+    "seq": 2,
+    "event": "evaluation_completed",
+    "attempt": 1,
+    "decision": "revise",
+    "reasons": [
+      "The 18% figure needs its date range"
+    ],
+    "revision_count": 0,
+    "at": "2026-10-25T12:22:12.891164+00:00"
+  },
+  {
+    "seq": 3,
+    "event": "revision_requested",
+    "feedback": [
+      "The 18% figure needs its date range"
+    ],
+    "revision_count": 1,
+    "at": "2026-10-25T12:22:12.893372+00:00"
+  },
+  {
+    "seq": 4,
+    "event": "revision_completed",
+    "revision_count": 1,
+    "at": "2026-10-25T12:22:12.895202+00:00"
+  },
+  {
+    "seq": 5,
+    "event": "evaluation_completed",
+    "attempt": 2,
+    "decision": "human_review",
+    "reasons": [
+      "Date range added; claims now match evidence"
+    ],
+    "revision_count": 1,
+    "at": "2026-10-25T12:22:12.896300+00:00"
+  },
+  {
+    "seq": 6,
+    "event": "human_review_required",
+    "checkpoint_version": 1,
+    "reasons": [
+      "Date range added; claims now match evidence"
+    ],
+    "revision_count": 1,
+    "at": "2026-10-25T12:22:12.898869+00:00"
+  },
+  {
+    "seq": 7,
+    "event": "checkpoint_saved",
+    "checkpoint_id": "1f1d06eb-520c-611b-8004-04059e5688ac",
+    "checkpoint_version": 1,
+    "next_node": "human_review",
+    "at": "2026-10-25T12:22:12.906514+00:00"
+  },
+  {
+    "seq": 8,
+    "event": "checkpoint_loaded",
+    "checkpoint_id": "1f1d06eb-520c-611b-8004-04059e5688ac",
+    "checkpoint_version": 1,
+    "stage": "human_review",
+    "at": "2026-10-25T12:22:14.440317+00:00"
+  },
+  {
+    "seq": 9,
+    "event": "human_approved",
+    "note": null,
+    "reviewer": "ada",
+    "at": "2026-10-25T12:22:14.443913+00:00"
+  },
+  {
+    "seq": 10,
+    "event": "workflow_completed",
+    "approved_by": "ada",
+    "revision_count": 1,
+    "at": "2026-10-25T12:22:14.445999+00:00"
+  },
+  {
+    "seq": 11,
+    "event": "duplicate_approval_ignored",
+    "decision": "approve",
+    "reviewer": "ada",
+    "status": "completed",
+    "at": "2026-10-25T12:22:15.247503+00:00"
+  }
+]
