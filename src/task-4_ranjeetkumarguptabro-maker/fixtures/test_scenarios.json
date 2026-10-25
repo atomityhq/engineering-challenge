@@ -1,0 +1,63 @@
+{
+  "scenarios": [
+    {
+      "id": "scenario_normal_pass",
+      "name": "Normal pass to human review",
+      "description": "Evaluator returns human_review immediately; pauses at review boundary; approves and completes.",
+      "content_id": "content-001",
+      "expected_revisions": 0,
+      "expected_evaluations": 1,
+      "expected_final_status": "completed",
+      "expected_event_sequence": [
+        "workflow_started",
+        "evaluation_completed",
+        "human_review_required",
+        "checkpoint_saved",
+        "workflow_resumed",
+        "human_approved",
+        "workflow_completed"
+      ]
+    },
+    {
+      "id": "scenario_one_revision_pass",
+      "name": "One revision then pass",
+      "description": "First evaluation returns revise; revision runs; second evaluation returns human_review; pauses; approves and completes.",
+      "content_id": "content-002",
+      "expected_revisions": 1,
+      "expected_evaluations": 2,
+      "expected_final_status": "completed",
+      "expected_event_sequence": [
+        "workflow_started",
+        "evaluation_completed",
+        "revision_requested",
+        "revision_completed",
+        "evaluation_completed",
+        "human_review_required",
+        "checkpoint_saved",
+        "workflow_resumed",
+        "human_approved",
+        "workflow_completed"
+      ]
+    },
+    {
+      "id": "scenario_revision_limit",
+      "name": "Revision limit exhausted (2 attempts)",
+      "description": "Evaluator repeatedly requests revision; halts after exactly 2 revisions and enters terminal state.",
+      "content_id": "content-003",
+      "expected_revisions": 2,
+      "expected_evaluations": 3,
+      "expected_final_status": "revision_limit_reached",
+      "expected_event_sequence": [
+        "workflow_started",
+        "evaluation_completed",
+        "revision_requested",
+        "revision_completed",
+        "evaluation_completed",
+        "revision_requested",
+        "revision_completed",
+        "evaluation_completed",
+        "revision_limit_reached"
+      ]
+    }
+  ]
+}

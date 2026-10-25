@@ -1,0 +1,159 @@
+[
+  {
+    "event_id": "evt_9f06d7397065",
+    "workflow_id": "run_demo-content-001",
+    "content_id": "demo-content-001",
+    "event_type": "workflow_started",
+    "stage": "initial",
+    "revision_count": 0,
+    "decision": null,
+    "explanation": "Workflow started for content 'demo-content-001'.",
+    "metadata": {
+      "title": "Overview: LLM Reasoning Reliability in Production",
+      "max_revisions": 2
+    },
+    "timestamp": "2026-10-22T16:04:09.456966Z"
+  },
+  {
+    "event_id": "evt_420b50e0a358",
+    "workflow_id": "run_demo-content-001",
+    "content_id": "demo-content-001",
+    "event_type": "evaluation_completed",
+    "stage": "evaluate",
+    "revision_count": 0,
+    "decision": "revise",
+    "explanation": "Evaluation completed with decision: revise. (Initial draft 
+requires evidence citation and formatting refinement.)",
+    "metadata": {
+      "scores": {
+        "clarity": 0.6,
+        "evidence_grounding": 0.5
+      },
+      "evaluator": "rule_based_evaluator"
+    },
+    "timestamp": "2026-10-22T16:04:09.465472Z"
+  },
+  {
+    "event_id": "evt_c032dc7b719b",
+    "workflow_id": "run_demo-content-001",
+    "content_id": "demo-content-001",
+    "event_type": "revision_requested",
+    "stage": "evaluate",
+    "revision_count": 1,
+    "decision": "revise",
+    "explanation": "Revision attempt 1 requested: Initial draft requires 
+evidence citation and formatting refinement.",
+    "metadata": {
+      "reason": "Initial draft requires evidence citation and formatting 
+refinement."
+    },
+    "timestamp": "2026-10-22T16:04:09.466999Z"
+  },
+  {
+    "event_id": "evt_11597862aa7b",
+    "workflow_id": "run_demo-content-001",
+    "content_id": "demo-content-001",
+    "event_type": "revision_completed",
+    "stage": "revise",
+    "revision_count": 1,
+    "decision": null,
+    "explanation": "Revision 1 completed successfully.",
+    "metadata": {
+      "revision_number": 1,
+      "reason": "Initial draft requires evidence citation and formatting 
+refinement."
+    },
+    "timestamp": "2026-10-22T16:04:09.467632Z"
+  },
+  {
+    "event_id": "evt_4630bb7e2435",
+    "workflow_id": "run_demo-content-001",
+    "content_id": "demo-content-001",
+    "event_type": "evaluation_completed",
+    "stage": "evaluate",
+    "revision_count": 1,
+    "decision": "human_review",
+    "explanation": "Evaluation completed with decision: human_review. (Content 
+passed automated quality checks. Ready for human review.)",
+    "metadata": {
+      "scores": {
+        "clarity": 0.95,
+        "evidence_grounding": 0.98
+      },
+      "evaluator": "rule_based_evaluator"
+    },
+    "timestamp": "2026-10-22T16:04:09.470831Z"
+  },
+  {
+    "event_id": "evt_59609aa4f47b",
+    "workflow_id": "run_demo-content-001",
+    "content_id": "demo-content-001",
+    "event_type": "human_review_required",
+    "stage": "human_review",
+    "revision_count": 1,
+    "decision": "human_review",
+    "explanation": "Content passed automated evaluation. Human review required 
+for publication.",
+    "metadata": {
+      "revisions_performed": 1
+    },
+    "timestamp": "2026-10-22T16:04:09.472674Z"
+  },
+  {
+    "event_id": "evt_c9d3e4cfca16",
+    "workflow_id": "run_demo-content-001",
+    "content_id": "demo-content-001",
+    "event_type": "checkpoint_saved",
+    "stage": "human_review",
+    "revision_count": 1,
+    "decision": null,
+    "explanation": "Workflow checkpoint v1 persisted at human-review boundary.",
+    "metadata": {
+      "checkpoint_version": 1
+    },
+    "timestamp": "2026-10-22T16:04:09.474218Z"
+  },
+  {
+    "event_id": "evt_1c762085ee2e",
+    "workflow_id": "run_demo-content-001",
+    "content_id": "demo-content-001",
+    "event_type": "workflow_resumed",
+    "stage": "approval",
+    "revision_count": 1,
+    "decision": null,
+    "explanation": "Workflow execution resumed from persisted checkpoint.",
+    "metadata": {
+      "resumed_from_version": 1
+    },
+    "timestamp": "2026-10-22T16:04:34.085830Z"
+  },
+  {
+    "event_id": "evt_d71e4a067b99",
+    "workflow_id": "run_demo-content-001",
+    "content_id": "demo-content-001",
+    "event_type": "human_approved",
+    "stage": "approval",
+    "revision_count": 1,
+    "decision": null,
+    "explanation": "Content approved by Jane Doe (Lead Editor).",
+    "metadata": {
+      "approved_by": "Jane Doe (Lead Editor)",
+      "comment": null
+    },
+    "timestamp": "2026-10-22T16:04:34.086399Z"
+  },
+  {
+    "event_id": "evt_9b705001358a",
+    "workflow_id": "run_demo-content-001",
+    "content_id": "demo-content-001",
+    "event_type": "workflow_completed",
+    "stage": "complete",
+    "revision_count": 1,
+    "decision": null,
+    "explanation": "Workflow completed successfully.",
+    "metadata": {
+      "final_revision_count": 1
+    },
+    "timestamp": "2026-10-22T16:04:34.086661Z"
+  }
+]
