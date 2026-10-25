@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.0",
+  "synthetic": true,
+  "as_of": "2026-10-06",
+  "instructions": "Synthetic extra test cases designed for weight sensitivity comparison. All cases pass hard checks and are eligible for scoring, featuring single and multi-criterion variations.",
+  "demo_policy": {
+    "news_max_event_age_days": 30,
+    "regulation_rule": "Evaluate current_status and effective_from. Do not reject current law solely for an old publication date.",
+    "unknown_required_temporal_metadata": "human_review",
+    "weights_and_threshold": "Three distinct configurations compared across eligible candidates."
+  },
+  "cases": [
+    {
+      "id": "extra-secondary-authority",
+      "statement": "An independent industry research group confirms regional adoption figures.",
+      "metadata": {
+        "source_type": "secondary",
+        "content_type": "news",
+        "published_at": "2026-10-05",
+        "event_date": "2026-10-04",
+        "effective_from": null,
+        "last_verified_at": "2026-10-06",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false,
+        "support_level": "full",
+        "timing_uncertain": false
+      },
+      "expected_decision": "pass"
+    },
+    {
+      "id": "extra-partial-support",
+      "statement": "The draft claims broad efficiency gains, but regulatory filings provide only partial evidence.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "regulation",
+        "published_at": "2024-03-01",
+        "event_date": "2024-03-01",
+        "effective_from": "2024-06-01",
+        "last_verified_at": "2026-10-06",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false,
+        "support_level": "partial",
+        "timing_uncertain": false
+      },
+      "expected_decision": "human_review"
+    },
+    {
+      "id": "extra-provisional-timing",
+      "statement": "A primary regulatory body issues preliminary findings subject to formal gazetting.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "news",
+        "published_at": "2026-10-04",
+        "event_date": "2026-10-03",
+        "effective_from": null,
+        "last_verified_at": "2026-10-06",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false,
+        "support_level": "full",
+        "timing_uncertain": true
+      },
+      "expected_decision": "pass"
+    },
+    {
+      "id": "extra-secondary-partial",
+      "statement": "A secondary trade publication provides only partial verification for an industry claim.",
+      "metadata": {
+        "source_type": "secondary",
+        "content_type": "news",
+        "published_at": "2026-10-04",
+        "event_date": "2026-10-02",
+        "effective_from": null,
+        "last_verified_at": "2026-10-06",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false,
+        "support_level": "partial",
+        "timing_uncertain": false
+      },
+      "expected_decision": "human_review"
+    }
+  ]
+}

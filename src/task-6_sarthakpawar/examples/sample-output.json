@@ -1,0 +1,301 @@
+[
+  {
+    "case_id": "current-news",
+    "gate": "G2",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_superseded": false,
+      "competitor_promotion": false
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 1.0,
+      "temporal_validity": 1.0
+    },
+    "freshness": {
+      "status": "current",
+      "date_type": "event_date",
+      "date_used": "2026-10-03",
+      "reason": "Event date 2026-10-03 (3 days old) falls within demo policy limit of 30 days."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.25,
+      "temporal_validity": 0.25
+    },
+    "score": 1.0,
+    "decision": "pass",
+    "reasons": [
+      "ALL_CHECKS_PASSED"
+    ]
+  },
+  {
+    "case_id": "old-law-current",
+    "gate": "G2",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_superseded": false,
+      "competitor_promotion": false
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 1.0,
+      "temporal_validity": 1.0
+    },
+    "freshness": {
+      "status": "current",
+      "date_type": "effective_from",
+      "date_used": "2021-06-01",
+      "reason": "Regulation has been in force since 2021-06-01 and remains currently applicable as of 2026-10-06."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.25,
+      "temporal_validity": 0.25
+    },
+    "score": 1.0,
+    "decision": "pass",
+    "reasons": [
+      "ALL_CHECKS_PASSED"
+    ]
+  },
+  {
+    "case_id": "recent-article-old-event",
+    "gate": "G2",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_superseded": false,
+      "competitor_promotion": false
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 1.0,
+      "temporal_validity": 0.0
+    },
+    "freshness": {
+      "status": "stale",
+      "date_type": "event_date",
+      "date_used": "2025-01-01",
+      "reason": "Event date 2025-01-01 (643 days old) exceeds demo policy limit of 30 days."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.25,
+      "temporal_validity": 0.25
+    },
+    "score": null,
+    "decision": "revise",
+    "reasons": [
+      "STALE_EVENT_DATE"
+    ]
+  },
+  {
+    "case_id": "unknown-date",
+    "gate": "G2",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_superseded": false,
+      "competitor_promotion": false
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 1.0,
+      "temporal_validity": null
+    },
+    "freshness": {
+      "status": "unknown",
+      "date_type": "event_date",
+      "date_used": null,
+      "reason": "News event date is unavailable; temporal validity cannot be established."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.25,
+      "temporal_validity": 0.25
+    },
+    "score": null,
+    "decision": "human_review",
+    "reasons": [
+      "UNKNOWN_TEMPORAL_METADATA"
+    ]
+  },
+  {
+    "case_id": "unsupported-claim",
+    "gate": "G2",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "hard_checks": {
+      "material_claim_supported": false,
+      "evidence_superseded": false,
+      "competitor_promotion": false
+    },
+    "criteria": {
+      "evidence_support": 0.0,
+      "source_authority": 1.0,
+      "temporal_validity": 1.0
+    },
+    "freshness": {
+      "status": "current",
+      "date_type": "event_date",
+      "date_used": "2026-10-03",
+      "reason": "Event date 2026-10-03 (3 days old) falls within demo policy limit of 30 days."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.25,
+      "temporal_validity": 0.25
+    },
+    "score": null,
+    "decision": "revise",
+    "reasons": [
+      "UNSUPPORTED_CLAIM"
+    ]
+  },
+  {
+    "case_id": "superseded-source",
+    "gate": "G2",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_superseded": true,
+      "competitor_promotion": false
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 1.0,
+      "temporal_validity": 0.0
+    },
+    "freshness": {
+      "status": "superseded",
+      "date_type": "effective_from",
+      "date_used": null,
+      "reason": "Regulation is superseded and no longer in force."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.25,
+      "temporal_validity": 0.25
+    },
+    "score": null,
+    "decision": "revise",
+    "reasons": [
+      "SUPERSEDED_EVIDENCE"
+    ]
+  },
+  {
+    "case_id": "competitor-promotion",
+    "gate": "G2",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_superseded": false,
+      "competitor_promotion": true
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 0.0,
+      "temporal_validity": 1.0
+    },
+    "freshness": {
+      "status": "current",
+      "date_type": "event_date",
+      "date_used": "2026-10-03",
+      "reason": "Event date 2026-10-03 (3 days old) falls within demo policy limit of 30 days."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.25,
+      "temporal_validity": 0.25
+    },
+    "score": null,
+    "decision": "reject",
+    "reasons": [
+      "COMPETITOR_PROMOTION"
+    ]
+  },
+  {
+    "case_id": "conflicting-evidence",
+    "gate": "G2",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_superseded": false,
+      "competitor_promotion": false
+    },
+    "criteria": {
+      "evidence_support": 0.5,
+      "source_authority": 1.0,
+      "temporal_validity": 1.0
+    },
+    "freshness": {
+      "status": "current",
+      "date_type": "event_date",
+      "date_used": "2026-10-03",
+      "reason": "Event date 2026-10-03 (3 days old) falls within demo policy limit of 30 days."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.25,
+      "temporal_validity": 0.25
+    },
+    "score": 0.75,
+    "decision": "human_review",
+    "reasons": [
+      "CONFLICTING_EVIDENCE",
+      "SCORE_BELOW_THRESHOLD (score=0.7500 < 0.8)"
+    ]
+  },
+  {
+    "case_id": "future-rule",
+    "gate": "G2",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_superseded": false,
+      "competitor_promotion": false
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 1.0,
+      "temporal_validity": 1.0
+    },
+    "freshness": {
+      "status": "adopted_not_applicable",
+      "date_type": "effective_from",
+      "date_used": "2027-01-01",
+      "reason": "Regulation is adopted with future effective date 2027-01-01; not yet in force as of 2026-10-06."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.25,
+      "temporal_validity": 0.25
+    },
+    "score": 1.0,
+    "decision": "pass",
+    "reasons": [
+      "ALL_CHECKS_PASSED",
+      "ADOPTED_FUTURE_REGULATION_NOT_CURRENTLY_APPLICABLE"
+    ]
+  }
+]
