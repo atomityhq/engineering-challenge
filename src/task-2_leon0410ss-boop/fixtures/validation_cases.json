@@ -1,0 +1,110 @@
+{
+  "sources": [
+    {
+      "source_id": "source-001",
+      "title": "Regulatory Publication Notice",
+      "excerpts": [
+        {
+          "locator": "paragraph-2",
+          "text": "The regulation was published on 1 June."
+        }
+      ]
+    },
+    {
+      "source_id": "source-002",
+      "title": "Compliance Cost Report",
+      "excerpts": [
+        {
+          "locator": "paragraph-4",
+          "text": "Compliance costs increased after the regulation took effect."
+        }
+      ]
+    },
+    {
+  "source_id": "source-003",
+  "title": "Survey Report A",
+  "excerpts": [
+    {
+      "locator": "results-1",
+      "text": "The survey included 500 participants."
+    }
+  ]
+},
+{
+  "source_id": "source-004",
+  "title": "Survey Report B",
+  "excerpts": [
+    {
+      "locator": "results-1",
+      "text": "The survey included 650 participants."
+    }
+  ]
+},
+{
+  "source_id": "source-005",
+  "title": "Monthly Customer Service Report",
+  "excerpts": [
+    {
+      "locator": "table-2",
+      "text": "Customer complaints fell from 120 in January to 80 in February."
+    }
+  ]
+}
+  ],
+  "claims": [
+    {
+      "claim_id": "claim-001",
+      "text": "The regulation was published on 1 June.",
+      "evidence_refs": [
+        {
+          "source_id": "source-001",
+          "locator": "paragraph-2"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-002",
+      "text": "Compliance costs increased by 30% after the regulation took effect.",
+      "evidence_refs": [
+        {
+          "source_id": "source-002",
+          "locator": "paragraph-4"
+        }
+      ]
+    },
+    {
+      "claim_id": "claim-003",
+      "text": "The regulation entered into force on 15 June.",
+      "evidence_refs": [
+        {
+          "source_id": "source-999",
+          "locator": "paragraph-1"
+        }
+      ]
+    },
+    {
+  "claim_id": "claim-004",
+  "text": "The survey included 500 participants.",
+  "evidence_refs": [
+    {
+      "source_id": "source-003",
+      "locator": "results-1"
+    },
+    {
+      "source_id": "source-004",
+      "locator": "results-1"
+    }
+  ]
+},
+{
+  "claim_id": "claim-005",
+  "text": "The new policy caused customer satisfaction to improve.",
+  "evidence_refs": [
+    {
+      "source_id": "source-005",
+      "locator": "table-2"
+    }
+  ]
+}
+  ]
+}

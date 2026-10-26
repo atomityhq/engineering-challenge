@@ -1,0 +1,9 @@
+{
+  "claim_id": "claim-006",
+  "evidence_refs": [
+    {
+      "source_id": "source-001",
+      "locator": "paragraph-2"
+    }
+  ]
+}
