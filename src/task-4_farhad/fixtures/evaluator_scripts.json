@@ -1,0 +1,5 @@
+{
+  "pass_first_time": ["human_review"],
+  "one_revision_then_pass": ["revise", "human_review"],
+  "always_revise": ["revise", "revise", "revise", "revise"]
+}

@@ -1,0 +1,6 @@
+# Pinned to the versions the author developed and tested against.
+langgraph==1.2.17
+langgraph-checkpoint==4.3.0
+langgraph-checkpoint-sqlite==3.1.2
+pydantic==2.14.1
+pytest==9.1.1

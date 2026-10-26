@@ -1,0 +1,44 @@
+$ python -m workflow run content-001 --scenario one_revision_then_pass
+  [1] workflow_started
+  [2] evaluation_completed (revision 0) - revise
+  [3] revision_requested (revision 1)
+  [4] revision_completed (revision 1)
+  [5] evaluation_completed (revision 1) - human_review
+  [6] human_review_required (revision 1)
+  [7] checkpoint_saved (revision 1) - checkpoint_id=1f1d13f6-2021-630f-8004-5d57c66ceb05
+
+Run ID: run-content-001
+Workflow paused at human review. Resume with:
+  python -m workflow resume run-content-001
+(exit code 0)
+
+$ python -m workflow resume run-content-001 --approve
+Loaded checkpoint
+Current stage: human_review
+  [8] checkpoint_loaded - checkpoint_id=1f1d13f6-2021-630f-8004-5d57c66ceb05
+  [9] human_approved - reviewer
+  [10] workflow_completed
+Approved.
+Workflow completed.
+(exit code 0)
+
+$ python -m workflow approve run-content-001
+Loaded checkpoint
+Current stage: completed
+  [11] duplicate_approval_ignored
+Already completed; nothing repeated.
+(exit code 0)
+
+$ python -m workflow log run-content-001
+  [1] workflow_started
+  [2] evaluation_completed (revision 0) - revise
+  [3] revision_requested (revision 1)
+  [4] revision_completed (revision 1)
+  [5] evaluation_completed (revision 1) - human_review
+  [6] human_review_required (revision 1)
+  [7] checkpoint_saved (revision 1) - checkpoint_id=1f1d13f6-2021-630f-8004-5d57c66ceb05
+  [8] checkpoint_loaded - checkpoint_id=1f1d13f6-2021-630f-8004-5d57c66ceb05
+  [9] human_approved - reviewer
+  [10] workflow_completed
+  [11] duplicate_approval_ignored
+(exit code 0)
