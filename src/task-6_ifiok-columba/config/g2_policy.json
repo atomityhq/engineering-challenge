@@ -1,0 +1,71 @@
+{
+  "policy_version": "prototype-v1",
+  "calibration_status": "uncalibrated",
+  "weights_version": "provisional-v1",
+  "weights": {
+    "evidence_support": 0.5,
+    "temporal_validity": 0.3,
+    "source_authority": 0.2
+  },
+  "weight_rationale": {
+    "evidence_support": "Highest weight. Publishing a claim the evidence does not back is the most damaging mistake for an audience of regulated buyers who check sources.",
+    "temporal_validity": "Second. A true statement about a rule that no longer applies, or an event that is long past, still misleads a placement decision.",
+    "source_authority": "Lowest. The starter metadata only offers coarse source labels, so this signal is blunt. It also overlaps with the competitor hard check, so a heavy weight would count the same concern twice."
+  },
+  "pass_threshold": 0.8,
+  "criterion_floor": 0.5,
+  "threshold_rationale": "0.8 means: every criterion must be at least 'partly good' (floor 0.5) and the weighted average must be clearly high. One weak spot is tolerated (a secondary source scores 0.9; a primary rule last checked long ago scores 0.85). Two weak spots at once are not (a secondary source that was also last checked long ago scores 0.75) and go to a person. Provisional, not calibrated.",
+  "verification_max_age_days": 90,
+  "source_authority_scores": {
+    "primary_authority": 1.0,
+    "secondary": 0.5,
+    "competitor": 0.0
+  },
+  "alternative_weights": {
+    "equal": {
+      "evidence_support": 0.3333333333333333,
+      "temporal_validity": 0.3333333333333333,
+      "source_authority": 0.3333333333333334
+    },
+    "authority_first": {
+      "evidence_support": 0.35,
+      "temporal_validity": 0.2,
+      "source_authority": 0.45
+    }
+  },
+  "criterion_anchors": {
+    "evidence_support": {
+      "0": "Material claim is not supported by the supplied evidence.",
+      "0.5": "Reserved for partial or qualified support. The starter metadata is true/false, so this level is defined but not produced today.",
+      "1": "Material claim is directly supported by the supplied evidence."
+    },
+    "source_authority": {
+      "0": "Competitor source: no authority for a claim we would publish.",
+      "0.5": "Secondary source: useful but indirect (for example trade press reporting on a rule).",
+      "1": "Primary authority for the claim (the body that made the rule or announcement)."
+    },
+    "temporal_validity": {
+      "0": "Evidence is superseded, or news whose event is older than the demo window.",
+      "0.5": "Evidence looks valid but was last verified more than the re-verification window before as_of.",
+      "1": "News within the demo window, or a rule whose applicability status is clear and recently verified. A future rule correctly labelled as future also scores 1, but it is never reported as currently applicable."
+    }
+  },
+  "next_actions": {
+    "COMPETITOR_PROMOTION": "Remove the competitor's product claim, or find independent evidence for the underlying industry fact. Do not republish.",
+    "UNSUPPORTED_CLAIM": "Find a source for the claim or delete the claim. Do not keep unsupported numbers.",
+    "SUPERSEDED_EVIDENCE": "Replace the superseded rule with the one that replaced it, then resubmit.",
+    "STALE_EVENT": "Describe it as past news with its real date, or swap in a recent event. Do not present it as breaking.",
+    "UNKNOWN_EVENT_DATE": "Find the real event date from the source. Do not guess it.",
+    "UNKNOWN_EFFECTIVE_DATE": "Find the date the rule takes effect from the primary source.",
+    "UNKNOWN_VERIFICATION_DATE": "Re-check the source and record when it was checked.",
+    "UNKNOWN_CURRENT_STATUS": "Confirm whether the rule is in force, adopted but not yet applicable, or replaced.",
+    "UNKNOWN_CONTENT_TYPE": "Classify the content as news or regulation, or send it to a person to decide.",
+    "UNKNOWN_SUPPORT": "Check whether the evidence supports the claim and record the answer.",
+    "UNKNOWN_SOURCE_AUTHORITY": "Classify the source type, or send it to a person to decide.",
+    "CONFLICTING_EVIDENCE": "A person decides which source is right. Keep both sources visible.",
+    "INCONSISTENT_METADATA": "The dates or status contradict each other. Correct the metadata before scoring.",
+    "CRITERION_BELOW_FLOOR": "One criterion is too weak to pass. Strengthen that evidence or have a person review it.",
+    "BELOW_THRESHOLD": "Overall evidence is thinner than the pass bar. A person decides whether it is good enough.",
+    "INCOMPLETE_EVALUATION": "The gate could not finish its checks. A person reviews it."
+  }
+}

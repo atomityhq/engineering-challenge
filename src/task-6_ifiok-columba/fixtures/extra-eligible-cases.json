@@ -1,0 +1,86 @@
+{
+  "schema_version": "1.0",
+  "synthetic": true,
+  "as_of": "2026-10-06",
+  "instructions": "All statements and metadata are fictional. These extra cases are written for the weight-sensitivity comparison: each has a different mix of source authority and verification age. expected_decision is test-only and is stripped by the loader.",
+  "demo_policy": {
+    "news_max_event_age_days": 30,
+    "regulation_rule": "Evaluate current_status and effective_from. Do not reject current law solely for an old publication date.",
+    "unknown_required_temporal_metadata": "human_review",
+    "weights_and_threshold": "Candidate defines and justifies a provisional configuration. These routing expectations do not calibrate it."
+  },
+  "cases": [
+    {
+      "id": "extra-secondary-news-recent",
+      "statement": "A fictional trade publication reports a recent provider region change.",
+      "metadata": {
+        "source_type": "secondary",
+        "content_type": "news",
+        "published_at": "2026-09-28",
+        "event_date": "2026-09-25",
+        "effective_from": null,
+        "last_verified_at": "2026-10-01",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "pass"
+    },
+    {
+      "id": "extra-primary-rule-old-check",
+      "statement": "Fictional Regulation B is in force, but its status was last checked months ago.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "regulation",
+        "published_at": "2022-03-01",
+        "event_date": "2022-03-01",
+        "effective_from": "2022-09-01",
+        "last_verified_at": "2026-04-01",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "pass"
+    },
+    {
+      "id": "extra-secondary-rule-old-check",
+      "statement": "A fictional trade guide says Regulation B is in force; the guide was last checked months ago.",
+      "metadata": {
+        "source_type": "secondary",
+        "content_type": "regulation",
+        "published_at": "2022-05-01",
+        "event_date": "2022-03-01",
+        "effective_from": "2022-09-01",
+        "last_verified_at": "2026-04-01",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "human_review"
+    },
+    {
+      "id": "extra-primary-news-day-30",
+      "statement": "Fictional Authority announced a change exactly 30 days before the as_of date.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "news",
+        "published_at": "2026-09-07",
+        "event_date": "2026-09-06",
+        "effective_from": null,
+        "last_verified_at": "2026-10-05",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "pass"
+    }
+  ]
+}

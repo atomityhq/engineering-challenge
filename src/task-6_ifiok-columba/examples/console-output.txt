@@ -1,0 +1,76 @@
+
+== g2-cases.json (as_of 2026-10-06) ==
+case                             decision       score  reasons
+current-news                     pass           1.000  ALL_HARD_CHECKS_PASSED, ALL_CRITERIA_KNOWN, THRESHOLD_MET
+old-law-current                  pass           1.000  ALL_HARD_CHECKS_PASSED, ALL_CRITERIA_KNOWN, THRESHOLD_MET
+recent-article-old-event         revise         0.700  STALE_EVENT
+unknown-date                     human_review       -  UNKNOWN_EVENT_DATE
+unsupported-claim                revise             -  UNSUPPORTED_CLAIM
+superseded-source                revise             -  SUPERSEDED_EVIDENCE
+competitor-promotion             reject             -  COMPETITOR_PROMOTION
+conflicting-evidence             human_review       -  CONFLICTING_EVIDENCE
+future-rule                      pass           1.000  ALL_HARD_CHECKS_PASSED, ALL_CRITERIA_KNOWN, THRESHOLD_MET
+
+# Weight sensitivity
+
+Same cases, three weight sets. Only cases eligible for a score (no failed hard check, no unknown criterion) are compared.
+
+| case | chosen score / rank / decision | equal score / rank / decision | authority_first score / rank / decision | routing changes? |
+|---|---|---|---|---|
+| current-news | 1.000 / #1 / pass | 1.000 / #1 / pass | 1.000 / #1 / pass | no |
+| old-law-current | 1.000 / #1 / pass | 1.000 / #1 / pass | 1.000 / #1 / pass | no |
+| recent-article-old-event | 0.700 / #8 / revise | 0.667 / #7 / revise | 0.800 / #6 / revise | no |
+| future-rule | 1.000 / #1 / pass | 1.000 / #1 / pass | 1.000 / #1 / pass | no |
+| extra-secondary-news-recent | 0.900 / #5 / pass | 0.833 / #5 / pass | 0.775 / #7 / human_review | YES |
+| extra-primary-rule-old-check | 0.850 / #6 / pass | 0.833 / #5 / pass | 0.900 / #5 / pass | no |
+| extra-secondary-rule-old-check | 0.750 / #7 / human_review | 0.667 / #7 / human_review | 0.675 / #8 / human_review | no |
+| extra-primary-news-day-30 | 1.000 / #1 / pass | 1.000 / #1 / pass | 1.000 / #1 / pass | no |
+
+- Eligible cases compared: 8
+- Cases whose routing changes with the weights: 1 ['extra-secondary-news-recent']
+- Cases whose rank changes with the weights: 4 ['recent-article-old-event', 'extra-secondary-news-recent', 'extra-primary-rule-old-check', 'extra-secondary-rule-old-check']
+- Routing unchanged under every weight set: ['current-news', 'old-law-current', 'recent-article-old-event', 'future-rule', 'extra-primary-rule-old-check', 'extra-secondary-rule-old-check', 'extra-primary-news-day-30']
+
+Limitation: cases scoring 1.0 on every criterion score 1.0 under any weights, so they cannot show weight sensitivity. The extra fixtures exist to vary the criteria.
+
+
+# Content triage queue (G2)
+
+13 cases checked: 6 pass, 3 revise, 3 human_review, 1 reject.
+
+Only 'pass' moves on. Everything else has a named next step, so reviewers spend time on real judgment calls instead of working out why something stopped.
+
+## Ready for the next internal stage (6)
+
+- **current-news** - Fictional Authority reports a region availability change.
+- **old-law-current** - Fictional Regulation A is still in force and applicable.
+- **future-rule** - The fictional rule is adopted and will apply from 2027-01-01, not today.
+  - Careful: this rule is not applicable yet. Say "from <date>", not "now".
+- **extra-secondary-news-recent** - A fictional trade publication reports a recent provider region change.
+- **extra-primary-rule-old-check** - Fictional Regulation B is in force, but its status was last checked months ago.
+  - Re-verify the source soon.
+- **extra-primary-news-day-30** - Fictional Authority announced a change exactly 30 days before the as_of date.
+
+## Fix and resubmit (3)
+
+- **recent-article-old-event** - A new article describes an old provider event as breaking news.
+  - STALE_EVENT: Describe it as past news with its real date, or swap in a recent event. Do not present it as breaking.
+- **unsupported-claim** - The draft asserts a 10 percent saving absent from its evidence.
+  - UNSUPPORTED_CLAIM: Find a source for the claim or delete the claim. Do not keep unsupported numbers.
+- **superseded-source** - An older fictional rule has been replaced.
+  - SUPERSEDED_EVIDENCE: Replace the superseded rule with the one that replaced it, then resubmit.
+
+## Needs a person to decide (3)
+
+- **unknown-date** - The date of the fictional provider event is unavailable.
+  - UNKNOWN_EVENT_DATE: Find the real event date from the source. Do not guess it.
+- **conflicting-evidence** - Two fictional authorities disagree about the same claim.
+  - CONFLICTING_EVIDENCE: A person decides which source is right. Keep both sources visible.
+- **extra-secondary-rule-old-check** - A fictional trade guide says Regulation B is in force; the guide was last checked months ago.
+  - BELOW_THRESHOLD: Overall evidence is thinner than the pass bar. A person decides whether it is good enough.
+
+## Do not publish (1)
+
+- **competitor-promotion** - Fictional RivalCloud claims its own product saves 10 percent.
+  - COMPETITOR_PROMOTION: Remove the competitor's product claim, or find independent evidence for the underlying industry fact. Do not republish.
+

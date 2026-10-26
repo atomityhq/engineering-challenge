@@ -1,0 +1,382 @@
+[
+  {
+    "case_id": "current-news",
+    "gate": "G2",
+    "statement": "Fictional Authority reports a region availability change.",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "as_of": "2026-10-06",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_not_superseded": true,
+      "no_competitor_promotion": true,
+      "no_conflicting_evidence": true
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 1.0,
+      "temporal_validity": 1.0
+    },
+    "freshness": {
+      "status": "current",
+      "date_type": "event_date",
+      "date_used": "2026-10-03",
+      "age_days": 3,
+      "applicability": "not_assessed_for_news",
+      "reason": "Event was 3 days before as_of, inside the 30-day demo window."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.2,
+      "temporal_validity": 0.3
+    },
+    "score": 1.0,
+    "score_note": "Prototype index, not a probability. Weights and threshold are provisional and uncalibrated.",
+    "decision": "pass",
+    "reasons": [
+      "ALL_HARD_CHECKS_PASSED",
+      "ALL_CRITERIA_KNOWN",
+      "THRESHOLD_MET"
+    ],
+    "additional_findings": [],
+    "notes": []
+  },
+  {
+    "case_id": "old-law-current",
+    "gate": "G2",
+    "statement": "Fictional Regulation A is still in force and applicable.",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "as_of": "2026-10-06",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_not_superseded": true,
+      "no_competitor_promotion": true,
+      "no_conflicting_evidence": true
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 1.0,
+      "temporal_validity": 1.0
+    },
+    "freshness": {
+      "status": "current",
+      "date_type": "effective_from",
+      "date_used": "2021-06-01",
+      "age_days": 1953,
+      "applicability": "applicable_now",
+      "reason": "In force since 2021-06-01. An old publication date does not make a current rule stale."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.2,
+      "temporal_validity": 0.3
+    },
+    "score": 1.0,
+    "score_note": "Prototype index, not a probability. Weights and threshold are provisional and uncalibrated.",
+    "decision": "pass",
+    "reasons": [
+      "ALL_HARD_CHECKS_PASSED",
+      "ALL_CRITERIA_KNOWN",
+      "THRESHOLD_MET"
+    ],
+    "additional_findings": [],
+    "notes": []
+  },
+  {
+    "case_id": "recent-article-old-event",
+    "gate": "G2",
+    "statement": "A new article describes an old provider event as breaking news.",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "as_of": "2026-10-06",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_not_superseded": true,
+      "no_competitor_promotion": true,
+      "no_conflicting_evidence": true
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 1.0,
+      "temporal_validity": 0.0
+    },
+    "freshness": {
+      "status": "stale",
+      "date_type": "event_date",
+      "date_used": "2025-01-01",
+      "age_days": 643,
+      "applicability": "not_assessed_for_news",
+      "reason": "Event was 643 days before as_of; demo policy allows 30 (published date ignored: a new article about an old event is still old news)."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.2,
+      "temporal_validity": 0.3
+    },
+    "score": 0.7,
+    "score_note": "Prototype index, not a probability. Weights and threshold are provisional and uncalibrated.",
+    "decision": "revise",
+    "reasons": [
+      "STALE_EVENT"
+    ],
+    "additional_findings": [
+      "CRITERION_BELOW_FLOOR",
+      "BELOW_THRESHOLD"
+    ],
+    "notes": []
+  },
+  {
+    "case_id": "unknown-date",
+    "gate": "G2",
+    "statement": "The date of the fictional provider event is unavailable.",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "as_of": "2026-10-06",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_not_superseded": true,
+      "no_competitor_promotion": true,
+      "no_conflicting_evidence": true
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 1.0,
+      "temporal_validity": null
+    },
+    "freshness": {
+      "status": "unknown",
+      "date_type": "event_date",
+      "date_used": null,
+      "age_days": null,
+      "applicability": "not_assessed_for_news",
+      "reason": "Event date is unavailable, so freshness cannot be judged. Publication date is not used as a stand-in."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.2,
+      "temporal_validity": 0.3
+    },
+    "score": null,
+    "score_note": "Prototype index, not a probability. Weights and threshold are provisional and uncalibrated.",
+    "decision": "human_review",
+    "reasons": [
+      "UNKNOWN_EVENT_DATE"
+    ],
+    "additional_findings": [],
+    "notes": []
+  },
+  {
+    "case_id": "unsupported-claim",
+    "gate": "G2",
+    "statement": "The draft asserts a 10 percent saving absent from its evidence.",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "as_of": "2026-10-06",
+    "hard_checks": {
+      "material_claim_supported": false,
+      "evidence_not_superseded": true,
+      "no_competitor_promotion": true,
+      "no_conflicting_evidence": true
+    },
+    "criteria": {
+      "evidence_support": 0.0,
+      "source_authority": 1.0,
+      "temporal_validity": 1.0
+    },
+    "freshness": {
+      "status": "current",
+      "date_type": "event_date",
+      "date_used": "2026-10-03",
+      "age_days": 3,
+      "applicability": "not_assessed_for_news",
+      "reason": "Event was 3 days before as_of, inside the 30-day demo window."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.2,
+      "temporal_validity": 0.3
+    },
+    "score": null,
+    "score_note": "Prototype index, not a probability. Weights and threshold are provisional and uncalibrated.",
+    "decision": "revise",
+    "reasons": [
+      "UNSUPPORTED_CLAIM"
+    ],
+    "additional_findings": [],
+    "notes": []
+  },
+  {
+    "case_id": "superseded-source",
+    "gate": "G2",
+    "statement": "An older fictional rule has been replaced.",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "as_of": "2026-10-06",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_not_superseded": false,
+      "no_competitor_promotion": true,
+      "no_conflicting_evidence": true
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 1.0,
+      "temporal_validity": 0.0
+    },
+    "freshness": {
+      "status": "superseded",
+      "date_type": "none",
+      "date_used": null,
+      "age_days": null,
+      "applicability": "not_applicable_superseded",
+      "reason": "The rule has been replaced; it is not valid evidence for today."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.2,
+      "temporal_validity": 0.3
+    },
+    "score": null,
+    "score_note": "Prototype index, not a probability. Weights and threshold are provisional and uncalibrated.",
+    "decision": "revise",
+    "reasons": [
+      "SUPERSEDED_EVIDENCE"
+    ],
+    "additional_findings": [],
+    "notes": []
+  },
+  {
+    "case_id": "competitor-promotion",
+    "gate": "G2",
+    "statement": "Fictional RivalCloud claims its own product saves 10 percent.",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "as_of": "2026-10-06",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_not_superseded": true,
+      "no_competitor_promotion": false,
+      "no_conflicting_evidence": true
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 0.0,
+      "temporal_validity": 1.0
+    },
+    "freshness": {
+      "status": "current",
+      "date_type": "event_date",
+      "date_used": "2026-10-03",
+      "age_days": 3,
+      "applicability": "not_assessed_for_news",
+      "reason": "Event was 3 days before as_of, inside the 30-day demo window."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.2,
+      "temporal_validity": 0.3
+    },
+    "score": null,
+    "score_note": "Prototype index, not a probability. Weights and threshold are provisional and uncalibrated.",
+    "decision": "reject",
+    "reasons": [
+      "COMPETITOR_PROMOTION"
+    ],
+    "additional_findings": [],
+    "notes": []
+  },
+  {
+    "case_id": "conflicting-evidence",
+    "gate": "G2",
+    "statement": "Two fictional authorities disagree about the same claim.",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "as_of": "2026-10-06",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_not_superseded": true,
+      "no_competitor_promotion": true,
+      "no_conflicting_evidence": false
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 1.0,
+      "temporal_validity": 1.0
+    },
+    "freshness": {
+      "status": "current",
+      "date_type": "event_date",
+      "date_used": "2026-10-03",
+      "age_days": 3,
+      "applicability": "not_assessed_for_news",
+      "reason": "Event was 3 days before as_of, inside the 30-day demo window."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.2,
+      "temporal_validity": 0.3
+    },
+    "score": null,
+    "score_note": "Prototype index, not a probability. Weights and threshold are provisional and uncalibrated.",
+    "decision": "human_review",
+    "reasons": [
+      "CONFLICTING_EVIDENCE"
+    ],
+    "additional_findings": [],
+    "notes": []
+  },
+  {
+    "case_id": "future-rule",
+    "gate": "G2",
+    "statement": "The fictional rule is adopted and will apply from 2027-01-01, not today.",
+    "policy_version": "prototype-v1",
+    "calibration_status": "uncalibrated",
+    "as_of": "2026-10-06",
+    "hard_checks": {
+      "material_claim_supported": true,
+      "evidence_not_superseded": true,
+      "no_competitor_promotion": true,
+      "no_conflicting_evidence": true
+    },
+    "criteria": {
+      "evidence_support": 1.0,
+      "source_authority": 1.0,
+      "temporal_validity": 1.0
+    },
+    "freshness": {
+      "status": "future",
+      "date_type": "effective_from",
+      "date_used": "2027-01-01",
+      "age_days": null,
+      "applicability": "not_yet_applicable",
+      "reason": "Adopted but applies from 2027-01-01. Correct to describe it as a future rule; it must not be presented as applicable today."
+    },
+    "weights_version": "provisional-v1",
+    "weights": {
+      "evidence_support": 0.5,
+      "source_authority": 0.2,
+      "temporal_validity": 0.3
+    },
+    "score": 1.0,
+    "score_note": "Prototype index, not a probability. Weights and threshold are provisional and uncalibrated.",
+    "decision": "pass",
+    "reasons": [
+      "ALL_HARD_CHECKS_PASSED",
+      "ALL_CRITERIA_KNOWN",
+      "THRESHOLD_MET"
+    ],
+    "additional_findings": [],
+    "notes": [
+      "RULE_NOT_YET_APPLICABLE"
+    ]
+  }
+]
