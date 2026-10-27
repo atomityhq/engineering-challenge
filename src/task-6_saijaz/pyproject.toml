@@ -1,0 +1,9 @@
+[project]
+name = "g2-task-6-saijaz"
+version = "0.1.0"
+description = "Offline synthetic G2 evidence and temporal-validity demonstration"
+requires-python = ">=3.11"
+dependencies = []
+
+# Project metadata only: primary execution is python -m g2 from this directory.
+# No distribution build backend or pip installation workflow is provided.

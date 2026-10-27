@@ -1,0 +1,1475 @@
+{
+  "as_of": "2026-10-06",
+  "gate": "G2",
+  "reports": [
+    {
+      "aggregate_score": 1.0,
+      "applicability": "not_applicable",
+      "as_of": "2026-10-06",
+      "authority_mapping": {
+        "competitor": 0.0,
+        "official_indirect": 0.75,
+        "primary_authority": 1.0,
+        "reputable_secondary": 0.5,
+        "unknown": null
+      },
+      "calibration_status": "uncalibrated",
+      "case_id": "current-news",
+      "checks": [
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "material_claim_supported",
+          "reason": "Metadata asserts material support without unresolved contradiction.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_not_superseded",
+          "reason": "Neither supersession assertion reports replacement.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "competitor_promotion_absent",
+          "reason": "Metadata asserts no competitor product promotion.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_conflict_absent",
+          "reason": "Metadata asserts no unresolved evidence conflict.",
+          "status": "pass"
+        }
+      ],
+      "criteria": [
+        {
+          "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": true,
+          "name": "evidence_support",
+          "value": 1.0
+        },
+        {
+          "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+          "floor": 0.5,
+          "floor_met": true,
+          "name": "source_authority",
+          "value": 1.0
+        },
+        {
+          "explanation": "Event coverage is current under the supplied age limit. Qualified-scope anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": true,
+          "name": "temporal_validity",
+          "value": 1.0
+        }
+      ],
+      "currently_applicable": null,
+      "date_basis": "event_date",
+      "decision": "pass",
+      "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+      "findings": [],
+      "floors": {
+        "evidence_support": 1.0,
+        "source_authority": 0.5,
+        "temporal_validity": 1.0
+      },
+      "floors_met": true,
+      "freshness": {
+        "applicability": "not_applicable",
+        "as_of": "2026-10-06",
+        "currently_applicable": null,
+        "date_basis": "event_date",
+        "event_age_days": 3,
+        "explanation": "Event coverage is current under the supplied age limit.",
+        "findings": [],
+        "metadata": {
+          "competitor_product_claim": false,
+          "content_type": "news",
+          "contradiction": false,
+          "current_status": "current",
+          "effective_from": null,
+          "event_date": "2026-10-03",
+          "last_verified_at": "2026-10-06",
+          "published_at": "2026-10-04",
+          "source_type": "primary_authority",
+          "superseded": false,
+          "supported": true
+        },
+        "news_max_event_age_days": 30,
+        "value": 1.0
+      },
+      "gate": "G2",
+      "original_evidence_required": false,
+      "pass_requirements_met": true,
+      "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+      "policy_schema_version": "1.0",
+      "policy_version": "g2-demo-v1",
+      "primary_reason": "PASS_REQUIREMENTS_MET",
+      "schema_version": "1.0",
+      "scoring_blockers": [],
+      "scoring_eligible": true,
+      "scoring_explanation": "Unrounded weighted sum is a diagnostic preference score, not a probability; floors, threshold, and original-evidence requirements are separate.",
+      "threshold": 0.8,
+      "threshold_met": true,
+      "weights": {
+        "evidence_support": 0.45,
+        "source_authority": 0.3,
+        "temporal_validity": 0.25
+      },
+      "weights_version": "grounding-first-v1"
+    },
+    {
+      "aggregate_score": 1.0,
+      "applicability": "currently_applicable",
+      "as_of": "2026-10-06",
+      "authority_mapping": {
+        "competitor": 0.0,
+        "official_indirect": 0.75,
+        "primary_authority": 1.0,
+        "reputable_secondary": 0.5,
+        "unknown": null
+      },
+      "calibration_status": "uncalibrated",
+      "case_id": "old-law-current",
+      "checks": [
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "material_claim_supported",
+          "reason": "Metadata asserts material support without unresolved contradiction.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_not_superseded",
+          "reason": "Neither supersession assertion reports replacement.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "competitor_promotion_absent",
+          "reason": "Metadata asserts no competitor product promotion.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_conflict_absent",
+          "reason": "Metadata asserts no unresolved evidence conflict.",
+          "status": "pass"
+        }
+      ],
+      "criteria": [
+        {
+          "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": true,
+          "name": "evidence_support",
+          "value": 1.0
+        },
+        {
+          "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+          "floor": 0.5,
+          "floor_met": true,
+          "name": "source_authority",
+          "value": 1.0
+        },
+        {
+          "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately. Qualified-scope anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": true,
+          "name": "temporal_validity",
+          "value": 1.0
+        }
+      ],
+      "currently_applicable": true,
+      "date_basis": "effective_from",
+      "decision": "pass",
+      "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+      "findings": [],
+      "floors": {
+        "evidence_support": 1.0,
+        "source_authority": 0.5,
+        "temporal_validity": 1.0
+      },
+      "floors_met": true,
+      "freshness": {
+        "applicability": "currently_applicable",
+        "as_of": "2026-10-06",
+        "currently_applicable": true,
+        "date_basis": "effective_from",
+        "event_age_days": null,
+        "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately.",
+        "findings": [],
+        "metadata": {
+          "competitor_product_claim": false,
+          "content_type": "regulation",
+          "contradiction": false,
+          "current_status": "current",
+          "effective_from": "2021-06-01",
+          "event_date": "2021-01-01",
+          "last_verified_at": "2026-10-06",
+          "published_at": "2021-01-01",
+          "source_type": "primary_authority",
+          "superseded": false,
+          "supported": true
+        },
+        "news_max_event_age_days": 30,
+        "value": 1.0
+      },
+      "gate": "G2",
+      "original_evidence_required": false,
+      "pass_requirements_met": true,
+      "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+      "policy_schema_version": "1.0",
+      "policy_version": "g2-demo-v1",
+      "primary_reason": "PASS_REQUIREMENTS_MET",
+      "schema_version": "1.0",
+      "scoring_blockers": [],
+      "scoring_eligible": true,
+      "scoring_explanation": "Unrounded weighted sum is a diagnostic preference score, not a probability; floors, threshold, and original-evidence requirements are separate.",
+      "threshold": 0.8,
+      "threshold_met": true,
+      "weights": {
+        "evidence_support": 0.45,
+        "source_authority": 0.3,
+        "temporal_validity": 0.25
+      },
+      "weights_version": "grounding-first-v1"
+    },
+    {
+      "aggregate_score": null,
+      "applicability": "not_applicable",
+      "as_of": "2026-10-06",
+      "authority_mapping": {
+        "competitor": 0.0,
+        "official_indirect": 0.75,
+        "primary_authority": 1.0,
+        "reputable_secondary": 0.5,
+        "unknown": null
+      },
+      "calibration_status": "uncalibrated",
+      "case_id": "recent-article-old-event",
+      "checks": [
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "material_claim_supported",
+          "reason": "Metadata asserts material support without unresolved contradiction.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_not_superseded",
+          "reason": "Neither supersession assertion reports replacement.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "competitor_promotion_absent",
+          "reason": "Metadata asserts no competitor product promotion.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_conflict_absent",
+          "reason": "Metadata asserts no unresolved evidence conflict.",
+          "status": "pass"
+        }
+      ],
+      "criteria": [
+        {
+          "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": true,
+          "name": "evidence_support",
+          "value": 1.0
+        },
+        {
+          "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+          "floor": 0.5,
+          "floor_met": true,
+          "name": "source_authority",
+          "value": 1.0
+        },
+        {
+          "explanation": "Known temporal invalidity takes precedence; all uncertainties are retained. Qualified-scope anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": false,
+          "name": "temporal_validity",
+          "value": 0.0
+        }
+      ],
+      "currently_applicable": null,
+      "date_basis": "event_date",
+      "decision": "revise",
+      "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+      "findings": [
+        {
+          "code": "STALE_EVENT",
+          "kind": "repairable",
+          "origins": [
+            "temporal"
+          ],
+          "reasons": [
+            "News event age exceeds the fixture-owned coverage limit."
+          ]
+        },
+        {
+          "code": "BELOW_FLOOR:temporal_validity",
+          "kind": "review",
+          "origins": [
+            "criterion"
+          ],
+          "reasons": [
+            "Known criterion value is below its configured floor."
+          ]
+        }
+      ],
+      "floors": {
+        "evidence_support": 1.0,
+        "source_authority": 0.5,
+        "temporal_validity": 1.0
+      },
+      "floors_met": false,
+      "freshness": {
+        "applicability": "not_applicable",
+        "as_of": "2026-10-06",
+        "currently_applicable": null,
+        "date_basis": "event_date",
+        "event_age_days": 643,
+        "explanation": "Known temporal invalidity takes precedence; all uncertainties are retained.",
+        "findings": [
+          {
+            "code": "STALE_EVENT",
+            "kind": "repairable",
+            "reason": "News event age exceeds the fixture-owned coverage limit."
+          }
+        ],
+        "metadata": {
+          "competitor_product_claim": false,
+          "content_type": "news",
+          "contradiction": false,
+          "current_status": "current",
+          "effective_from": null,
+          "event_date": "2025-01-01",
+          "last_verified_at": "2026-10-06",
+          "published_at": "2026-10-05",
+          "source_type": "primary_authority",
+          "superseded": false,
+          "supported": true
+        },
+        "news_max_event_age_days": 30,
+        "value": 0.0
+      },
+      "gate": "G2",
+      "original_evidence_required": false,
+      "pass_requirements_met": false,
+      "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+      "policy_schema_version": "1.0",
+      "policy_version": "g2-demo-v1",
+      "primary_reason": "STALE_EVENT",
+      "schema_version": "1.0",
+      "scoring_blockers": [
+        "TEMPORAL_BLOCKED:STALE_EVENT"
+      ],
+      "scoring_eligible": false,
+      "scoring_explanation": "Aggregate withheld: every listed blocker is retained; weights cannot repair missing or disallowed evidence.",
+      "threshold": 0.8,
+      "threshold_met": null,
+      "weights": {
+        "evidence_support": 0.45,
+        "source_authority": 0.3,
+        "temporal_validity": 0.25
+      },
+      "weights_version": "grounding-first-v1"
+    },
+    {
+      "aggregate_score": null,
+      "applicability": "not_applicable",
+      "as_of": "2026-10-06",
+      "authority_mapping": {
+        "competitor": 0.0,
+        "official_indirect": 0.75,
+        "primary_authority": 1.0,
+        "reputable_secondary": 0.5,
+        "unknown": null
+      },
+      "calibration_status": "uncalibrated",
+      "case_id": "unknown-date",
+      "checks": [
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "material_claim_supported",
+          "reason": "Metadata asserts material support without unresolved contradiction.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_not_superseded",
+          "reason": "Neither supersession assertion reports replacement.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "competitor_promotion_absent",
+          "reason": "Metadata asserts no competitor product promotion.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_conflict_absent",
+          "reason": "Metadata asserts no unresolved evidence conflict.",
+          "status": "pass"
+        }
+      ],
+      "criteria": [
+        {
+          "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": true,
+          "name": "evidence_support",
+          "value": 1.0
+        },
+        {
+          "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+          "floor": 0.5,
+          "floor_met": true,
+          "name": "source_authority",
+          "value": 1.0
+        },
+        {
+          "explanation": "Required temporal assertions are unresolved or inconsistent. Qualified-scope anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": null,
+          "name": "temporal_validity",
+          "value": null
+        }
+      ],
+      "currently_applicable": null,
+      "date_basis": "event_date",
+      "decision": "human_review",
+      "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+      "findings": [
+        {
+          "code": "UNKNOWN_EVENT_DATE",
+          "kind": "review",
+          "origins": [
+            "temporal"
+          ],
+          "reasons": [
+            "News event date is unknown; publication and verification cannot substitute."
+          ]
+        },
+        {
+          "code": "UNKNOWN_CRITERION:temporal_validity",
+          "kind": "review",
+          "origins": [
+            "criterion"
+          ],
+          "reasons": [
+            "Required temporal assertions are unresolved or inconsistent. Qualified-scope anchor 0.5 is not representable in this schema."
+          ]
+        }
+      ],
+      "floors": {
+        "evidence_support": 1.0,
+        "source_authority": 0.5,
+        "temporal_validity": 1.0
+      },
+      "floors_met": false,
+      "freshness": {
+        "applicability": "not_applicable",
+        "as_of": "2026-10-06",
+        "currently_applicable": null,
+        "date_basis": "event_date",
+        "event_age_days": null,
+        "explanation": "Required temporal assertions are unresolved or inconsistent.",
+        "findings": [
+          {
+            "code": "UNKNOWN_EVENT_DATE",
+            "kind": "review",
+            "reason": "News event date is unknown; publication and verification cannot substitute."
+          }
+        ],
+        "metadata": {
+          "competitor_product_claim": false,
+          "content_type": "news",
+          "contradiction": false,
+          "current_status": "current",
+          "effective_from": null,
+          "event_date": null,
+          "last_verified_at": "2026-10-06",
+          "published_at": "2026-10-04",
+          "source_type": "primary_authority",
+          "superseded": false,
+          "supported": true
+        },
+        "news_max_event_age_days": 30,
+        "value": null
+      },
+      "gate": "G2",
+      "original_evidence_required": false,
+      "pass_requirements_met": false,
+      "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+      "policy_schema_version": "1.0",
+      "policy_version": "g2-demo-v1",
+      "primary_reason": "UNKNOWN_EVENT_DATE",
+      "schema_version": "1.0",
+      "scoring_blockers": [
+        "TEMPORAL_BLOCKED:UNKNOWN_EVENT_DATE",
+        "UNKNOWN_CRITERION:temporal_validity"
+      ],
+      "scoring_eligible": false,
+      "scoring_explanation": "Aggregate withheld: every listed blocker is retained; weights cannot repair missing or disallowed evidence.",
+      "threshold": 0.8,
+      "threshold_met": null,
+      "weights": {
+        "evidence_support": 0.45,
+        "source_authority": 0.3,
+        "temporal_validity": 0.25
+      },
+      "weights_version": "grounding-first-v1"
+    },
+    {
+      "aggregate_score": null,
+      "applicability": "not_applicable",
+      "as_of": "2026-10-06",
+      "authority_mapping": {
+        "competitor": 0.0,
+        "official_indirect": 0.75,
+        "primary_authority": 1.0,
+        "reputable_secondary": 0.5,
+        "unknown": null
+      },
+      "calibration_status": "uncalibrated",
+      "case_id": "unsupported-claim",
+      "checks": [
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": false
+          },
+          "name": "material_claim_supported",
+          "reason": "Metadata explicitly asserts missing material support.",
+          "status": "fail"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": false
+          },
+          "name": "evidence_not_superseded",
+          "reason": "Neither supersession assertion reports replacement.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": false
+          },
+          "name": "competitor_promotion_absent",
+          "reason": "Metadata asserts no competitor product promotion.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": false
+          },
+          "name": "evidence_conflict_absent",
+          "reason": "Metadata asserts no unresolved evidence conflict.",
+          "status": "pass"
+        }
+      ],
+      "criteria": [
+        {
+          "explanation": "Metadata explicitly asserts missing material support. Partial-support anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": false,
+          "name": "evidence_support",
+          "value": 0.0
+        },
+        {
+          "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+          "floor": 0.5,
+          "floor_met": true,
+          "name": "source_authority",
+          "value": 1.0
+        },
+        {
+          "explanation": "Event coverage is current under the supplied age limit. Qualified-scope anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": true,
+          "name": "temporal_validity",
+          "value": 1.0
+        }
+      ],
+      "currently_applicable": null,
+      "date_basis": "event_date",
+      "decision": "revise",
+      "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+      "findings": [
+        {
+          "code": "UNSUPPORTED_CLAIM",
+          "kind": "repairable",
+          "origins": [
+            "hard_check"
+          ],
+          "reasons": [
+            "Restore material evidence support before further approval."
+          ]
+        },
+        {
+          "code": "BELOW_FLOOR:evidence_support",
+          "kind": "review",
+          "origins": [
+            "criterion"
+          ],
+          "reasons": [
+            "Known criterion value is below its configured floor."
+          ]
+        }
+      ],
+      "floors": {
+        "evidence_support": 1.0,
+        "source_authority": 0.5,
+        "temporal_validity": 1.0
+      },
+      "floors_met": false,
+      "freshness": {
+        "applicability": "not_applicable",
+        "as_of": "2026-10-06",
+        "currently_applicable": null,
+        "date_basis": "event_date",
+        "event_age_days": 3,
+        "explanation": "Event coverage is current under the supplied age limit.",
+        "findings": [],
+        "metadata": {
+          "competitor_product_claim": false,
+          "content_type": "news",
+          "contradiction": false,
+          "current_status": "current",
+          "effective_from": null,
+          "event_date": "2026-10-03",
+          "last_verified_at": "2026-10-06",
+          "published_at": "2026-10-04",
+          "source_type": "primary_authority",
+          "superseded": false,
+          "supported": false
+        },
+        "news_max_event_age_days": 30,
+        "value": 1.0
+      },
+      "gate": "G2",
+      "original_evidence_required": false,
+      "pass_requirements_met": false,
+      "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+      "policy_schema_version": "1.0",
+      "policy_version": "g2-demo-v1",
+      "primary_reason": "UNSUPPORTED_CLAIM",
+      "schema_version": "1.0",
+      "scoring_blockers": [
+        "CHECK_BLOCKED:material_claim_supported"
+      ],
+      "scoring_eligible": false,
+      "scoring_explanation": "Aggregate withheld: every listed blocker is retained; weights cannot repair missing or disallowed evidence.",
+      "threshold": 0.8,
+      "threshold_met": null,
+      "weights": {
+        "evidence_support": 0.45,
+        "source_authority": 0.3,
+        "temporal_validity": 0.25
+      },
+      "weights_version": "grounding-first-v1"
+    },
+    {
+      "aggregate_score": null,
+      "applicability": "not_currently_applicable",
+      "as_of": "2026-10-06",
+      "authority_mapping": {
+        "competitor": 0.0,
+        "official_indirect": 0.75,
+        "primary_authority": 1.0,
+        "reputable_secondary": 0.5,
+        "unknown": null
+      },
+      "calibration_status": "uncalibrated",
+      "case_id": "superseded-source",
+      "checks": [
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "superseded",
+            "superseded": true,
+            "supported": true
+          },
+          "name": "material_claim_supported",
+          "reason": "Metadata asserts material support without unresolved contradiction.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "superseded",
+            "superseded": true,
+            "supported": true
+          },
+          "name": "evidence_not_superseded",
+          "reason": "At least one supersession assertion reports replacement.",
+          "status": "fail"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "superseded",
+            "superseded": true,
+            "supported": true
+          },
+          "name": "competitor_promotion_absent",
+          "reason": "Metadata asserts no competitor product promotion.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "superseded",
+            "superseded": true,
+            "supported": true
+          },
+          "name": "evidence_conflict_absent",
+          "reason": "Metadata asserts no unresolved evidence conflict.",
+          "status": "pass"
+        }
+      ],
+      "criteria": [
+        {
+          "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": true,
+          "name": "evidence_support",
+          "value": 1.0
+        },
+        {
+          "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+          "floor": 0.5,
+          "floor_met": true,
+          "name": "source_authority",
+          "value": 1.0
+        },
+        {
+          "explanation": "Known temporal invalidity takes precedence; all uncertainties are retained. Qualified-scope anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": false,
+          "name": "temporal_validity",
+          "value": 0.0
+        }
+      ],
+      "currently_applicable": false,
+      "date_basis": "effective_from",
+      "decision": "revise",
+      "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+      "findings": [
+        {
+          "code": "SUPERSEDED_EVIDENCE",
+          "kind": "repairable",
+          "origins": [
+            "hard_check",
+            "temporal"
+          ],
+          "reasons": [
+            "Replace superseded evidence before further approval.",
+            "A supersession assertion establishes replaced evidence."
+          ]
+        },
+        {
+          "code": "UNKNOWN_EFFECTIVE_DATE",
+          "kind": "review",
+          "origins": [
+            "temporal"
+          ],
+          "reasons": [
+            "Required regulation effective date is unknown."
+          ]
+        },
+        {
+          "code": "BELOW_FLOOR:temporal_validity",
+          "kind": "review",
+          "origins": [
+            "criterion"
+          ],
+          "reasons": [
+            "Known criterion value is below its configured floor."
+          ]
+        }
+      ],
+      "floors": {
+        "evidence_support": 1.0,
+        "source_authority": 0.5,
+        "temporal_validity": 1.0
+      },
+      "floors_met": false,
+      "freshness": {
+        "applicability": "not_currently_applicable",
+        "as_of": "2026-10-06",
+        "currently_applicable": false,
+        "date_basis": "effective_from",
+        "event_age_days": null,
+        "explanation": "Known temporal invalidity takes precedence; all uncertainties are retained.",
+        "findings": [
+          {
+            "code": "SUPERSEDED_EVIDENCE",
+            "kind": "repairable",
+            "reason": "A supersession assertion establishes replaced evidence."
+          },
+          {
+            "code": "UNKNOWN_EFFECTIVE_DATE",
+            "kind": "review",
+            "reason": "Required regulation effective date is unknown."
+          }
+        ],
+        "metadata": {
+          "competitor_product_claim": false,
+          "content_type": "regulation",
+          "contradiction": false,
+          "current_status": "superseded",
+          "effective_from": null,
+          "event_date": "2026-10-03",
+          "last_verified_at": "2026-10-06",
+          "published_at": "2026-10-04",
+          "source_type": "primary_authority",
+          "superseded": true,
+          "supported": true
+        },
+        "news_max_event_age_days": 30,
+        "value": 0.0
+      },
+      "gate": "G2",
+      "original_evidence_required": false,
+      "pass_requirements_met": false,
+      "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+      "policy_schema_version": "1.0",
+      "policy_version": "g2-demo-v1",
+      "primary_reason": "SUPERSEDED_EVIDENCE",
+      "schema_version": "1.0",
+      "scoring_blockers": [
+        "CHECK_BLOCKED:evidence_not_superseded",
+        "TEMPORAL_BLOCKED:SUPERSEDED_EVIDENCE",
+        "TEMPORAL_BLOCKED:UNKNOWN_EFFECTIVE_DATE"
+      ],
+      "scoring_eligible": false,
+      "scoring_explanation": "Aggregate withheld: every listed blocker is retained; weights cannot repair missing or disallowed evidence.",
+      "threshold": 0.8,
+      "threshold_met": null,
+      "weights": {
+        "evidence_support": 0.45,
+        "source_authority": 0.3,
+        "temporal_validity": 0.25
+      },
+      "weights_version": "grounding-first-v1"
+    },
+    {
+      "aggregate_score": null,
+      "applicability": "not_applicable",
+      "as_of": "2026-10-06",
+      "authority_mapping": {
+        "competitor": 0.0,
+        "official_indirect": 0.75,
+        "primary_authority": 1.0,
+        "reputable_secondary": 0.5,
+        "unknown": null
+      },
+      "calibration_status": "uncalibrated",
+      "case_id": "competitor-promotion",
+      "checks": [
+        {
+          "basis": {
+            "competitor_product_claim": true,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "material_claim_supported",
+          "reason": "Metadata asserts material support without unresolved contradiction.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": true,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_not_superseded",
+          "reason": "Neither supersession assertion reports replacement.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": true,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "competitor_promotion_absent",
+          "reason": "Metadata asserts prohibited competitor product promotion.",
+          "status": "fail"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": true,
+            "contradiction": false,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_conflict_absent",
+          "reason": "Metadata asserts no unresolved evidence conflict.",
+          "status": "pass"
+        }
+      ],
+      "criteria": [
+        {
+          "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": true,
+          "name": "evidence_support",
+          "value": 1.0
+        },
+        {
+          "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+          "floor": 0.5,
+          "floor_met": false,
+          "name": "source_authority",
+          "value": 0.0
+        },
+        {
+          "explanation": "Event coverage is current under the supplied age limit. Qualified-scope anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": true,
+          "name": "temporal_validity",
+          "value": 1.0
+        }
+      ],
+      "currently_applicable": null,
+      "date_basis": "event_date",
+      "decision": "reject",
+      "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+      "findings": [
+        {
+          "code": "COMPETITOR_PROMOTION",
+          "kind": "prohibited",
+          "origins": [
+            "hard_check"
+          ],
+          "reasons": [
+            "Product promotion is prohibited irrespective of source authority or weights."
+          ]
+        },
+        {
+          "code": "BELOW_FLOOR:source_authority",
+          "kind": "review",
+          "origins": [
+            "criterion"
+          ],
+          "reasons": [
+            "Known criterion value is below its configured floor."
+          ]
+        },
+        {
+          "code": "ORIGINAL_EVIDENCE_REQUIRED",
+          "kind": "review",
+          "origins": [
+            "policy"
+          ],
+          "reasons": [
+            "Competitor-origin information requires independent original evidence regardless of its diagnostic score."
+          ]
+        }
+      ],
+      "floors": {
+        "evidence_support": 1.0,
+        "source_authority": 0.5,
+        "temporal_validity": 1.0
+      },
+      "floors_met": false,
+      "freshness": {
+        "applicability": "not_applicable",
+        "as_of": "2026-10-06",
+        "currently_applicable": null,
+        "date_basis": "event_date",
+        "event_age_days": 3,
+        "explanation": "Event coverage is current under the supplied age limit.",
+        "findings": [],
+        "metadata": {
+          "competitor_product_claim": true,
+          "content_type": "news",
+          "contradiction": false,
+          "current_status": "current",
+          "effective_from": null,
+          "event_date": "2026-10-03",
+          "last_verified_at": "2026-10-06",
+          "published_at": "2026-10-04",
+          "source_type": "competitor",
+          "superseded": false,
+          "supported": true
+        },
+        "news_max_event_age_days": 30,
+        "value": 1.0
+      },
+      "gate": "G2",
+      "original_evidence_required": true,
+      "pass_requirements_met": false,
+      "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+      "policy_schema_version": "1.0",
+      "policy_version": "g2-demo-v1",
+      "primary_reason": "COMPETITOR_PROMOTION",
+      "schema_version": "1.0",
+      "scoring_blockers": [
+        "CHECK_BLOCKED:competitor_promotion_absent"
+      ],
+      "scoring_eligible": false,
+      "scoring_explanation": "Aggregate withheld: every listed blocker is retained; weights cannot repair missing or disallowed evidence.",
+      "threshold": 0.8,
+      "threshold_met": null,
+      "weights": {
+        "evidence_support": 0.45,
+        "source_authority": 0.3,
+        "temporal_validity": 0.25
+      },
+      "weights_version": "grounding-first-v1"
+    },
+    {
+      "aggregate_score": null,
+      "applicability": "not_applicable",
+      "as_of": "2026-10-06",
+      "authority_mapping": {
+        "competitor": 0.0,
+        "official_indirect": 0.75,
+        "primary_authority": 1.0,
+        "reputable_secondary": 0.5,
+        "unknown": null
+      },
+      "calibration_status": "uncalibrated",
+      "case_id": "conflicting-evidence",
+      "checks": [
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": true,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "material_claim_supported",
+          "reason": "Asserted support is unresolved because evidence contradicts the claim.",
+          "status": "unknown"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": true,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_not_superseded",
+          "reason": "Neither supersession assertion reports replacement.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": true,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "competitor_promotion_absent",
+          "reason": "Metadata asserts no competitor product promotion.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": true,
+            "current_status": "current",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_conflict_absent",
+          "reason": "Metadata asserts unresolved evidence disagreement, not proven falsehood.",
+          "status": "fail"
+        }
+      ],
+      "criteria": [
+        {
+          "explanation": "Asserted support is unresolved because evidence contradicts the claim. Partial-support anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": null,
+          "name": "evidence_support",
+          "value": null
+        },
+        {
+          "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+          "floor": 0.5,
+          "floor_met": true,
+          "name": "source_authority",
+          "value": 1.0
+        },
+        {
+          "explanation": "Event coverage is current under the supplied age limit. Qualified-scope anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": true,
+          "name": "temporal_validity",
+          "value": 1.0
+        }
+      ],
+      "currently_applicable": null,
+      "date_basis": "event_date",
+      "decision": "human_review",
+      "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+      "findings": [
+        {
+          "code": "UNRESOLVED_SUPPORT",
+          "kind": "review",
+          "origins": [
+            "hard_check"
+          ],
+          "reasons": [
+            "Resolve contradictory evidence before treating support as known."
+          ]
+        },
+        {
+          "code": "CONFLICTING_EVIDENCE",
+          "kind": "review",
+          "origins": [
+            "hard_check"
+          ],
+          "reasons": [
+            "Human review must resolve the asserted evidence disagreement."
+          ]
+        },
+        {
+          "code": "UNKNOWN_CRITERION:evidence_support",
+          "kind": "review",
+          "origins": [
+            "criterion"
+          ],
+          "reasons": [
+            "Asserted support is unresolved because evidence contradicts the claim. Partial-support anchor 0.5 is not representable in this schema."
+          ]
+        }
+      ],
+      "floors": {
+        "evidence_support": 1.0,
+        "source_authority": 0.5,
+        "temporal_validity": 1.0
+      },
+      "floors_met": false,
+      "freshness": {
+        "applicability": "not_applicable",
+        "as_of": "2026-10-06",
+        "currently_applicable": null,
+        "date_basis": "event_date",
+        "event_age_days": 3,
+        "explanation": "Event coverage is current under the supplied age limit.",
+        "findings": [],
+        "metadata": {
+          "competitor_product_claim": false,
+          "content_type": "news",
+          "contradiction": true,
+          "current_status": "current",
+          "effective_from": null,
+          "event_date": "2026-10-03",
+          "last_verified_at": "2026-10-06",
+          "published_at": "2026-10-04",
+          "source_type": "primary_authority",
+          "superseded": false,
+          "supported": true
+        },
+        "news_max_event_age_days": 30,
+        "value": 1.0
+      },
+      "gate": "G2",
+      "original_evidence_required": false,
+      "pass_requirements_met": false,
+      "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+      "policy_schema_version": "1.0",
+      "policy_version": "g2-demo-v1",
+      "primary_reason": "UNRESOLVED_SUPPORT",
+      "schema_version": "1.0",
+      "scoring_blockers": [
+        "CHECK_BLOCKED:material_claim_supported",
+        "CHECK_BLOCKED:evidence_conflict_absent",
+        "UNKNOWN_CRITERION:evidence_support"
+      ],
+      "scoring_eligible": false,
+      "scoring_explanation": "Aggregate withheld: every listed blocker is retained; weights cannot repair missing or disallowed evidence.",
+      "threshold": 0.8,
+      "threshold_met": null,
+      "weights": {
+        "evidence_support": 0.45,
+        "source_authority": 0.3,
+        "temporal_validity": 0.25
+      },
+      "weights_version": "grounding-first-v1"
+    },
+    {
+      "aggregate_score": 1.0,
+      "applicability": "not_yet_applicable",
+      "as_of": "2026-10-06",
+      "authority_mapping": {
+        "competitor": 0.0,
+        "official_indirect": 0.75,
+        "primary_authority": 1.0,
+        "reputable_secondary": 0.5,
+        "unknown": null
+      },
+      "calibration_status": "uncalibrated",
+      "case_id": "future-rule",
+      "checks": [
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "adopted_not_applicable",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "material_claim_supported",
+          "reason": "Metadata asserts material support without unresolved contradiction.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "adopted_not_applicable",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_not_superseded",
+          "reason": "Neither supersession assertion reports replacement.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "adopted_not_applicable",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "competitor_promotion_absent",
+          "reason": "Metadata asserts no competitor product promotion.",
+          "status": "pass"
+        },
+        {
+          "basis": {
+            "competitor_product_claim": false,
+            "contradiction": false,
+            "current_status": "adopted_not_applicable",
+            "superseded": false,
+            "supported": true
+          },
+          "name": "evidence_conflict_absent",
+          "reason": "Metadata asserts no unresolved evidence conflict.",
+          "status": "pass"
+        }
+      ],
+      "criteria": [
+        {
+          "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": true,
+          "name": "evidence_support",
+          "value": 1.0
+        },
+        {
+          "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+          "floor": 0.5,
+          "floor_met": true,
+          "name": "source_authority",
+          "value": 1.0
+        },
+        {
+          "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately. Qualified-scope anchor 0.5 is not representable in this schema.",
+          "floor": 1.0,
+          "floor_met": true,
+          "name": "temporal_validity",
+          "value": 1.0
+        }
+      ],
+      "currently_applicable": false,
+      "date_basis": "effective_from",
+      "decision": "pass",
+      "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+      "findings": [],
+      "floors": {
+        "evidence_support": 1.0,
+        "source_authority": 0.5,
+        "temporal_validity": 1.0
+      },
+      "floors_met": true,
+      "freshness": {
+        "applicability": "not_yet_applicable",
+        "as_of": "2026-10-06",
+        "currently_applicable": false,
+        "date_basis": "effective_from",
+        "event_age_days": null,
+        "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately.",
+        "findings": [],
+        "metadata": {
+          "competitor_product_claim": false,
+          "content_type": "regulation",
+          "contradiction": false,
+          "current_status": "adopted_not_applicable",
+          "effective_from": "2027-01-01",
+          "event_date": "2026-10-03",
+          "last_verified_at": "2026-10-06",
+          "published_at": "2026-10-04",
+          "source_type": "primary_authority",
+          "superseded": false,
+          "supported": true
+        },
+        "news_max_event_age_days": 30,
+        "value": 1.0
+      },
+      "gate": "G2",
+      "original_evidence_required": false,
+      "pass_requirements_met": true,
+      "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+      "policy_schema_version": "1.0",
+      "policy_version": "g2-demo-v1",
+      "primary_reason": "PASS_REQUIREMENTS_MET",
+      "schema_version": "1.0",
+      "scoring_blockers": [],
+      "scoring_eligible": true,
+      "scoring_explanation": "Unrounded weighted sum is a diagnostic preference score, not a probability; floors, threshold, and original-evidence requirements are separate.",
+      "threshold": 0.8,
+      "threshold_met": true,
+      "weights": {
+        "evidence_support": 0.45,
+        "source_authority": 0.3,
+        "temporal_validity": 0.25
+      },
+      "weights_version": "grounding-first-v1"
+    }
+  ],
+  "schema_version": "1.0",
+  "synthetic": true
+}
