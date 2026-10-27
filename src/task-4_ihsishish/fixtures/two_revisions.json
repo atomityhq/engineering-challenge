@@ -1,0 +1,21 @@
+{
+  "content_id": "two-001",
+  "text": "AI can help research and draft a post.",
+  "revised_text": "AI can help research a post, and a person can verify its claims.",
+  "second_revised_text": "AI can organize sources and flag claims. A person checks the evidence before approving the post.",
+  "evaluation_mode": "scripted",
+  "evaluation_responses": [
+    {
+      "decision": "revise",
+      "reason": "The first draft needs a correction."
+    },
+    {
+      "decision": "revise",
+      "reason": "The first revision still needs work."
+    },
+    {
+      "decision": "human_review",
+      "reason": "The second revision is ready for a person."
+    }
+  ]
+}

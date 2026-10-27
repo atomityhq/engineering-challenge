@@ -1,0 +1,16 @@
+{
+  "content_id": "one-001",
+  "text": "AI can make every post accurate before publication.",
+  "revised_text": "AI can flag claims for a person to verify before publication.",
+  "evaluation_mode": "scripted",
+  "evaluation_responses": [
+    {
+      "decision": "revise",
+      "reason": "The first draft needs a correction."
+    },
+    {
+      "decision": "human_review",
+      "reason": "The revised draft is ready for a person."
+    }
+  ]
+}
