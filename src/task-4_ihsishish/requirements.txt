@@ -1,0 +1,4 @@
+langgraph
+langgraph-checkpoint-sqlite
+pydantic>=2,<3
+pytest
