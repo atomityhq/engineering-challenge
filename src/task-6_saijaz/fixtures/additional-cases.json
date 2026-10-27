@@ -1,0 +1,47 @@
+{
+  "schema_version": "1.0",
+  "synthetic": true,
+  "as_of": "2026-10-06",
+  "instructions": "Synthetic sensitivity inputs. Source relationships are asserted by metadata; prose is not executable policy. No expected labels are provided.",
+  "demo_policy": {
+    "news_max_event_age_days": 30,
+    "regulation_rule": "Use status and effective date, not publication age.",
+    "unknown_required_temporal_metadata": "human_review",
+    "weights_and_threshold": "Preferences remain uncalibrated; compare weights while holding other settings fixed."
+  },
+  "cases": [
+    {
+      "id": "secondary-transit-report",
+      "statement": "A fictional independent secondary publisher reports the opening of a synthetic transit station on October 2.",
+      "metadata": {
+        "source_type": "reputable_secondary", "content_type": "news",
+        "published_at": "2026-10-03", "event_date": "2026-10-02",
+        "effective_from": null, "last_verified_at": "2026-10-06",
+        "current_status": "current", "supported": true, "superseded": false,
+        "contradiction": false, "competitor_product_claim": false
+      }
+    },
+    {
+      "id": "indirect-institutional-rule",
+      "statement": "A fictional official institution reports another issuer's synthetic record-retention rule, which remains effective.",
+      "metadata": {
+        "source_type": "official_indirect", "content_type": "regulation",
+        "published_at": "2020-02-03", "event_date": null,
+        "effective_from": "2020-03-01", "last_verified_at": "2026-10-06",
+        "current_status": "current", "supported": true, "superseded": false,
+        "contradiction": false, "competitor_product_claim": false
+      }
+    },
+    {
+      "id": "primary-future-rule",
+      "statement": "A fictional primary issuer describes its adopted synthetic reporting rule as taking effect next January, not today.",
+      "metadata": {
+        "source_type": "primary_authority", "content_type": "regulation",
+        "published_at": "2026-10-01", "event_date": null,
+        "effective_from": "2027-01-01", "last_verified_at": "2026-10-06",
+        "current_status": "adopted_not_applicable", "supported": true, "superseded": false,
+        "contradiction": false, "competitor_product_claim": false
+      }
+    }
+  ]
+}

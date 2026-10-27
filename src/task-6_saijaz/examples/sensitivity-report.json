@@ -1,0 +1,1408 @@
+{
+  "as_of": "2026-10-06",
+  "baseline_weights_version": "grounding-first-v1",
+  "cases": [
+    {
+      "case_id": "secondary-transit-report",
+      "decisions": [
+        "pass",
+        "pass",
+        "human_review"
+      ],
+      "ranking_changed": false,
+      "ranks": [
+        3,
+        3,
+        3
+      ],
+      "routing_changed": true,
+      "scores": [
+        0.85,
+        0.8333333333333333,
+        0.75
+      ]
+    },
+    {
+      "case_id": "indirect-institutional-rule",
+      "decisions": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "ranking_changed": false,
+      "ranks": [
+        2,
+        2,
+        2
+      ],
+      "routing_changed": false,
+      "scores": [
+        0.925,
+        0.9166666666666666,
+        0.875
+      ]
+    },
+    {
+      "case_id": "primary-future-rule",
+      "decisions": [
+        "pass",
+        "pass",
+        "pass"
+      ],
+      "ranking_changed": false,
+      "ranks": [
+        1,
+        1,
+        1
+      ],
+      "routing_changed": false,
+      "scores": [
+        1.0,
+        1.0,
+        1.0
+      ]
+    }
+  ],
+  "gate": "G2",
+  "limitations": "Weight-only synthetic preference analysis, not calibration or independent evidence. Cases with fixed support/timing vary on authority only; unchanged rankings are possible and must not be presented as reversals.",
+  "rank_convention": "Competition ranks by exact full-precision score; exact ties share rank, lexical IDs order tied display, null scores are unranked.",
+  "ranking_changed": false,
+  "routing_changed_case_ids": [
+    "secondary-transit-report"
+  ],
+  "routing_unchanged_case_ids": [
+    "indirect-institutional-rule",
+    "primary-future-rule"
+  ],
+  "runs": [
+    {
+      "ranked_case_ids": [
+        "primary-future-rule",
+        "indirect-institutional-rule",
+        "secondary-transit-report"
+      ],
+      "ranks": [
+        3,
+        2,
+        1
+      ],
+      "reports": [
+        {
+          "aggregate_score": 0.85,
+          "applicability": "not_applicable",
+          "as_of": "2026-10-06",
+          "authority_mapping": {
+            "competitor": 0.0,
+            "official_indirect": 0.75,
+            "primary_authority": 1.0,
+            "reputable_secondary": 0.5,
+            "unknown": null
+          },
+          "calibration_status": "uncalibrated",
+          "case_id": "secondary-transit-report",
+          "checks": [
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "material_claim_supported",
+              "reason": "Metadata asserts material support without unresolved contradiction.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_not_superseded",
+              "reason": "Neither supersession assertion reports replacement.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "competitor_promotion_absent",
+              "reason": "Metadata asserts no competitor product promotion.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_conflict_absent",
+              "reason": "Metadata asserts no unresolved evidence conflict.",
+              "status": "pass"
+            }
+          ],
+          "criteria": [
+            {
+              "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "evidence_support",
+              "value": 1.0
+            },
+            {
+              "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+              "floor": 0.5,
+              "floor_met": true,
+              "name": "source_authority",
+              "value": 0.5
+            },
+            {
+              "explanation": "Event coverage is current under the supplied age limit. Qualified-scope anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "temporal_validity",
+              "value": 1.0
+            }
+          ],
+          "currently_applicable": null,
+          "date_basis": "event_date",
+          "decision": "pass",
+          "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+          "findings": [],
+          "floors": {
+            "evidence_support": 1.0,
+            "source_authority": 0.5,
+            "temporal_validity": 1.0
+          },
+          "floors_met": true,
+          "freshness": {
+            "applicability": "not_applicable",
+            "as_of": "2026-10-06",
+            "currently_applicable": null,
+            "date_basis": "event_date",
+            "event_age_days": 4,
+            "explanation": "Event coverage is current under the supplied age limit.",
+            "findings": [],
+            "metadata": {
+              "competitor_product_claim": false,
+              "content_type": "news",
+              "contradiction": false,
+              "current_status": "current",
+              "effective_from": null,
+              "event_date": "2026-10-02",
+              "last_verified_at": "2026-10-06",
+              "published_at": "2026-10-03",
+              "source_type": "reputable_secondary",
+              "superseded": false,
+              "supported": true
+            },
+            "news_max_event_age_days": 30,
+            "value": 1.0
+          },
+          "gate": "G2",
+          "original_evidence_required": false,
+          "pass_requirements_met": true,
+          "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+          "policy_schema_version": "1.0",
+          "policy_version": "g2-demo-v1",
+          "primary_reason": "PASS_REQUIREMENTS_MET",
+          "schema_version": "1.0",
+          "scoring_blockers": [],
+          "scoring_eligible": true,
+          "scoring_explanation": "Unrounded weighted sum is a diagnostic preference score, not a probability; floors, threshold, and original-evidence requirements are separate.",
+          "threshold": 0.8,
+          "threshold_met": true,
+          "weights": {
+            "evidence_support": 0.45,
+            "source_authority": 0.3,
+            "temporal_validity": 0.25
+          },
+          "weights_version": "grounding-first-v1"
+        },
+        {
+          "aggregate_score": 0.925,
+          "applicability": "currently_applicable",
+          "as_of": "2026-10-06",
+          "authority_mapping": {
+            "competitor": 0.0,
+            "official_indirect": 0.75,
+            "primary_authority": 1.0,
+            "reputable_secondary": 0.5,
+            "unknown": null
+          },
+          "calibration_status": "uncalibrated",
+          "case_id": "indirect-institutional-rule",
+          "checks": [
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "material_claim_supported",
+              "reason": "Metadata asserts material support without unresolved contradiction.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_not_superseded",
+              "reason": "Neither supersession assertion reports replacement.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "competitor_promotion_absent",
+              "reason": "Metadata asserts no competitor product promotion.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_conflict_absent",
+              "reason": "Metadata asserts no unresolved evidence conflict.",
+              "status": "pass"
+            }
+          ],
+          "criteria": [
+            {
+              "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "evidence_support",
+              "value": 1.0
+            },
+            {
+              "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+              "floor": 0.5,
+              "floor_met": true,
+              "name": "source_authority",
+              "value": 0.75
+            },
+            {
+              "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately. Qualified-scope anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "temporal_validity",
+              "value": 1.0
+            }
+          ],
+          "currently_applicable": true,
+          "date_basis": "effective_from",
+          "decision": "pass",
+          "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+          "findings": [],
+          "floors": {
+            "evidence_support": 1.0,
+            "source_authority": 0.5,
+            "temporal_validity": 1.0
+          },
+          "floors_met": true,
+          "freshness": {
+            "applicability": "currently_applicable",
+            "as_of": "2026-10-06",
+            "currently_applicable": true,
+            "date_basis": "effective_from",
+            "event_age_days": null,
+            "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately.",
+            "findings": [],
+            "metadata": {
+              "competitor_product_claim": false,
+              "content_type": "regulation",
+              "contradiction": false,
+              "current_status": "current",
+              "effective_from": "2020-03-01",
+              "event_date": null,
+              "last_verified_at": "2026-10-06",
+              "published_at": "2020-02-03",
+              "source_type": "official_indirect",
+              "superseded": false,
+              "supported": true
+            },
+            "news_max_event_age_days": 30,
+            "value": 1.0
+          },
+          "gate": "G2",
+          "original_evidence_required": false,
+          "pass_requirements_met": true,
+          "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+          "policy_schema_version": "1.0",
+          "policy_version": "g2-demo-v1",
+          "primary_reason": "PASS_REQUIREMENTS_MET",
+          "schema_version": "1.0",
+          "scoring_blockers": [],
+          "scoring_eligible": true,
+          "scoring_explanation": "Unrounded weighted sum is a diagnostic preference score, not a probability; floors, threshold, and original-evidence requirements are separate.",
+          "threshold": 0.8,
+          "threshold_met": true,
+          "weights": {
+            "evidence_support": 0.45,
+            "source_authority": 0.3,
+            "temporal_validity": 0.25
+          },
+          "weights_version": "grounding-first-v1"
+        },
+        {
+          "aggregate_score": 1.0,
+          "applicability": "not_yet_applicable",
+          "as_of": "2026-10-06",
+          "authority_mapping": {
+            "competitor": 0.0,
+            "official_indirect": 0.75,
+            "primary_authority": 1.0,
+            "reputable_secondary": 0.5,
+            "unknown": null
+          },
+          "calibration_status": "uncalibrated",
+          "case_id": "primary-future-rule",
+          "checks": [
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "adopted_not_applicable",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "material_claim_supported",
+              "reason": "Metadata asserts material support without unresolved contradiction.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "adopted_not_applicable",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_not_superseded",
+              "reason": "Neither supersession assertion reports replacement.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "adopted_not_applicable",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "competitor_promotion_absent",
+              "reason": "Metadata asserts no competitor product promotion.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "adopted_not_applicable",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_conflict_absent",
+              "reason": "Metadata asserts no unresolved evidence conflict.",
+              "status": "pass"
+            }
+          ],
+          "criteria": [
+            {
+              "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "evidence_support",
+              "value": 1.0
+            },
+            {
+              "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+              "floor": 0.5,
+              "floor_met": true,
+              "name": "source_authority",
+              "value": 1.0
+            },
+            {
+              "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately. Qualified-scope anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "temporal_validity",
+              "value": 1.0
+            }
+          ],
+          "currently_applicable": false,
+          "date_basis": "effective_from",
+          "decision": "pass",
+          "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+          "findings": [],
+          "floors": {
+            "evidence_support": 1.0,
+            "source_authority": 0.5,
+            "temporal_validity": 1.0
+          },
+          "floors_met": true,
+          "freshness": {
+            "applicability": "not_yet_applicable",
+            "as_of": "2026-10-06",
+            "currently_applicable": false,
+            "date_basis": "effective_from",
+            "event_age_days": null,
+            "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately.",
+            "findings": [],
+            "metadata": {
+              "competitor_product_claim": false,
+              "content_type": "regulation",
+              "contradiction": false,
+              "current_status": "adopted_not_applicable",
+              "effective_from": "2027-01-01",
+              "event_date": null,
+              "last_verified_at": "2026-10-06",
+              "published_at": "2026-10-01",
+              "source_type": "primary_authority",
+              "superseded": false,
+              "supported": true
+            },
+            "news_max_event_age_days": 30,
+            "value": 1.0
+          },
+          "gate": "G2",
+          "original_evidence_required": false,
+          "pass_requirements_met": true,
+          "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+          "policy_schema_version": "1.0",
+          "policy_version": "g2-demo-v1",
+          "primary_reason": "PASS_REQUIREMENTS_MET",
+          "schema_version": "1.0",
+          "scoring_blockers": [],
+          "scoring_eligible": true,
+          "scoring_explanation": "Unrounded weighted sum is a diagnostic preference score, not a probability; floors, threshold, and original-evidence requirements are separate.",
+          "threshold": 0.8,
+          "threshold_met": true,
+          "weights": {
+            "evidence_support": 0.45,
+            "source_authority": 0.3,
+            "temporal_validity": 0.25
+          },
+          "weights_version": "grounding-first-v1"
+        }
+      ],
+      "tie_groups": [],
+      "weights_version": "grounding-first-v1"
+    },
+    {
+      "ranked_case_ids": [
+        "primary-future-rule",
+        "indirect-institutional-rule",
+        "secondary-transit-report"
+      ],
+      "ranks": [
+        3,
+        2,
+        1
+      ],
+      "reports": [
+        {
+          "aggregate_score": 0.8333333333333333,
+          "applicability": "not_applicable",
+          "as_of": "2026-10-06",
+          "authority_mapping": {
+            "competitor": 0.0,
+            "official_indirect": 0.75,
+            "primary_authority": 1.0,
+            "reputable_secondary": 0.5,
+            "unknown": null
+          },
+          "calibration_status": "uncalibrated",
+          "case_id": "secondary-transit-report",
+          "checks": [
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "material_claim_supported",
+              "reason": "Metadata asserts material support without unresolved contradiction.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_not_superseded",
+              "reason": "Neither supersession assertion reports replacement.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "competitor_promotion_absent",
+              "reason": "Metadata asserts no competitor product promotion.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_conflict_absent",
+              "reason": "Metadata asserts no unresolved evidence conflict.",
+              "status": "pass"
+            }
+          ],
+          "criteria": [
+            {
+              "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "evidence_support",
+              "value": 1.0
+            },
+            {
+              "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+              "floor": 0.5,
+              "floor_met": true,
+              "name": "source_authority",
+              "value": 0.5
+            },
+            {
+              "explanation": "Event coverage is current under the supplied age limit. Qualified-scope anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "temporal_validity",
+              "value": 1.0
+            }
+          ],
+          "currently_applicable": null,
+          "date_basis": "event_date",
+          "decision": "pass",
+          "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+          "findings": [],
+          "floors": {
+            "evidence_support": 1.0,
+            "source_authority": 0.5,
+            "temporal_validity": 1.0
+          },
+          "floors_met": true,
+          "freshness": {
+            "applicability": "not_applicable",
+            "as_of": "2026-10-06",
+            "currently_applicable": null,
+            "date_basis": "event_date",
+            "event_age_days": 4,
+            "explanation": "Event coverage is current under the supplied age limit.",
+            "findings": [],
+            "metadata": {
+              "competitor_product_claim": false,
+              "content_type": "news",
+              "contradiction": false,
+              "current_status": "current",
+              "effective_from": null,
+              "event_date": "2026-10-02",
+              "last_verified_at": "2026-10-06",
+              "published_at": "2026-10-03",
+              "source_type": "reputable_secondary",
+              "superseded": false,
+              "supported": true
+            },
+            "news_max_event_age_days": 30,
+            "value": 1.0
+          },
+          "gate": "G2",
+          "original_evidence_required": false,
+          "pass_requirements_met": true,
+          "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+          "policy_schema_version": "1.0",
+          "policy_version": "g2-demo-v1",
+          "primary_reason": "PASS_REQUIREMENTS_MET",
+          "schema_version": "1.0",
+          "scoring_blockers": [],
+          "scoring_eligible": true,
+          "scoring_explanation": "Unrounded weighted sum is a diagnostic preference score, not a probability; floors, threshold, and original-evidence requirements are separate.",
+          "threshold": 0.8,
+          "threshold_met": true,
+          "weights": {
+            "evidence_support": 0.3333333333333333,
+            "source_authority": 0.3333333333333333,
+            "temporal_validity": 0.3333333333333333
+          },
+          "weights_version": "grounding-first-v1:equal-v1"
+        },
+        {
+          "aggregate_score": 0.9166666666666666,
+          "applicability": "currently_applicable",
+          "as_of": "2026-10-06",
+          "authority_mapping": {
+            "competitor": 0.0,
+            "official_indirect": 0.75,
+            "primary_authority": 1.0,
+            "reputable_secondary": 0.5,
+            "unknown": null
+          },
+          "calibration_status": "uncalibrated",
+          "case_id": "indirect-institutional-rule",
+          "checks": [
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "material_claim_supported",
+              "reason": "Metadata asserts material support without unresolved contradiction.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_not_superseded",
+              "reason": "Neither supersession assertion reports replacement.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "competitor_promotion_absent",
+              "reason": "Metadata asserts no competitor product promotion.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_conflict_absent",
+              "reason": "Metadata asserts no unresolved evidence conflict.",
+              "status": "pass"
+            }
+          ],
+          "criteria": [
+            {
+              "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "evidence_support",
+              "value": 1.0
+            },
+            {
+              "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+              "floor": 0.5,
+              "floor_met": true,
+              "name": "source_authority",
+              "value": 0.75
+            },
+            {
+              "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately. Qualified-scope anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "temporal_validity",
+              "value": 1.0
+            }
+          ],
+          "currently_applicable": true,
+          "date_basis": "effective_from",
+          "decision": "pass",
+          "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+          "findings": [],
+          "floors": {
+            "evidence_support": 1.0,
+            "source_authority": 0.5,
+            "temporal_validity": 1.0
+          },
+          "floors_met": true,
+          "freshness": {
+            "applicability": "currently_applicable",
+            "as_of": "2026-10-06",
+            "currently_applicable": true,
+            "date_basis": "effective_from",
+            "event_age_days": null,
+            "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately.",
+            "findings": [],
+            "metadata": {
+              "competitor_product_claim": false,
+              "content_type": "regulation",
+              "contradiction": false,
+              "current_status": "current",
+              "effective_from": "2020-03-01",
+              "event_date": null,
+              "last_verified_at": "2026-10-06",
+              "published_at": "2020-02-03",
+              "source_type": "official_indirect",
+              "superseded": false,
+              "supported": true
+            },
+            "news_max_event_age_days": 30,
+            "value": 1.0
+          },
+          "gate": "G2",
+          "original_evidence_required": false,
+          "pass_requirements_met": true,
+          "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+          "policy_schema_version": "1.0",
+          "policy_version": "g2-demo-v1",
+          "primary_reason": "PASS_REQUIREMENTS_MET",
+          "schema_version": "1.0",
+          "scoring_blockers": [],
+          "scoring_eligible": true,
+          "scoring_explanation": "Unrounded weighted sum is a diagnostic preference score, not a probability; floors, threshold, and original-evidence requirements are separate.",
+          "threshold": 0.8,
+          "threshold_met": true,
+          "weights": {
+            "evidence_support": 0.3333333333333333,
+            "source_authority": 0.3333333333333333,
+            "temporal_validity": 0.3333333333333333
+          },
+          "weights_version": "grounding-first-v1:equal-v1"
+        },
+        {
+          "aggregate_score": 1.0,
+          "applicability": "not_yet_applicable",
+          "as_of": "2026-10-06",
+          "authority_mapping": {
+            "competitor": 0.0,
+            "official_indirect": 0.75,
+            "primary_authority": 1.0,
+            "reputable_secondary": 0.5,
+            "unknown": null
+          },
+          "calibration_status": "uncalibrated",
+          "case_id": "primary-future-rule",
+          "checks": [
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "adopted_not_applicable",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "material_claim_supported",
+              "reason": "Metadata asserts material support without unresolved contradiction.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "adopted_not_applicable",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_not_superseded",
+              "reason": "Neither supersession assertion reports replacement.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "adopted_not_applicable",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "competitor_promotion_absent",
+              "reason": "Metadata asserts no competitor product promotion.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "adopted_not_applicable",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_conflict_absent",
+              "reason": "Metadata asserts no unresolved evidence conflict.",
+              "status": "pass"
+            }
+          ],
+          "criteria": [
+            {
+              "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "evidence_support",
+              "value": 1.0
+            },
+            {
+              "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+              "floor": 0.5,
+              "floor_met": true,
+              "name": "source_authority",
+              "value": 1.0
+            },
+            {
+              "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately. Qualified-scope anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "temporal_validity",
+              "value": 1.0
+            }
+          ],
+          "currently_applicable": false,
+          "date_basis": "effective_from",
+          "decision": "pass",
+          "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+          "findings": [],
+          "floors": {
+            "evidence_support": 1.0,
+            "source_authority": 0.5,
+            "temporal_validity": 1.0
+          },
+          "floors_met": true,
+          "freshness": {
+            "applicability": "not_yet_applicable",
+            "as_of": "2026-10-06",
+            "currently_applicable": false,
+            "date_basis": "effective_from",
+            "event_age_days": null,
+            "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately.",
+            "findings": [],
+            "metadata": {
+              "competitor_product_claim": false,
+              "content_type": "regulation",
+              "contradiction": false,
+              "current_status": "adopted_not_applicable",
+              "effective_from": "2027-01-01",
+              "event_date": null,
+              "last_verified_at": "2026-10-06",
+              "published_at": "2026-10-01",
+              "source_type": "primary_authority",
+              "superseded": false,
+              "supported": true
+            },
+            "news_max_event_age_days": 30,
+            "value": 1.0
+          },
+          "gate": "G2",
+          "original_evidence_required": false,
+          "pass_requirements_met": true,
+          "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+          "policy_schema_version": "1.0",
+          "policy_version": "g2-demo-v1",
+          "primary_reason": "PASS_REQUIREMENTS_MET",
+          "schema_version": "1.0",
+          "scoring_blockers": [],
+          "scoring_eligible": true,
+          "scoring_explanation": "Unrounded weighted sum is a diagnostic preference score, not a probability; floors, threshold, and original-evidence requirements are separate.",
+          "threshold": 0.8,
+          "threshold_met": true,
+          "weights": {
+            "evidence_support": 0.3333333333333333,
+            "source_authority": 0.3333333333333333,
+            "temporal_validity": 0.3333333333333333
+          },
+          "weights_version": "grounding-first-v1:equal-v1"
+        }
+      ],
+      "tie_groups": [],
+      "weights_version": "grounding-first-v1:equal-v1"
+    },
+    {
+      "ranked_case_ids": [
+        "primary-future-rule",
+        "indirect-institutional-rule",
+        "secondary-transit-report"
+      ],
+      "ranks": [
+        3,
+        2,
+        1
+      ],
+      "reports": [
+        {
+          "aggregate_score": 0.75,
+          "applicability": "not_applicable",
+          "as_of": "2026-10-06",
+          "authority_mapping": {
+            "competitor": 0.0,
+            "official_indirect": 0.75,
+            "primary_authority": 1.0,
+            "reputable_secondary": 0.5,
+            "unknown": null
+          },
+          "calibration_status": "uncalibrated",
+          "case_id": "secondary-transit-report",
+          "checks": [
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "material_claim_supported",
+              "reason": "Metadata asserts material support without unresolved contradiction.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_not_superseded",
+              "reason": "Neither supersession assertion reports replacement.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "competitor_promotion_absent",
+              "reason": "Metadata asserts no competitor product promotion.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_conflict_absent",
+              "reason": "Metadata asserts no unresolved evidence conflict.",
+              "status": "pass"
+            }
+          ],
+          "criteria": [
+            {
+              "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "evidence_support",
+              "value": 1.0
+            },
+            {
+              "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+              "floor": 0.5,
+              "floor_met": true,
+              "name": "source_authority",
+              "value": 0.5
+            },
+            {
+              "explanation": "Event coverage is current under the supplied age limit. Qualified-scope anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "temporal_validity",
+              "value": 1.0
+            }
+          ],
+          "currently_applicable": null,
+          "date_basis": "event_date",
+          "decision": "human_review",
+          "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+          "findings": [
+            {
+              "code": "BELOW_THRESHOLD",
+              "kind": "review",
+              "origins": [
+                "policy"
+              ],
+              "reasons": [
+                "Unrounded diagnostic score is below the configured threshold."
+              ]
+            }
+          ],
+          "floors": {
+            "evidence_support": 1.0,
+            "source_authority": 0.5,
+            "temporal_validity": 1.0
+          },
+          "floors_met": true,
+          "freshness": {
+            "applicability": "not_applicable",
+            "as_of": "2026-10-06",
+            "currently_applicable": null,
+            "date_basis": "event_date",
+            "event_age_days": 4,
+            "explanation": "Event coverage is current under the supplied age limit.",
+            "findings": [],
+            "metadata": {
+              "competitor_product_claim": false,
+              "content_type": "news",
+              "contradiction": false,
+              "current_status": "current",
+              "effective_from": null,
+              "event_date": "2026-10-02",
+              "last_verified_at": "2026-10-06",
+              "published_at": "2026-10-03",
+              "source_type": "reputable_secondary",
+              "superseded": false,
+              "supported": true
+            },
+            "news_max_event_age_days": 30,
+            "value": 1.0
+          },
+          "gate": "G2",
+          "original_evidence_required": false,
+          "pass_requirements_met": false,
+          "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+          "policy_schema_version": "1.0",
+          "policy_version": "g2-demo-v1",
+          "primary_reason": "BELOW_THRESHOLD",
+          "schema_version": "1.0",
+          "scoring_blockers": [],
+          "scoring_eligible": true,
+          "scoring_explanation": "Unrounded weighted sum is a diagnostic preference score, not a probability; floors, threshold, and original-evidence requirements are separate.",
+          "threshold": 0.8,
+          "threshold_met": false,
+          "weights": {
+            "evidence_support": 0.25,
+            "source_authority": 0.5,
+            "temporal_validity": 0.25
+          },
+          "weights_version": "grounding-first-v1:authority-heavy-v1"
+        },
+        {
+          "aggregate_score": 0.875,
+          "applicability": "currently_applicable",
+          "as_of": "2026-10-06",
+          "authority_mapping": {
+            "competitor": 0.0,
+            "official_indirect": 0.75,
+            "primary_authority": 1.0,
+            "reputable_secondary": 0.5,
+            "unknown": null
+          },
+          "calibration_status": "uncalibrated",
+          "case_id": "indirect-institutional-rule",
+          "checks": [
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "material_claim_supported",
+              "reason": "Metadata asserts material support without unresolved contradiction.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_not_superseded",
+              "reason": "Neither supersession assertion reports replacement.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "competitor_promotion_absent",
+              "reason": "Metadata asserts no competitor product promotion.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "current",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_conflict_absent",
+              "reason": "Metadata asserts no unresolved evidence conflict.",
+              "status": "pass"
+            }
+          ],
+          "criteria": [
+            {
+              "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "evidence_support",
+              "value": 1.0
+            },
+            {
+              "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+              "floor": 0.5,
+              "floor_met": true,
+              "name": "source_authority",
+              "value": 0.75
+            },
+            {
+              "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately. Qualified-scope anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "temporal_validity",
+              "value": 1.0
+            }
+          ],
+          "currently_applicable": true,
+          "date_basis": "effective_from",
+          "decision": "pass",
+          "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+          "findings": [],
+          "floors": {
+            "evidence_support": 1.0,
+            "source_authority": 0.5,
+            "temporal_validity": 1.0
+          },
+          "floors_met": true,
+          "freshness": {
+            "applicability": "currently_applicable",
+            "as_of": "2026-10-06",
+            "currently_applicable": true,
+            "date_basis": "effective_from",
+            "event_age_days": null,
+            "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately.",
+            "findings": [],
+            "metadata": {
+              "competitor_product_claim": false,
+              "content_type": "regulation",
+              "contradiction": false,
+              "current_status": "current",
+              "effective_from": "2020-03-01",
+              "event_date": null,
+              "last_verified_at": "2026-10-06",
+              "published_at": "2020-02-03",
+              "source_type": "official_indirect",
+              "superseded": false,
+              "supported": true
+            },
+            "news_max_event_age_days": 30,
+            "value": 1.0
+          },
+          "gate": "G2",
+          "original_evidence_required": false,
+          "pass_requirements_met": true,
+          "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+          "policy_schema_version": "1.0",
+          "policy_version": "g2-demo-v1",
+          "primary_reason": "PASS_REQUIREMENTS_MET",
+          "schema_version": "1.0",
+          "scoring_blockers": [],
+          "scoring_eligible": true,
+          "scoring_explanation": "Unrounded weighted sum is a diagnostic preference score, not a probability; floors, threshold, and original-evidence requirements are separate.",
+          "threshold": 0.8,
+          "threshold_met": true,
+          "weights": {
+            "evidence_support": 0.25,
+            "source_authority": 0.5,
+            "temporal_validity": 0.25
+          },
+          "weights_version": "grounding-first-v1:authority-heavy-v1"
+        },
+        {
+          "aggregate_score": 1.0,
+          "applicability": "not_yet_applicable",
+          "as_of": "2026-10-06",
+          "authority_mapping": {
+            "competitor": 0.0,
+            "official_indirect": 0.75,
+            "primary_authority": 1.0,
+            "reputable_secondary": 0.5,
+            "unknown": null
+          },
+          "calibration_status": "uncalibrated",
+          "case_id": "primary-future-rule",
+          "checks": [
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "adopted_not_applicable",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "material_claim_supported",
+              "reason": "Metadata asserts material support without unresolved contradiction.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "adopted_not_applicable",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_not_superseded",
+              "reason": "Neither supersession assertion reports replacement.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "adopted_not_applicable",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "competitor_promotion_absent",
+              "reason": "Metadata asserts no competitor product promotion.",
+              "status": "pass"
+            },
+            {
+              "basis": {
+                "competitor_product_claim": false,
+                "contradiction": false,
+                "current_status": "adopted_not_applicable",
+                "superseded": false,
+                "supported": true
+              },
+              "name": "evidence_conflict_absent",
+              "reason": "Metadata asserts no unresolved evidence conflict.",
+              "status": "pass"
+            }
+          ],
+          "criteria": [
+            {
+              "explanation": "Metadata asserts material support without unresolved contradiction. Partial-support anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "evidence_support",
+              "value": 1.0
+            },
+            {
+              "explanation": "Authority follows the configured, uncalibrated source relationship mapping; unknown remains null.",
+              "floor": 0.5,
+              "floor_met": true,
+              "name": "source_authority",
+              "value": 1.0
+            },
+            {
+              "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately. Qualified-scope anchor 0.5 is not representable in this schema.",
+              "floor": 1.0,
+              "floor_met": true,
+              "name": "temporal_validity",
+              "value": 1.0
+            }
+          ],
+          "currently_applicable": false,
+          "date_basis": "effective_from",
+          "decision": "pass",
+          "evidence_boundary": "Trusted synthetic metadata; not independent verification, calibrated probability, or publication approval.",
+          "findings": [],
+          "floors": {
+            "evidence_support": 1.0,
+            "source_authority": 0.5,
+            "temporal_validity": 1.0
+          },
+          "floors_met": true,
+          "freshness": {
+            "applicability": "not_yet_applicable",
+            "as_of": "2026-10-06",
+            "currently_applicable": false,
+            "date_basis": "effective_from",
+            "event_age_days": null,
+            "explanation": "Regulation timing is appropriate under trusted status/effective-date assertions; current applicability is reported separately.",
+            "findings": [],
+            "metadata": {
+              "competitor_product_claim": false,
+              "content_type": "regulation",
+              "contradiction": false,
+              "current_status": "adopted_not_applicable",
+              "effective_from": "2027-01-01",
+              "event_date": null,
+              "last_verified_at": "2026-10-06",
+              "published_at": "2026-10-01",
+              "source_type": "primary_authority",
+              "superseded": false,
+              "supported": true
+            },
+            "news_max_event_age_days": 30,
+            "value": 1.0
+          },
+          "gate": "G2",
+          "original_evidence_required": false,
+          "pass_requirements_met": true,
+          "policy_rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+          "policy_schema_version": "1.0",
+          "policy_version": "g2-demo-v1",
+          "primary_reason": "PASS_REQUIREMENTS_MET",
+          "schema_version": "1.0",
+          "scoring_blockers": [],
+          "scoring_eligible": true,
+          "scoring_explanation": "Unrounded weighted sum is a diagnostic preference score, not a probability; floors, threshold, and original-evidence requirements are separate.",
+          "threshold": 0.8,
+          "threshold_met": true,
+          "weights": {
+            "evidence_support": 0.25,
+            "source_authority": 0.5,
+            "temporal_validity": 0.25
+          },
+          "weights_version": "grounding-first-v1:authority-heavy-v1"
+        }
+      ],
+      "tie_groups": [],
+      "weights_version": "grounding-first-v1:authority-heavy-v1"
+    }
+  ],
+  "schema_version": "1.0"
+}

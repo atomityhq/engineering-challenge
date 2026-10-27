@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "policy_version": "g2-demo-v1",
+  "weights_version": "grounding-first-v1",
+  "calibration_status": "uncalibrated",
+  "rationale": "Provisional grounding-first preference, not fitted to starter labels. Evidence support has weight 0.45, authority 0.30, and temporal validity 0.25. Support and temporal floors are 1; authority floor is 0.5. With support/time at 1 the score is 0.70 + 0.30 * authority, so threshold 0.80 is partly redundant with the authority floor. An authority-heavy alternative makes the threshold decisive. Source mappings are trusted synthetic relationships, not measured probabilities. Fixture-owned event age and temporal conventions remain separate.",
+  "weights": {
+    "evidence_support": 0.45,
+    "source_authority": 0.30,
+    "temporal_validity": 0.25
+  },
+  "floors": {
+    "evidence_support": 1.0,
+    "source_authority": 0.5,
+    "temporal_validity": 1.0
+  },
+  "threshold": 0.80,
+  "authority": {
+    "primary_authority": 1.0,
+    "official_indirect": 0.75,
+    "reputable_secondary": 0.5,
+    "competitor": 0.0,
+    "unknown": null
+  }
+}
