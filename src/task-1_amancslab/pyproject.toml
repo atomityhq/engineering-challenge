@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "atomity-task1-amancslab"
+version = "0.1.0"
+description = "Source normalisation and filtering for the Atomity engineering challenge"
+requires-python = ">=3.11"
+dependencies = [
+    "pydantic>=1.10,<2"
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8,<10"
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["source_filter*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

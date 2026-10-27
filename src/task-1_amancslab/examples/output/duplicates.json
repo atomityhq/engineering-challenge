@@ -1,0 +1,8 @@
+[
+  {
+    "canonical_url": "https://research.example.org/reports/cloud-residency",
+    "retained_source_id": "source-001",
+    "duplicate_source_id": "source-002",
+    "duplicate_type": "canonical_url"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "approved_source_types": [
+    "primary",
+    "authoritative"
+  ],
+  "excluded_source_types": [
+    "low_quality"
+  ],
+  "competitor_product_claim_action": "exclude",
+  "competitor_generic_claim_action": "exclude_and_require_verification",
+  "competitor_other_claim_action": "exclude"
+}

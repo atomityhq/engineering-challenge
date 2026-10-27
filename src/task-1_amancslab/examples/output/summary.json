@@ -1,0 +1,10 @@
+{
+  "input_records": 7,
+  "valid_input_records": 6,
+  "invalid_records": 1,
+  "deduplicated_records": 5,
+  "duplicate_records": 1,
+  "metadata_conflicts": 0,
+  "eligible_records": 2,
+  "excluded_records": 3
+}

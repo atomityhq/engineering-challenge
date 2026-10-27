@@ -1,0 +1,39 @@
+[
+  {
+    "source_id": "source-001",
+    "url": "https://research.example.org/reports/cloud-residency?utm_source=feed-a",
+    "publisher": "Example Research Institute",
+    "source_type": "primary",
+    "claim_kind": "other",
+    "publication_date": "2026-10-20",
+    "event_date": null,
+    "canonical_url": "https://research.example.org/reports/cloud-residency",
+    "discovery_lineage": [
+      "research-feed",
+      "daily-monitor"
+    ],
+    "eligibility": "eligible",
+    "reason_codes": [
+      "SOURCE_POLICY_ACCEPTED"
+    ],
+    "verification_required": false
+  },
+  {
+    "source_id": "source-003",
+    "url": "https://regulator.example.org/notices/cloud-policy",
+    "publisher": "Example Regulatory Authority",
+    "source_type": "authoritative",
+    "claim_kind": "other",
+    "publication_date": null,
+    "event_date": null,
+    "canonical_url": "https://regulator.example.org/notices/cloud-policy",
+    "discovery_lineage": [
+      "official-bulletin"
+    ],
+    "eligibility": "eligible",
+    "reason_codes": [
+      "SOURCE_POLICY_ACCEPTED"
+    ],
+    "verification_required": false
+  }
+]

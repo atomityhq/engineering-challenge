@@ -1,0 +1,56 @@
+[
+  {
+    "source_id": "source-004",
+    "url": "https://competitor.example.com/products/cloud-platform",
+    "publisher": "Example Competitor",
+    "source_type": "competitor",
+    "claim_kind": "product_promotional",
+    "publication_date": "2026-10-21",
+    "event_date": null,
+    "canonical_url": "https://competitor.example.com/products/cloud-platform",
+    "discovery_lineage": [
+      "market-monitor"
+    ],
+    "eligibility": "excluded",
+    "reason_codes": [
+      "COMPETITOR_PROMOTIONAL_CLAIM"
+    ],
+    "verification_required": false
+  },
+  {
+    "source_id": "source-005",
+    "url": "https://competitor.example.com/blog/cloud-industry-trends",
+    "publisher": "Example Competitor",
+    "source_type": "competitor",
+    "claim_kind": "generic_industry",
+    "publication_date": null,
+    "event_date": null,
+    "canonical_url": "https://competitor.example.com/blog/cloud-industry-trends",
+    "discovery_lineage": [
+      "industry-feed"
+    ],
+    "eligibility": "excluded",
+    "reason_codes": [
+      "COMPETITOR_GENERIC_CLAIM_NEEDS_VERIFICATION"
+    ],
+    "verification_required": true
+  },
+  {
+    "source_id": "source-006",
+    "url": "https://unknown-quality.example.org/article",
+    "publisher": "Unverified Publisher",
+    "source_type": "low_quality",
+    "claim_kind": "other",
+    "publication_date": null,
+    "event_date": null,
+    "canonical_url": "https://unknown-quality.example.org/article",
+    "discovery_lineage": [
+      "unverified-feed"
+    ],
+    "eligibility": "excluded",
+    "reason_codes": [
+      "SOURCE_LOW_QUALITY"
+    ],
+    "verification_required": false
+  }
+]

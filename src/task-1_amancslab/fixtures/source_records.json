@@ -1,0 +1,71 @@
+[
+  {
+    "source_id": "source-001",
+    "url": "https://research.example.org/reports/cloud-residency?utm_source=feed-a",
+    "publisher": "Example Research Institute",
+    "source_type": "primary",
+    "claim_kind": "other",
+    "publication_date": "2026-10-20",
+    "event_date": null,
+    "discovery_lineage": ["research-feed"]
+  },
+  {
+    "source_id": "source-002",
+    "url": "https://research.example.org/reports/cloud-residency",
+    "publisher": "Example Research Institute",
+    "source_type": "primary",
+    "claim_kind": "other",
+    "publication_date": "2026-10-20",
+    "event_date": null,
+    "discovery_lineage": ["daily-monitor"]
+  },
+  {
+    "source_id": "source-003",
+    "url": "https://regulator.example.org/notices/cloud-policy",
+    "publisher": "Example Regulatory Authority",
+    "source_type": "authoritative",
+    "claim_kind": "other",
+    "publication_date": null,
+    "event_date": null,
+    "discovery_lineage": ["official-bulletin"]
+  },
+  {
+    "source_id": "source-004",
+    "url": "https://competitor.example.com/products/cloud-platform",
+    "publisher": "Example Competitor",
+    "source_type": "competitor",
+    "claim_kind": "product_promotional",
+    "publication_date": "2026-10-21",
+    "event_date": null,
+    "discovery_lineage": ["market-monitor"]
+  },
+  {
+    "source_id": "source-005",
+    "url": "https://competitor.example.com/blog/cloud-industry-trends",
+    "publisher": "Example Competitor",
+    "source_type": "competitor",
+    "claim_kind": "generic_industry",
+    "publication_date": null,
+    "event_date": null,
+    "discovery_lineage": ["industry-feed"]
+  },
+  {
+    "source_id": "source-006",
+    "url": "https://unknown-quality.example.org/article",
+    "publisher": "Unverified Publisher",
+    "source_type": "low_quality",
+    "claim_kind": "other",
+    "publication_date": null,
+    "event_date": null,
+    "discovery_lineage": ["unverified-feed"]
+  },
+  {
+    "source_id": "source-007",
+    "publisher": "Incomplete Publisher",
+    "source_type": "primary",
+    "claim_kind": "other",
+    "publication_date": null,
+    "event_date": null,
+    "discovery_lineage": ["manual-import"]
+  }
+]

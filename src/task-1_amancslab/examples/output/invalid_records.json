@@ -1,0 +1,21 @@
+[
+  {
+    "index": 7,
+    "source_id": "source-007",
+    "raw_record": {
+      "source_id": "source-007",
+      "publisher": "Incomplete Publisher",
+      "source_type": "primary",
+      "claim_kind": "other",
+      "publication_date": null,
+      "event_date": null,
+      "discovery_lineage": [
+        "manual-import"
+      ]
+    },
+    "reason_code": "INVALID_RECORD",
+    "errors": [
+      "url: field required"
+    ]
+  }
+]
