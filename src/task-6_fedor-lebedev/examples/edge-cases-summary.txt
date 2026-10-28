@@ -1,0 +1,24 @@
+G2 gate | policy g2-prototype-v1 (uncalibrated) | weights provisional-v1 (provisional) | threshold 0.8 (provisional)
+fixture src/task-6_fedor-lebedev/fixtures/g2-edge-cases.json | as_of 2026-10-06 (from the fixture, not the system clock) | news window 30 days (demo convention)
+
+case                                   decision       score    ES   SA   TV  freshness           expected      ok  routing reasons
+----------------------------------------------------------------------------------------------------------------------------------
+e-primary-reports-competitor-claim     reject           -       1    1    1  current             reject        yes COMPETITOR_PRODUCT_PROMOTION
+e-competitor-source-neutral            human_review     -       1    0    1  current             human_review  yes COMPETITOR_SOURCE_NEEDS_JUDGMENT
+e-support-undetermined                 human_review     -    null    1    1  current             human_review  yes UNKNOWN_EVIDENCE_SUPPORT, UNKNOWN_CRITERION
+e-unknown-source-type                  human_review     -       1 null    1  current             human_review  yes UNKNOWN_CRITERION
+e-community-source                     revise        0.7000     1    0    1  current             revise        yes BELOW_CRITERION_FLOOR, BELOW_THRESHOLD
+e-news-at-window-edge                  pass          1.0000     1    1    1  current             pass          yes -
+e-news-one-day-past-window             revise           -       1    1    0  stale               revise        yes STALE_EVENT
+e-future-dated-news-event              human_review     -       1    1 null  future_event        human_review  yes FUTURE_EVENT_DATE, UNKNOWN_CRITERION
+e-adopted-rule-past-effective-date     human_review     -       1    1 null  conflicting         human_review  yes STATUS_DATE_CONFLICT, UNKNOWN_CRITERION
+e-current-rule-future-effective-date   human_review     -       1    1 null  conflicting         human_review  yes STATUS_DATE_CONFLICT, UNKNOWN_CRITERION
+e-current-rule-missing-effective-date  human_review     -       1    1 null  unknown             human_review  yes UNKNOWN_EFFECTIVE_DATE, UNKNOWN_CRITERION
+e-supersession-flags-disagree          revise           -       1    1    0  superseded          revise        yes SUPERSEDED_EVIDENCE
+e-unsupported-competitor-promotion     reject           -       0    0    1  current             reject        yes COMPETITOR_PRODUCT_PROMOTION, UNSUPPORTED_MATERIAL_CLAIM, COMPETITOR_SOURCE_NEEDS_JUDGMENT
+e-embedded-instructions-stale-news     revise           -       1    1    0  stale               revise        yes STALE_EVENT
+e-published-after-as-of                human_review     -       1    1 null  conflicting         human_review  yes DATE_AFTER_AS_OF, UNKNOWN_CRITERION
+e-unsupported-unknown-date             revise           -       0    1 null  unknown             revise        yes UNSUPPORTED_MATERIAL_CLAIM, UNKNOWN_EVENT_DATE, UNKNOWN_CRITERION
+e-unknown-current-status               human_review     -       1    1 null  unknown             human_review  yes UNKNOWN_CURRENT_STATUS, UNKNOWN_CRITERION
+
+17/17 decisions match expected_decision (compared after evaluation; the evaluator never sees it).

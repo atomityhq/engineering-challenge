@@ -1,0 +1,13 @@
+G2 gate | policy g2-prototype-v1 (uncalibrated) | weights provisional-v1 (provisional) | threshold 0.8 (provisional)
+fixture src/task-6_fedor-lebedev/fixtures/g2-weighting-cases.json | as_of 2026-10-06 (from the fixture, not the system clock) | news window 30 days (demo convention)
+
+case                                   decision       score    ES   SA   TV  freshness           expected      ok  routing reasons
+----------------------------------------------------------------------------------------------------------------------------------
+w-primary-news-verified                pass          1.0000     1    1    1  current             pass          yes -
+w-secondary-news                       pass          0.8500     1  0.5    1  current             pass          yes -
+w-qualified-rule                       human_review  0.7500   0.5    1    1  current             human_review  yes BELOW_THRESHOLD
+w-rule-status-unverified               pass          0.9000     1    1  0.5  current             pass          yes -
+w-secondary-news-unverified            human_review  0.7500     1  0.5  0.5  current             human_review  yes BELOW_THRESHOLD
+w-qualified-secondary-future-rule      human_review  0.6000   0.5  0.5    1  not_yet_applicable  human_review  yes BELOW_THRESHOLD
+
+6/6 decisions match expected_decision (compared after evaluation; the evaluator never sees it).

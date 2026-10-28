@@ -1,0 +1,1115 @@
+[
+  {
+    "fixture": "src/task-6_fedor-lebedev/fixtures/g2-weighting-cases.json",
+    "as_of": "2026-10-06",
+    "reports": [
+      {
+        "case_id": "w-primary-news-verified",
+        "gate": "G2",
+        "as_of": "2026-10-06",
+        "policy_version": "g2-prototype-v1",
+        "weights_version": "provisional-v1",
+        "calibration_status": "uncalibrated",
+        "config_digest": "sha256:3fe06c198ebb1577",
+        "input_digest": "sha256:99ff31234a38c45a",
+        "hard_checks": {
+          "no_competitor_promotion": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "competitor_product_claim": false
+            },
+            "detail": "No competitor product claim is promoted."
+          },
+          "material_claim_supported": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "supported": true
+            },
+            "detail": "The material claim is supported by the supplied evidence."
+          },
+          "evidence_not_superseded": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "superseded": false,
+              "current_status": "current"
+            },
+            "detail": "Evidence is not marked superseded."
+          },
+          "no_material_contradiction": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "contradiction": false
+            },
+            "detail": "No material contradiction recorded."
+          },
+          "source_not_competitor": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "source_type": "primary_authority"
+            },
+            "detail": "Evidence does not come from a competitor."
+          }
+        },
+        "freshness": {
+          "status": "current",
+          "passed": true,
+          "content_type": "news",
+          "rule": "news: event date must be within 30 days of as_of (fixture demo test convention, not a validated freshness threshold)",
+          "as_of": "2026-10-06",
+          "reference_date": "2026-09-28",
+          "reference_date_type": "event_date",
+          "reference_age_days": 8,
+          "max_age_days": 30,
+          "dates": {
+            "published_at": "2026-09-29",
+            "event_date": "2026-09-28",
+            "effective_from": null,
+            "last_verified_at": "2026-10-05"
+          },
+          "applicability": "applicable",
+          "currently_applicable": true,
+          "applicable_from": null,
+          "verification": {
+            "last_verified_at": "2026-10-05",
+            "age_days": 1,
+            "max_age_days": 30,
+            "within_window": true,
+            "window_note": "Demo convention: current status must have been checked within 30 days of as_of to earn temporal validity 1. It mirrors the fixture's 30-day news window and is not a validated threshold."
+          },
+          "issues": [],
+          "presentation_constraint": null,
+          "explanation": "current_status is 'current'; news needs no separate effective date. Event 2026-09-28 is 8 days before as_of, within the 30-day demo window. Current status was verified 1 days before as_of. Freshness status: current."
+        },
+        "criteria": {
+          "evidence_support": {
+            "score": 1.0,
+            "anchor": "supported=true with no qualification and no contradiction recorded: the claim is directly supported.",
+            "basis": {
+              "supported": true,
+              "qualified_support": false,
+              "contradiction": false
+            },
+            "unknown_reason": null
+          },
+          "source_authority": {
+            "score": 1.0,
+            "anchor": "primary_authority: the body that issued the rule or owns the announced fact.",
+            "basis": {
+              "source_type": "primary_authority"
+            },
+            "unknown_reason": null
+          },
+          "temporal_validity": {
+            "score": 1.0,
+            "anchor": "Timing is valid and current status was verified within the verification window.",
+            "basis": {
+              "freshness_status": "current",
+              "verified_within_window": true
+            },
+            "unknown_reason": null
+          }
+        },
+        "weights": {
+          "evidence_support": 0.5,
+          "source_authority": 0.3,
+          "temporal_validity": 0.2
+        },
+        "eligible_for_scoring": true,
+        "score": 1.0,
+        "score_breakdown": {
+          "formula": "score = sum(weight_i * criterion_i) over evidence_support, source_authority, temporal_validity",
+          "weights_version": "provisional-v1",
+          "weights_status": "provisional",
+          "weights": {
+            "evidence_support": 0.5,
+            "source_authority": 0.3,
+            "temporal_validity": 0.2
+          },
+          "contributions": {
+            "evidence_support": 0.5,
+            "source_authority": 0.3,
+            "temporal_validity": 0.2
+          },
+          "score": 1.0,
+          "threshold": 0.8,
+          "threshold_status": "provisional",
+          "threshold_met": true,
+          "floors": {
+            "evidence_support": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            },
+            "source_authority": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            },
+            "temporal_validity": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            }
+          }
+        },
+        "score_withheld_because": [],
+        "score_interpretation": "Provisional, uncalibrated prototype index in [0, 1] used for ranking and routing. It is not a probability that the content is correct.",
+        "decision": "pass",
+        "decision_meaning": "Eligible for the next internal stage under the demo policy. Not publication approval and not a calibrated quality judgment.",
+        "reasons": [
+          {
+            "code": "ALL_HARD_CHECKS_PASSED",
+            "route": null,
+            "stage": "hard_check",
+            "subject": null,
+            "message": "All mandatory hard checks passed."
+          },
+          {
+            "code": "FRESHNESS_PASSED",
+            "route": null,
+            "stage": "freshness",
+            "subject": null,
+            "message": "The freshness and current-validity rule for this content type is satisfied."
+          },
+          {
+            "code": "ALL_CRITERIA_KNOWN",
+            "route": null,
+            "stage": "criteria",
+            "subject": null,
+            "message": "All required criteria are known and meet their floors."
+          },
+          {
+            "code": "THRESHOLD_MET",
+            "route": null,
+            "stage": "scoring",
+            "subject": "score",
+            "message": "Score 1.0 meets the provisional, uncalibrated threshold 0.8."
+          }
+        ]
+      },
+      {
+        "case_id": "w-secondary-news",
+        "gate": "G2",
+        "as_of": "2026-10-06",
+        "policy_version": "g2-prototype-v1",
+        "weights_version": "provisional-v1",
+        "calibration_status": "uncalibrated",
+        "config_digest": "sha256:3fe06c198ebb1577",
+        "input_digest": "sha256:8f808b2404cdb06b",
+        "hard_checks": {
+          "no_competitor_promotion": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "competitor_product_claim": false
+            },
+            "detail": "No competitor product claim is promoted."
+          },
+          "material_claim_supported": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "supported": true
+            },
+            "detail": "The material claim is supported by the supplied evidence."
+          },
+          "evidence_not_superseded": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "superseded": false,
+              "current_status": "current"
+            },
+            "detail": "Evidence is not marked superseded."
+          },
+          "no_material_contradiction": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "contradiction": false
+            },
+            "detail": "No material contradiction recorded."
+          },
+          "source_not_competitor": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "source_type": "secondary_reporting"
+            },
+            "detail": "Evidence does not come from a competitor."
+          }
+        },
+        "freshness": {
+          "status": "current",
+          "passed": true,
+          "content_type": "news",
+          "rule": "news: event date must be within 30 days of as_of (fixture demo test convention, not a validated freshness threshold)",
+          "as_of": "2026-10-06",
+          "reference_date": "2026-09-20",
+          "reference_date_type": "event_date",
+          "reference_age_days": 16,
+          "max_age_days": 30,
+          "dates": {
+            "published_at": "2026-09-22",
+            "event_date": "2026-09-20",
+            "effective_from": null,
+            "last_verified_at": "2026-10-02"
+          },
+          "applicability": "applicable",
+          "currently_applicable": true,
+          "applicable_from": null,
+          "verification": {
+            "last_verified_at": "2026-10-02",
+            "age_days": 4,
+            "max_age_days": 30,
+            "within_window": true,
+            "window_note": "Demo convention: current status must have been checked within 30 days of as_of to earn temporal validity 1. It mirrors the fixture's 30-day news window and is not a validated threshold."
+          },
+          "issues": [],
+          "presentation_constraint": null,
+          "explanation": "current_status is 'current'; news needs no separate effective date. Event 2026-09-20 is 16 days before as_of, within the 30-day demo window. Current status was verified 4 days before as_of. Freshness status: current."
+        },
+        "criteria": {
+          "evidence_support": {
+            "score": 1.0,
+            "anchor": "supported=true with no qualification and no contradiction recorded: the claim is directly supported.",
+            "basis": {
+              "supported": true,
+              "qualified_support": false,
+              "contradiction": false
+            },
+            "unknown_reason": null
+          },
+          "source_authority": {
+            "score": 0.5,
+            "anchor": "secondary_reporting: relays a primary source; useful but indirect.",
+            "basis": {
+              "source_type": "secondary_reporting"
+            },
+            "unknown_reason": null
+          },
+          "temporal_validity": {
+            "score": 1.0,
+            "anchor": "Timing is valid and current status was verified within the verification window.",
+            "basis": {
+              "freshness_status": "current",
+              "verified_within_window": true
+            },
+            "unknown_reason": null
+          }
+        },
+        "weights": {
+          "evidence_support": 0.5,
+          "source_authority": 0.3,
+          "temporal_validity": 0.2
+        },
+        "eligible_for_scoring": true,
+        "score": 0.85,
+        "score_breakdown": {
+          "formula": "score = sum(weight_i * criterion_i) over evidence_support, source_authority, temporal_validity",
+          "weights_version": "provisional-v1",
+          "weights_status": "provisional",
+          "weights": {
+            "evidence_support": 0.5,
+            "source_authority": 0.3,
+            "temporal_validity": 0.2
+          },
+          "contributions": {
+            "evidence_support": 0.5,
+            "source_authority": 0.15,
+            "temporal_validity": 0.2
+          },
+          "score": 0.85,
+          "threshold": 0.8,
+          "threshold_status": "provisional",
+          "threshold_met": true,
+          "floors": {
+            "evidence_support": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            },
+            "source_authority": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            },
+            "temporal_validity": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            }
+          }
+        },
+        "score_withheld_because": [],
+        "score_interpretation": "Provisional, uncalibrated prototype index in [0, 1] used for ranking and routing. It is not a probability that the content is correct.",
+        "decision": "pass",
+        "decision_meaning": "Eligible for the next internal stage under the demo policy. Not publication approval and not a calibrated quality judgment.",
+        "reasons": [
+          {
+            "code": "ALL_HARD_CHECKS_PASSED",
+            "route": null,
+            "stage": "hard_check",
+            "subject": null,
+            "message": "All mandatory hard checks passed."
+          },
+          {
+            "code": "FRESHNESS_PASSED",
+            "route": null,
+            "stage": "freshness",
+            "subject": null,
+            "message": "The freshness and current-validity rule for this content type is satisfied."
+          },
+          {
+            "code": "ALL_CRITERIA_KNOWN",
+            "route": null,
+            "stage": "criteria",
+            "subject": null,
+            "message": "All required criteria are known and meet their floors."
+          },
+          {
+            "code": "THRESHOLD_MET",
+            "route": null,
+            "stage": "scoring",
+            "subject": "score",
+            "message": "Score 0.85 meets the provisional, uncalibrated threshold 0.8."
+          }
+        ]
+      },
+      {
+        "case_id": "w-qualified-rule",
+        "gate": "G2",
+        "as_of": "2026-10-06",
+        "policy_version": "g2-prototype-v1",
+        "weights_version": "provisional-v1",
+        "calibration_status": "uncalibrated",
+        "config_digest": "sha256:3fe06c198ebb1577",
+        "input_digest": "sha256:d1f0a7acde9a10d4",
+        "hard_checks": {
+          "no_competitor_promotion": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "competitor_product_claim": false
+            },
+            "detail": "No competitor product claim is promoted."
+          },
+          "material_claim_supported": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "supported": true
+            },
+            "detail": "The material claim is supported by the supplied evidence."
+          },
+          "evidence_not_superseded": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "superseded": false,
+              "current_status": "current"
+            },
+            "detail": "Evidence is not marked superseded."
+          },
+          "no_material_contradiction": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "contradiction": false
+            },
+            "detail": "No material contradiction recorded."
+          },
+          "source_not_competitor": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "source_type": "primary_authority"
+            },
+            "detail": "Evidence does not come from a competitor."
+          }
+        },
+        "freshness": {
+          "status": "current",
+          "passed": true,
+          "content_type": "regulation",
+          "rule": "regulation: no age limit; applicability is decided by current_status and effective_from (publication date is not used)",
+          "as_of": "2026-10-06",
+          "reference_date": "2025-03-01",
+          "reference_date_type": "effective_from",
+          "reference_age_days": 584,
+          "max_age_days": null,
+          "dates": {
+            "published_at": "2025-02-10",
+            "event_date": "2025-02-10",
+            "effective_from": "2025-03-01",
+            "last_verified_at": "2026-10-01"
+          },
+          "applicability": "applicable",
+          "currently_applicable": true,
+          "applicable_from": "2025-03-01",
+          "verification": {
+            "last_verified_at": "2026-10-01",
+            "age_days": 5,
+            "max_age_days": 30,
+            "within_window": true,
+            "window_note": "Demo convention: current status must have been checked within 30 days of as_of to earn temporal validity 1. It mirrors the fixture's 30-day news window and is not a validated threshold."
+          },
+          "issues": [],
+          "presentation_constraint": null,
+          "explanation": "current_status is 'current' and the evidence has applied since 2025-03-01. Publication date 2025-02-10 is recorded but not used to judge a rule's validity. Current status was verified 5 days before as_of. Freshness status: current."
+        },
+        "criteria": {
+          "evidence_support": {
+            "score": 0.5,
+            "anchor": "supported=true, but the support is qualified (qualified_support=true) or other supplied evidence contradicts it (contradiction=true).",
+            "basis": {
+              "supported": true,
+              "qualified_support": true,
+              "contradiction": false
+            },
+            "unknown_reason": null
+          },
+          "source_authority": {
+            "score": 1.0,
+            "anchor": "primary_authority: the body that issued the rule or owns the announced fact.",
+            "basis": {
+              "source_type": "primary_authority"
+            },
+            "unknown_reason": null
+          },
+          "temporal_validity": {
+            "score": 1.0,
+            "anchor": "Timing is valid and current status was verified within the verification window.",
+            "basis": {
+              "freshness_status": "current",
+              "verified_within_window": true
+            },
+            "unknown_reason": null
+          }
+        },
+        "weights": {
+          "evidence_support": 0.5,
+          "source_authority": 0.3,
+          "temporal_validity": 0.2
+        },
+        "eligible_for_scoring": true,
+        "score": 0.75,
+        "score_breakdown": {
+          "formula": "score = sum(weight_i * criterion_i) over evidence_support, source_authority, temporal_validity",
+          "weights_version": "provisional-v1",
+          "weights_status": "provisional",
+          "weights": {
+            "evidence_support": 0.5,
+            "source_authority": 0.3,
+            "temporal_validity": 0.2
+          },
+          "contributions": {
+            "evidence_support": 0.25,
+            "source_authority": 0.3,
+            "temporal_validity": 0.2
+          },
+          "score": 0.75,
+          "threshold": 0.8,
+          "threshold_status": "provisional",
+          "threshold_met": false,
+          "floors": {
+            "evidence_support": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            },
+            "source_authority": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            },
+            "temporal_validity": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            }
+          }
+        },
+        "score_withheld_because": [],
+        "score_interpretation": "Provisional, uncalibrated prototype index in [0, 1] used for ranking and routing. It is not a probability that the content is correct.",
+        "decision": "human_review",
+        "decision_meaning": "Cannot be routed automatically: required information is unknown or conflicting, or the result needs human judgment.",
+        "reasons": [
+          {
+            "code": "BELOW_THRESHOLD",
+            "route": "human_review",
+            "stage": "scoring",
+            "subject": "score",
+            "message": "Score 0.75 is below the provisional threshold 0.8 and no automatic repair is known."
+          }
+        ]
+      },
+      {
+        "case_id": "w-rule-status-unverified",
+        "gate": "G2",
+        "as_of": "2026-10-06",
+        "policy_version": "g2-prototype-v1",
+        "weights_version": "provisional-v1",
+        "calibration_status": "uncalibrated",
+        "config_digest": "sha256:3fe06c198ebb1577",
+        "input_digest": "sha256:a986a1fff7310d56",
+        "hard_checks": {
+          "no_competitor_promotion": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "competitor_product_claim": false
+            },
+            "detail": "No competitor product claim is promoted."
+          },
+          "material_claim_supported": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "supported": true
+            },
+            "detail": "The material claim is supported by the supplied evidence."
+          },
+          "evidence_not_superseded": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "superseded": false,
+              "current_status": "current"
+            },
+            "detail": "Evidence is not marked superseded."
+          },
+          "no_material_contradiction": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "contradiction": false
+            },
+            "detail": "No material contradiction recorded."
+          },
+          "source_not_competitor": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "source_type": "primary_authority"
+            },
+            "detail": "Evidence does not come from a competitor."
+          }
+        },
+        "freshness": {
+          "status": "current",
+          "passed": true,
+          "content_type": "regulation",
+          "rule": "regulation: no age limit; applicability is decided by current_status and effective_from (publication date is not used)",
+          "as_of": "2026-10-06",
+          "reference_date": "2024-07-01",
+          "reference_date_type": "effective_from",
+          "reference_age_days": 827,
+          "max_age_days": null,
+          "dates": {
+            "published_at": "2024-05-01",
+            "event_date": "2024-05-01",
+            "effective_from": "2024-07-01",
+            "last_verified_at": "2026-06-15"
+          },
+          "applicability": "applicable",
+          "currently_applicable": true,
+          "applicable_from": "2024-07-01",
+          "verification": {
+            "last_verified_at": "2026-06-15",
+            "age_days": 113,
+            "max_age_days": 30,
+            "within_window": false,
+            "window_note": "Demo convention: current status must have been checked within 30 days of as_of to earn temporal validity 1. It mirrors the fixture's 30-day news window and is not a validated threshold."
+          },
+          "issues": [
+            {
+              "code": "STATUS_NOT_RECENTLY_VERIFIED",
+              "field": "last_verified_at"
+            }
+          ],
+          "presentation_constraint": null,
+          "explanation": "current_status is 'current' and the evidence has applied since 2024-07-01. Publication date 2024-05-01 is recorded but not used to judge a rule's validity. Current status was last verified 113 days before as_of, outside the 30-day verification window. Freshness status: current."
+        },
+        "criteria": {
+          "evidence_support": {
+            "score": 1.0,
+            "anchor": "supported=true with no qualification and no contradiction recorded: the claim is directly supported.",
+            "basis": {
+              "supported": true,
+              "qualified_support": false,
+              "contradiction": false
+            },
+            "unknown_reason": null
+          },
+          "source_authority": {
+            "score": 1.0,
+            "anchor": "primary_authority: the body that issued the rule or owns the announced fact.",
+            "basis": {
+              "source_type": "primary_authority"
+            },
+            "unknown_reason": null
+          },
+          "temporal_validity": {
+            "score": 0.5,
+            "anchor": "Timing is valid (event within window, rule in force, or future rule correctly flagged), but current status was not verified within the verification window.",
+            "basis": {
+              "freshness_status": "current",
+              "verified_within_window": false
+            },
+            "unknown_reason": null
+          }
+        },
+        "weights": {
+          "evidence_support": 0.5,
+          "source_authority": 0.3,
+          "temporal_validity": 0.2
+        },
+        "eligible_for_scoring": true,
+        "score": 0.9,
+        "score_breakdown": {
+          "formula": "score = sum(weight_i * criterion_i) over evidence_support, source_authority, temporal_validity",
+          "weights_version": "provisional-v1",
+          "weights_status": "provisional",
+          "weights": {
+            "evidence_support": 0.5,
+            "source_authority": 0.3,
+            "temporal_validity": 0.2
+          },
+          "contributions": {
+            "evidence_support": 0.5,
+            "source_authority": 0.3,
+            "temporal_validity": 0.1
+          },
+          "score": 0.9,
+          "threshold": 0.8,
+          "threshold_status": "provisional",
+          "threshold_met": true,
+          "floors": {
+            "evidence_support": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            },
+            "source_authority": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            },
+            "temporal_validity": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            }
+          }
+        },
+        "score_withheld_because": [],
+        "score_interpretation": "Provisional, uncalibrated prototype index in [0, 1] used for ranking and routing. It is not a probability that the content is correct.",
+        "decision": "pass",
+        "decision_meaning": "Eligible for the next internal stage under the demo policy. Not publication approval and not a calibrated quality judgment.",
+        "reasons": [
+          {
+            "code": "ALL_HARD_CHECKS_PASSED",
+            "route": null,
+            "stage": "hard_check",
+            "subject": null,
+            "message": "All mandatory hard checks passed."
+          },
+          {
+            "code": "FRESHNESS_PASSED",
+            "route": null,
+            "stage": "freshness",
+            "subject": null,
+            "message": "The freshness and current-validity rule for this content type is satisfied."
+          },
+          {
+            "code": "ALL_CRITERIA_KNOWN",
+            "route": null,
+            "stage": "criteria",
+            "subject": null,
+            "message": "All required criteria are known and meet their floors."
+          },
+          {
+            "code": "THRESHOLD_MET",
+            "route": null,
+            "stage": "scoring",
+            "subject": "score",
+            "message": "Score 0.9 meets the provisional, uncalibrated threshold 0.8."
+          },
+          {
+            "code": "STATUS_NOT_RECENTLY_VERIFIED",
+            "route": null,
+            "stage": "freshness",
+            "subject": "last_verified_at",
+            "message": "Current status was not verified within the 30-day verification window (demo convention); temporal validity is scored 0.5 instead of 1."
+          }
+        ]
+      },
+      {
+        "case_id": "w-secondary-news-unverified",
+        "gate": "G2",
+        "as_of": "2026-10-06",
+        "policy_version": "g2-prototype-v1",
+        "weights_version": "provisional-v1",
+        "calibration_status": "uncalibrated",
+        "config_digest": "sha256:3fe06c198ebb1577",
+        "input_digest": "sha256:808c28ea3c099cb0",
+        "hard_checks": {
+          "no_competitor_promotion": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "competitor_product_claim": false
+            },
+            "detail": "No competitor product claim is promoted."
+          },
+          "material_claim_supported": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "supported": true
+            },
+            "detail": "The material claim is supported by the supplied evidence."
+          },
+          "evidence_not_superseded": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "superseded": false,
+              "current_status": "current"
+            },
+            "detail": "Evidence is not marked superseded."
+          },
+          "no_material_contradiction": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "contradiction": false
+            },
+            "detail": "No material contradiction recorded."
+          },
+          "source_not_competitor": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "source_type": "secondary_reporting"
+            },
+            "detail": "Evidence does not come from a competitor."
+          }
+        },
+        "freshness": {
+          "status": "current",
+          "passed": true,
+          "content_type": "news",
+          "rule": "news: event date must be within 30 days of as_of (fixture demo test convention, not a validated freshness threshold)",
+          "as_of": "2026-10-06",
+          "reference_date": "2026-09-25",
+          "reference_date_type": "event_date",
+          "reference_age_days": 11,
+          "max_age_days": 30,
+          "dates": {
+            "published_at": "2026-09-26",
+            "event_date": "2026-09-25",
+            "effective_from": null,
+            "last_verified_at": null
+          },
+          "applicability": "applicable",
+          "currently_applicable": true,
+          "applicable_from": null,
+          "verification": {
+            "last_verified_at": null,
+            "age_days": null,
+            "max_age_days": 30,
+            "within_window": false,
+            "window_note": "Demo convention: current status must have been checked within 30 days of as_of to earn temporal validity 1. It mirrors the fixture's 30-day news window and is not a validated threshold."
+          },
+          "issues": [
+            {
+              "code": "STATUS_NOT_RECENTLY_VERIFIED",
+              "field": "last_verified_at"
+            }
+          ],
+          "presentation_constraint": null,
+          "explanation": "current_status is 'current'; news needs no separate effective date. Event 2026-09-25 is 11 days before as_of, within the 30-day demo window. Current status has no recorded verification (last_verified_at is null). Freshness status: current."
+        },
+        "criteria": {
+          "evidence_support": {
+            "score": 1.0,
+            "anchor": "supported=true with no qualification and no contradiction recorded: the claim is directly supported.",
+            "basis": {
+              "supported": true,
+              "qualified_support": false,
+              "contradiction": false
+            },
+            "unknown_reason": null
+          },
+          "source_authority": {
+            "score": 0.5,
+            "anchor": "secondary_reporting: relays a primary source; useful but indirect.",
+            "basis": {
+              "source_type": "secondary_reporting"
+            },
+            "unknown_reason": null
+          },
+          "temporal_validity": {
+            "score": 0.5,
+            "anchor": "Timing is valid (event within window, rule in force, or future rule correctly flagged), but current status was not verified within the verification window.",
+            "basis": {
+              "freshness_status": "current",
+              "verified_within_window": false
+            },
+            "unknown_reason": null
+          }
+        },
+        "weights": {
+          "evidence_support": 0.5,
+          "source_authority": 0.3,
+          "temporal_validity": 0.2
+        },
+        "eligible_for_scoring": true,
+        "score": 0.75,
+        "score_breakdown": {
+          "formula": "score = sum(weight_i * criterion_i) over evidence_support, source_authority, temporal_validity",
+          "weights_version": "provisional-v1",
+          "weights_status": "provisional",
+          "weights": {
+            "evidence_support": 0.5,
+            "source_authority": 0.3,
+            "temporal_validity": 0.2
+          },
+          "contributions": {
+            "evidence_support": 0.5,
+            "source_authority": 0.15,
+            "temporal_validity": 0.1
+          },
+          "score": 0.75,
+          "threshold": 0.8,
+          "threshold_status": "provisional",
+          "threshold_met": false,
+          "floors": {
+            "evidence_support": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            },
+            "source_authority": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            },
+            "temporal_validity": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            }
+          }
+        },
+        "score_withheld_because": [],
+        "score_interpretation": "Provisional, uncalibrated prototype index in [0, 1] used for ranking and routing. It is not a probability that the content is correct.",
+        "decision": "human_review",
+        "decision_meaning": "Cannot be routed automatically: required information is unknown or conflicting, or the result needs human judgment.",
+        "reasons": [
+          {
+            "code": "BELOW_THRESHOLD",
+            "route": "human_review",
+            "stage": "scoring",
+            "subject": "score",
+            "message": "Score 0.75 is below the provisional threshold 0.8 and no automatic repair is known."
+          },
+          {
+            "code": "STATUS_NOT_RECENTLY_VERIFIED",
+            "route": null,
+            "stage": "freshness",
+            "subject": "last_verified_at",
+            "message": "Current status was not verified within the 30-day verification window (demo convention); temporal validity is scored 0.5 instead of 1."
+          }
+        ]
+      },
+      {
+        "case_id": "w-qualified-secondary-future-rule",
+        "gate": "G2",
+        "as_of": "2026-10-06",
+        "policy_version": "g2-prototype-v1",
+        "weights_version": "provisional-v1",
+        "calibration_status": "uncalibrated",
+        "config_digest": "sha256:3fe06c198ebb1577",
+        "input_digest": "sha256:ebd992fd9e0a2144",
+        "hard_checks": {
+          "no_competitor_promotion": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "competitor_product_claim": false
+            },
+            "detail": "No competitor product claim is promoted."
+          },
+          "material_claim_supported": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "supported": true
+            },
+            "detail": "The material claim is supported by the supplied evidence."
+          },
+          "evidence_not_superseded": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "superseded": false,
+              "current_status": "adopted_not_applicable"
+            },
+            "detail": "Evidence is not marked superseded."
+          },
+          "no_material_contradiction": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "contradiction": false
+            },
+            "detail": "No material contradiction recorded."
+          },
+          "source_not_competitor": {
+            "status": "pass",
+            "route": null,
+            "inputs": {
+              "source_type": "secondary_reporting"
+            },
+            "detail": "Evidence does not come from a competitor."
+          }
+        },
+        "freshness": {
+          "status": "not_yet_applicable",
+          "passed": true,
+          "content_type": "regulation",
+          "rule": "regulation: no age limit; applicability is decided by current_status and effective_from (publication date is not used)",
+          "as_of": "2026-10-06",
+          "reference_date": "2027-03-01",
+          "reference_date_type": "effective_from",
+          "reference_age_days": null,
+          "max_age_days": null,
+          "dates": {
+            "published_at": "2026-09-30",
+            "event_date": "2026-09-29",
+            "effective_from": "2027-03-01",
+            "last_verified_at": "2026-10-04"
+          },
+          "applicability": "not_yet_applicable",
+          "currently_applicable": false,
+          "applicable_from": "2027-03-01",
+          "verification": {
+            "last_verified_at": "2026-10-04",
+            "age_days": 2,
+            "max_age_days": 30,
+            "within_window": true,
+            "window_note": "Demo convention: current status must have been checked within 30 days of as_of to earn temporal validity 1. It mirrors the fixture's 30-day news window and is not a validated threshold."
+          },
+          "issues": [
+            {
+              "code": "NOT_YET_APPLICABLE",
+              "field": "effective_from"
+            }
+          ],
+          "presentation_constraint": "Present as adopted but not applicable until 2027-03-01; do not describe it as currently in force.",
+          "explanation": "The rule is adopted and applies from 2027-03-01, 146 days after as_of; it is not currently applicable. Publication date 2026-09-30 is recorded but not used to judge a rule's validity. Current status was verified 2 days before as_of. Freshness status: not_yet_applicable."
+        },
+        "criteria": {
+          "evidence_support": {
+            "score": 0.5,
+            "anchor": "supported=true, but the support is qualified (qualified_support=true) or other supplied evidence contradicts it (contradiction=true).",
+            "basis": {
+              "supported": true,
+              "qualified_support": true,
+              "contradiction": false
+            },
+            "unknown_reason": null
+          },
+          "source_authority": {
+            "score": 0.5,
+            "anchor": "secondary_reporting: relays a primary source; useful but indirect.",
+            "basis": {
+              "source_type": "secondary_reporting"
+            },
+            "unknown_reason": null
+          },
+          "temporal_validity": {
+            "score": 1.0,
+            "anchor": "Timing is valid and current status was verified within the verification window.",
+            "basis": {
+              "freshness_status": "not_yet_applicable",
+              "verified_within_window": true
+            },
+            "unknown_reason": null
+          }
+        },
+        "weights": {
+          "evidence_support": 0.5,
+          "source_authority": 0.3,
+          "temporal_validity": 0.2
+        },
+        "eligible_for_scoring": true,
+        "score": 0.6,
+        "score_breakdown": {
+          "formula": "score = sum(weight_i * criterion_i) over evidence_support, source_authority, temporal_validity",
+          "weights_version": "provisional-v1",
+          "weights_status": "provisional",
+          "weights": {
+            "evidence_support": 0.5,
+            "source_authority": 0.3,
+            "temporal_validity": 0.2
+          },
+          "contributions": {
+            "evidence_support": 0.25,
+            "source_authority": 0.15,
+            "temporal_validity": 0.2
+          },
+          "score": 0.6,
+          "threshold": 0.8,
+          "threshold_status": "provisional",
+          "threshold_met": false,
+          "floors": {
+            "evidence_support": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            },
+            "source_authority": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            },
+            "temporal_validity": {
+              "minimum": 0.5,
+              "status": "provisional",
+              "met": true
+            }
+          }
+        },
+        "score_withheld_because": [],
+        "score_interpretation": "Provisional, uncalibrated prototype index in [0, 1] used for ranking and routing. It is not a probability that the content is correct.",
+        "decision": "human_review",
+        "decision_meaning": "Cannot be routed automatically: required information is unknown or conflicting, or the result needs human judgment.",
+        "reasons": [
+          {
+            "code": "BELOW_THRESHOLD",
+            "route": "human_review",
+            "stage": "scoring",
+            "subject": "score",
+            "message": "Score 0.6 is below the provisional threshold 0.8 and no automatic repair is known."
+          },
+          {
+            "code": "NOT_YET_APPLICABLE",
+            "route": null,
+            "stage": "freshness",
+            "subject": "effective_from",
+            "message": "Present as adopted but not applicable until 2027-03-01; do not describe it as currently in force."
+          }
+        ]
+      }
+    ]
+  }
+]

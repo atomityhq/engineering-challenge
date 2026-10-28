@@ -1,0 +1,496 @@
+{
+  "policy_version": "g2-prototype-v1",
+  "calibration_status": "uncalibrated",
+  "baseline": "provisional-v1",
+  "threshold": 0.8,
+  "configurations": [
+    {
+      "version": "provisional-v1",
+      "status": "provisional",
+      "weights": {
+        "evidence_support": 0.5,
+        "source_authority": 0.3,
+        "temporal_validity": 0.2
+      }
+    },
+    {
+      "version": "equal-v1",
+      "status": "comparison-only",
+      "weights": {
+        "evidence_support": 0.3333333333333333,
+        "source_authority": 0.3333333333333333,
+        "temporal_validity": 0.3333333333333333
+      }
+    },
+    {
+      "version": "freshness-weighted-v1",
+      "status": "comparison-only",
+      "weights": {
+        "evidence_support": 0.35,
+        "source_authority": 0.2,
+        "temporal_validity": 0.45
+      }
+    }
+  ],
+  "rows": [
+    {
+      "case_id": "current-news",
+      "fixture": "fixtures/g2-cases.json",
+      "criteria": {
+        "evidence_support": 1.0,
+        "source_authority": 1.0,
+        "temporal_validity": 1.0
+      },
+      "outcomes": {
+        "provisional-v1": {
+          "score": 1.0,
+          "rank": 1,
+          "decision": "pass"
+        },
+        "equal-v1": {
+          "score": 1.0,
+          "rank": 1,
+          "decision": "pass"
+        },
+        "freshness-weighted-v1": {
+          "score": 1.0,
+          "rank": 1,
+          "decision": "pass"
+        }
+      },
+      "rank_changed": false,
+      "decision_changed": false
+    },
+    {
+      "case_id": "future-rule",
+      "fixture": "fixtures/g2-cases.json",
+      "criteria": {
+        "evidence_support": 1.0,
+        "source_authority": 1.0,
+        "temporal_validity": 1.0
+      },
+      "outcomes": {
+        "provisional-v1": {
+          "score": 1.0,
+          "rank": 1,
+          "decision": "pass"
+        },
+        "equal-v1": {
+          "score": 1.0,
+          "rank": 1,
+          "decision": "pass"
+        },
+        "freshness-weighted-v1": {
+          "score": 1.0,
+          "rank": 1,
+          "decision": "pass"
+        }
+      },
+      "rank_changed": false,
+      "decision_changed": false
+    },
+    {
+      "case_id": "old-law-current",
+      "fixture": "fixtures/g2-cases.json",
+      "criteria": {
+        "evidence_support": 1.0,
+        "source_authority": 1.0,
+        "temporal_validity": 1.0
+      },
+      "outcomes": {
+        "provisional-v1": {
+          "score": 1.0,
+          "rank": 1,
+          "decision": "pass"
+        },
+        "equal-v1": {
+          "score": 1.0,
+          "rank": 1,
+          "decision": "pass"
+        },
+        "freshness-weighted-v1": {
+          "score": 1.0,
+          "rank": 1,
+          "decision": "pass"
+        }
+      },
+      "rank_changed": false,
+      "decision_changed": false
+    },
+    {
+      "case_id": "w-primary-news-verified",
+      "fixture": "src/task-6_fedor-lebedev/fixtures/g2-weighting-cases.json",
+      "criteria": {
+        "evidence_support": 1.0,
+        "source_authority": 1.0,
+        "temporal_validity": 1.0
+      },
+      "outcomes": {
+        "provisional-v1": {
+          "score": 1.0,
+          "rank": 1,
+          "decision": "pass"
+        },
+        "equal-v1": {
+          "score": 1.0,
+          "rank": 1,
+          "decision": "pass"
+        },
+        "freshness-weighted-v1": {
+          "score": 1.0,
+          "rank": 1,
+          "decision": "pass"
+        }
+      },
+      "rank_changed": false,
+      "decision_changed": false
+    },
+    {
+      "case_id": "w-rule-status-unverified",
+      "fixture": "src/task-6_fedor-lebedev/fixtures/g2-weighting-cases.json",
+      "criteria": {
+        "evidence_support": 1.0,
+        "source_authority": 1.0,
+        "temporal_validity": 0.5
+      },
+      "outcomes": {
+        "provisional-v1": {
+          "score": 0.9,
+          "rank": 5,
+          "decision": "pass"
+        },
+        "equal-v1": {
+          "score": 0.833333,
+          "rank": 5,
+          "decision": "pass"
+        },
+        "freshness-weighted-v1": {
+          "score": 0.775,
+          "rank": 7,
+          "decision": "human_review"
+        }
+      },
+      "rank_changed": true,
+      "decision_changed": true
+    },
+    {
+      "case_id": "w-secondary-news",
+      "fixture": "src/task-6_fedor-lebedev/fixtures/g2-weighting-cases.json",
+      "criteria": {
+        "evidence_support": 1.0,
+        "source_authority": 0.5,
+        "temporal_validity": 1.0
+      },
+      "outcomes": {
+        "provisional-v1": {
+          "score": 0.85,
+          "rank": 6,
+          "decision": "pass"
+        },
+        "equal-v1": {
+          "score": 0.833333,
+          "rank": 5,
+          "decision": "pass"
+        },
+        "freshness-weighted-v1": {
+          "score": 0.9,
+          "rank": 5,
+          "decision": "pass"
+        }
+      },
+      "rank_changed": true,
+      "decision_changed": false
+    },
+    {
+      "case_id": "w-qualified-rule",
+      "fixture": "src/task-6_fedor-lebedev/fixtures/g2-weighting-cases.json",
+      "criteria": {
+        "evidence_support": 0.5,
+        "source_authority": 1.0,
+        "temporal_validity": 1.0
+      },
+      "outcomes": {
+        "provisional-v1": {
+          "score": 0.75,
+          "rank": 7,
+          "decision": "human_review"
+        },
+        "equal-v1": {
+          "score": 0.833333,
+          "rank": 5,
+          "decision": "pass"
+        },
+        "freshness-weighted-v1": {
+          "score": 0.825,
+          "rank": 6,
+          "decision": "pass"
+        }
+      },
+      "rank_changed": true,
+      "decision_changed": true
+    },
+    {
+      "case_id": "w-secondary-news-unverified",
+      "fixture": "src/task-6_fedor-lebedev/fixtures/g2-weighting-cases.json",
+      "criteria": {
+        "evidence_support": 1.0,
+        "source_authority": 0.5,
+        "temporal_validity": 0.5
+      },
+      "outcomes": {
+        "provisional-v1": {
+          "score": 0.75,
+          "rank": 7,
+          "decision": "human_review"
+        },
+        "equal-v1": {
+          "score": 0.666667,
+          "rank": 8,
+          "decision": "human_review"
+        },
+        "freshness-weighted-v1": {
+          "score": 0.675,
+          "rank": 9,
+          "decision": "human_review"
+        }
+      },
+      "rank_changed": true,
+      "decision_changed": false
+    },
+    {
+      "case_id": "w-qualified-secondary-future-rule",
+      "fixture": "src/task-6_fedor-lebedev/fixtures/g2-weighting-cases.json",
+      "criteria": {
+        "evidence_support": 0.5,
+        "source_authority": 0.5,
+        "temporal_validity": 1.0
+      },
+      "outcomes": {
+        "provisional-v1": {
+          "score": 0.6,
+          "rank": 9,
+          "decision": "human_review"
+        },
+        "equal-v1": {
+          "score": 0.666667,
+          "rank": 8,
+          "decision": "human_review"
+        },
+        "freshness-weighted-v1": {
+          "score": 0.725,
+          "rank": 8,
+          "decision": "human_review"
+        }
+      },
+      "rank_changed": true,
+      "decision_changed": false
+    }
+  ],
+  "rankings": {
+    "provisional-v1": [
+      [
+        "current-news",
+        "future-rule",
+        "old-law-current",
+        "w-primary-news-verified"
+      ],
+      [
+        "w-rule-status-unverified"
+      ],
+      [
+        "w-secondary-news"
+      ],
+      [
+        "w-qualified-rule",
+        "w-secondary-news-unverified"
+      ],
+      [
+        "w-qualified-secondary-future-rule"
+      ]
+    ],
+    "equal-v1": [
+      [
+        "current-news",
+        "future-rule",
+        "old-law-current",
+        "w-primary-news-verified"
+      ],
+      [
+        "w-qualified-rule",
+        "w-rule-status-unverified",
+        "w-secondary-news"
+      ],
+      [
+        "w-qualified-secondary-future-rule",
+        "w-secondary-news-unverified"
+      ]
+    ],
+    "freshness-weighted-v1": [
+      [
+        "current-news",
+        "future-rule",
+        "old-law-current",
+        "w-primary-news-verified"
+      ],
+      [
+        "w-secondary-news"
+      ],
+      [
+        "w-qualified-rule"
+      ],
+      [
+        "w-rule-status-unverified"
+      ],
+      [
+        "w-qualified-secondary-future-rule"
+      ],
+      [
+        "w-secondary-news-unverified"
+      ]
+    ]
+  },
+  "rank_changes": [
+    "w-rule-status-unverified",
+    "w-secondary-news",
+    "w-qualified-rule",
+    "w-secondary-news-unverified",
+    "w-qualified-secondary-future-rule"
+  ],
+  "order_changes": [
+    {
+      "configuration": "equal-v1",
+      "pair": [
+        "w-qualified-rule",
+        "w-rule-status-unverified"
+      ],
+      "baseline": "w-rule-status-unverified > w-qualified-rule",
+      "alternative": "w-qualified-rule = w-rule-status-unverified"
+    },
+    {
+      "configuration": "equal-v1",
+      "pair": [
+        "w-qualified-rule",
+        "w-secondary-news"
+      ],
+      "baseline": "w-secondary-news > w-qualified-rule",
+      "alternative": "w-qualified-rule = w-secondary-news"
+    },
+    {
+      "configuration": "equal-v1",
+      "pair": [
+        "w-qualified-rule",
+        "w-secondary-news-unverified"
+      ],
+      "baseline": "w-qualified-rule = w-secondary-news-unverified",
+      "alternative": "w-qualified-rule > w-secondary-news-unverified"
+    },
+    {
+      "configuration": "equal-v1",
+      "pair": [
+        "w-qualified-secondary-future-rule",
+        "w-secondary-news-unverified"
+      ],
+      "baseline": "w-secondary-news-unverified > w-qualified-secondary-future-rule",
+      "alternative": "w-qualified-secondary-future-rule = w-secondary-news-unverified"
+    },
+    {
+      "configuration": "equal-v1",
+      "pair": [
+        "w-rule-status-unverified",
+        "w-secondary-news"
+      ],
+      "baseline": "w-rule-status-unverified > w-secondary-news",
+      "alternative": "w-rule-status-unverified = w-secondary-news"
+    },
+    {
+      "configuration": "freshness-weighted-v1",
+      "pair": [
+        "w-qualified-rule",
+        "w-rule-status-unverified"
+      ],
+      "baseline": "w-rule-status-unverified > w-qualified-rule",
+      "alternative": "w-qualified-rule > w-rule-status-unverified"
+    },
+    {
+      "configuration": "freshness-weighted-v1",
+      "pair": [
+        "w-qualified-rule",
+        "w-secondary-news-unverified"
+      ],
+      "baseline": "w-qualified-rule = w-secondary-news-unverified",
+      "alternative": "w-qualified-rule > w-secondary-news-unverified"
+    },
+    {
+      "configuration": "freshness-weighted-v1",
+      "pair": [
+        "w-qualified-secondary-future-rule",
+        "w-secondary-news-unverified"
+      ],
+      "baseline": "w-secondary-news-unverified > w-qualified-secondary-future-rule",
+      "alternative": "w-qualified-secondary-future-rule > w-secondary-news-unverified"
+    },
+    {
+      "configuration": "freshness-weighted-v1",
+      "pair": [
+        "w-rule-status-unverified",
+        "w-secondary-news"
+      ],
+      "baseline": "w-rule-status-unverified > w-secondary-news",
+      "alternative": "w-secondary-news > w-rule-status-unverified"
+    }
+  ],
+  "decision_changes": [
+    "w-rule-status-unverified",
+    "w-qualified-rule"
+  ],
+  "unchanged": [
+    "current-news",
+    "future-rule",
+    "old-law-current",
+    "w-primary-news-verified"
+  ],
+  "excluded": [
+    {
+      "case_id": "recent-article-old-event",
+      "fixture": "fixtures/g2-cases.json",
+      "decision": "revise",
+      "reason": "freshness status is 'stale'"
+    },
+    {
+      "case_id": "unknown-date",
+      "fixture": "fixtures/g2-cases.json",
+      "decision": "human_review",
+      "reason": "freshness status is 'unknown'; unknown criteria: temporal_validity"
+    },
+    {
+      "case_id": "unsupported-claim",
+      "fixture": "fixtures/g2-cases.json",
+      "decision": "revise",
+      "reason": "hard checks not passed: material_claim_supported"
+    },
+    {
+      "case_id": "superseded-source",
+      "fixture": "fixtures/g2-cases.json",
+      "decision": "revise",
+      "reason": "hard checks not passed: evidence_not_superseded; freshness status is 'superseded'"
+    },
+    {
+      "case_id": "competitor-promotion",
+      "fixture": "fixtures/g2-cases.json",
+      "decision": "reject",
+      "reason": "hard checks not passed: no_competitor_promotion, source_not_competitor"
+    },
+    {
+      "case_id": "conflicting-evidence",
+      "fixture": "fixtures/g2-cases.json",
+      "decision": "human_review",
+      "reason": "hard checks not passed: no_material_contradiction"
+    }
+  ],
+  "notes": [
+    "Cases whose criteria are all equal score the same under every configuration, because weights sum to 1; weights only matter where criteria differ: current-news, future-rule, old-law-current, w-primary-news-verified.",
+    "evidence_support takes only [0.5, 1.0] among eligible cases: unsupported (0) and unknown support are routed by hard checks before scoring, so the score never sees them.",
+    "The threshold (0.8) and floors are held constant. They were chosen with provisional-v1 in mind, so part of any routing change under another configuration reflects a threshold that was not re-tuned for it.",
+    "Scores are provisional, uncalibrated prototype indices, not probabilities. Rank and routing changes show sensitivity to a preference choice; they do not show which configuration is correct."
+  ]
+}

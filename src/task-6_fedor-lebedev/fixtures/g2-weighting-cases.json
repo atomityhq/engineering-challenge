@@ -1,0 +1,124 @@
+{
+  "schema_version": "1.0",
+  "synthetic": true,
+  "as_of": "2026-10-06",
+  "instructions": "Synthetic cases written for this submission. All statements and metadata are fictional. Every case passes the hard checks and the freshness gate and has all criteria known, so it is eligible for scoring; together they vary the criterion profile for the weight-sensitivity comparison. expected_decision is under provisional-v1 and is test-only.",
+  "demo_policy": {
+    "news_max_event_age_days": 30,
+    "regulation_rule": "Evaluate current_status and effective_from. Do not reject current law solely for an old publication date.",
+    "unknown_required_temporal_metadata": "human_review",
+    "weights_and_threshold": "Defined in config/weights.json and config/g2_policy.json; provisional and uncalibrated."
+  },
+  "cases": [
+    {
+      "id": "w-primary-news-verified",
+      "statement": "Fictional Provider North announced that its test-region-2 now offers confidential VMs.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "news",
+        "published_at": "2026-09-29",
+        "event_date": "2026-09-28",
+        "effective_from": null,
+        "last_verified_at": "2026-10-05",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "pass"
+    },
+    {
+      "id": "w-secondary-news",
+      "statement": "A fictional trade outlet reports that Fictional Provider East cut storage egress prices.",
+      "metadata": {
+        "source_type": "secondary_reporting",
+        "content_type": "news",
+        "published_at": "2026-09-22",
+        "event_date": "2026-09-20",
+        "effective_from": null,
+        "last_verified_at": "2026-10-02",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "pass"
+    },
+    {
+      "id": "w-qualified-rule",
+      "statement": "Fictional Regulation B requires data residency for all workloads; the evidence limits it to regulated workloads.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "regulation",
+        "published_at": "2025-02-10",
+        "event_date": "2025-02-10",
+        "effective_from": "2025-03-01",
+        "last_verified_at": "2026-10-01",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false,
+        "qualified_support": true
+      },
+      "expected_decision": "human_review"
+    },
+    {
+      "id": "w-rule-status-unverified",
+      "statement": "Fictional Regulation C sets a 72-hour incident notification window.",
+      "metadata": {
+        "source_type": "primary_authority",
+        "content_type": "regulation",
+        "published_at": "2024-05-01",
+        "event_date": "2024-05-01",
+        "effective_from": "2024-07-01",
+        "last_verified_at": "2026-06-15",
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "pass"
+    },
+    {
+      "id": "w-secondary-news-unverified",
+      "statement": "A fictional newsletter reports that Fictional Provider West retired a GPU instance family.",
+      "metadata": {
+        "source_type": "secondary_reporting",
+        "content_type": "news",
+        "published_at": "2026-09-26",
+        "event_date": "2026-09-25",
+        "effective_from": null,
+        "last_verified_at": null,
+        "current_status": "current",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false
+      },
+      "expected_decision": "human_review"
+    },
+    {
+      "id": "w-qualified-secondary-future-rule",
+      "statement": "A fictional law-firm briefing says Fictional Regulation D will apply from 2027-03-01, with exemptions it summarises loosely.",
+      "metadata": {
+        "source_type": "secondary_reporting",
+        "content_type": "regulation",
+        "published_at": "2026-09-30",
+        "event_date": "2026-09-29",
+        "effective_from": "2027-03-01",
+        "last_verified_at": "2026-10-04",
+        "current_status": "adopted_not_applicable",
+        "supported": true,
+        "superseded": false,
+        "contradiction": false,
+        "competitor_product_claim": false,
+        "qualified_support": true
+      },
+      "expected_decision": "human_review"
+    }
+  ]
+}

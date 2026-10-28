@@ -1,0 +1,50 @@
+{
+  "default": "provisional-v1",
+  "configurations": [
+    {
+      "version": "provisional-v1",
+      "status": "provisional",
+      "description": "Chosen configuration: evidence support first, then source authority, then the temporal signal left over after the freshness gate. Uncalibrated.",
+      "weights": {
+        "evidence_support": 0.5,
+        "source_authority": 0.3,
+        "temporal_validity": 0.2
+      },
+      "rationale": {
+        "evidence_support": "Highest weight. G2 exists to stop claims that the evidence does not carry. Among eligible cases this separates direct from qualified support, which is the defect most likely to mislead a reader.",
+        "source_authority": "Second. A support assertion is only as reliable as the source behind it, but authority is a proxy for reliability rather than support itself, so it should not outweigh support.",
+        "temporal_validity": "Lowest. The hard timing failures (stale, superseded, unknown, conflicting, future-dated) are routed by the freshness gate before scoring. The score only sees the remaining signal, whether current status was recently verified, which carries less information."
+      }
+    },
+    {
+      "version": "equal-v1",
+      "status": "comparison-only",
+      "description": "Equal weights: the no-preference baseline for the sensitivity comparison.",
+      "weights": {
+        "evidence_support": 0.3333333333333333,
+        "source_authority": 0.3333333333333333,
+        "temporal_validity": 0.3333333333333333
+      },
+      "rationale": {
+        "evidence_support": "No preference expressed; tests whether the chosen preference changes outcomes.",
+        "source_authority": "No preference expressed; tests whether the chosen preference changes outcomes.",
+        "temporal_validity": "No preference expressed; tests whether the chosen preference changes outcomes."
+      }
+    },
+    {
+      "version": "freshness-weighted-v1",
+      "status": "comparison-only",
+      "description": "Plausible alternative for fast-moving coverage, where an unverified current status is treated as the dominant risk.",
+      "weights": {
+        "evidence_support": 0.35,
+        "source_authority": 0.2,
+        "temporal_validity": 0.45
+      },
+      "rationale": {
+        "evidence_support": "Still important, but treated as secondary to whether the position is still current.",
+        "source_authority": "Lowest: assumes upstream source policy (Task 1) already filtered weak sources.",
+        "temporal_validity": "Highest: in fast-moving availability and pricing news, a status nobody re-checked recently is the most common way content goes wrong."
+      }
+    }
+  ]
+}

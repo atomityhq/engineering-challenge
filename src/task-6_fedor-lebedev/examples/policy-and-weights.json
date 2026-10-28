@@ -1,0 +1,138 @@
+{
+  "policy": {
+    "gate": "G2",
+    "policy_version": "g2-prototype-v1",
+    "calibration_status": "uncalibrated",
+    "calibration_evidence": null,
+    "require_calibration_for_pass": false,
+    "threshold": {
+      "value": 0.8,
+      "status": "provisional",
+      "rationale": "Chosen by reasoning about anchor combinations under provisional-v1, not fitted to data. 0.8 requires direct (unqualified) evidence support and allows at most one of source authority or temporal validity to sit at its 0.5 anchor. Qualified support (at most 0.75) or two qualified criteria (0.75) go to human_review."
+    },
+    "criterion_floors": {
+      "evidence_support": {
+        "minimum": 0.5,
+        "status": "provisional",
+        "route": "revise",
+        "repair_hint": "Add evidence that directly supports the material claim."
+      },
+      "source_authority": {
+        "minimum": 0.5,
+        "status": "provisional",
+        "route": "revise",
+        "repair_hint": "Replace the source with the primary authority, or reputable reporting that cites it."
+      },
+      "temporal_validity": {
+        "minimum": 0.5,
+        "status": "provisional",
+        "route": "revise",
+        "repair_hint": "Replace the evidence with evidence that is valid at as_of."
+      }
+    },
+    "source_authority": {
+      "primary_authority": {
+        "score": 1.0,
+        "anchor": "primary_authority: the body that issued the rule or owns the announced fact."
+      },
+      "secondary_reporting": {
+        "score": 0.5,
+        "anchor": "secondary_reporting: relays a primary source; useful but indirect."
+      },
+      "community": {
+        "score": 0.0,
+        "anchor": "community: user-generated source with no meaningful authority for the claim."
+      },
+      "competitor": {
+        "score": 0.0,
+        "anchor": "competitor: a self-interested party with no independent authority for the claim."
+      },
+      "unknown": {
+        "score": null,
+        "anchor": "Source type unknown; authority cannot be assessed and is not defaulted."
+      }
+    },
+    "verification_max_age_days": 30,
+    "verification_window_note": "Demo convention: current status must have been checked within 30 days of as_of to earn temporal validity 1. It mirrors the fixture's 30-day news window and is not a validated threshold.",
+    "score_decimals": 6
+  },
+  "weights": {
+    "default": "provisional-v1",
+    "configurations": [
+      {
+        "version": "provisional-v1",
+        "status": "provisional",
+        "description": "Chosen configuration: evidence support first, then source authority, then the temporal signal left over after the freshness gate. Uncalibrated.",
+        "weights": {
+          "evidence_support": 0.5,
+          "source_authority": 0.3,
+          "temporal_validity": 0.2
+        },
+        "rationale": {
+          "evidence_support": "Highest weight. G2 exists to stop claims that the evidence does not carry. Among eligible cases this separates direct from qualified support, which is the defect most likely to mislead a reader.",
+          "source_authority": "Second. A support assertion is only as reliable as the source behind it, but authority is a proxy for reliability rather than support itself, so it should not outweigh support.",
+          "temporal_validity": "Lowest. The hard timing failures (stale, superseded, unknown, conflicting, future-dated) are routed by the freshness gate before scoring. The score only sees the remaining signal, whether current status was recently verified, which carries less information."
+        }
+      },
+      {
+        "version": "equal-v1",
+        "status": "comparison-only",
+        "description": "Equal weights: the no-preference baseline for the sensitivity comparison.",
+        "weights": {
+          "evidence_support": 0.3333333333333333,
+          "source_authority": 0.3333333333333333,
+          "temporal_validity": 0.3333333333333333
+        },
+        "rationale": {
+          "evidence_support": "No preference expressed; tests whether the chosen preference changes outcomes.",
+          "source_authority": "No preference expressed; tests whether the chosen preference changes outcomes.",
+          "temporal_validity": "No preference expressed; tests whether the chosen preference changes outcomes."
+        }
+      },
+      {
+        "version": "freshness-weighted-v1",
+        "status": "comparison-only",
+        "description": "Plausible alternative for fast-moving coverage, where an unverified current status is treated as the dominant risk.",
+        "weights": {
+          "evidence_support": 0.35,
+          "source_authority": 0.2,
+          "temporal_validity": 0.45
+        },
+        "rationale": {
+          "evidence_support": "Still important, but treated as secondary to whether the position is still current.",
+          "source_authority": "Lowest: assumes upstream source policy (Task 1) already filtered weak sources.",
+          "temporal_validity": "Highest: in fast-moving availability and pricing news, a status nobody re-checked recently is the most common way content goes wrong."
+        }
+      }
+    ]
+  },
+  "criteria": {
+    "evidence_support": {
+      "question": "Does the supplied evidence support the material claim?",
+      "anchors": {
+        "0": "supported=false: the material claim is unsupported by the supplied evidence.",
+        "0.5": "supported=true, but the support is qualified (qualified_support=true) or other supplied evidence contradicts it (contradiction=true).",
+        "1": "supported=true with no qualification and no contradiction recorded: the claim is directly supported.",
+        "null": "supported=null: upstream validation did not determine support."
+      }
+    },
+    "source_authority": {
+      "question": "How authoritative is the supplied source for the claim being evaluated?",
+      "anchors": {
+        "0": "community or competitor source: no independent authority for the claim.",
+        "0.5": "secondary_reporting: relays a primary source; useful but indirect.",
+        "1": "primary_authority: the body that issued the rule or owns the announced fact.",
+        "null": "source_type=unknown: authority cannot be assessed."
+      }
+    },
+    "temporal_validity": {
+      "question": "Is the evidence temporally valid for the claim at as_of?",
+      "anchors": {
+        "0": "Evidence is superseded, or the news event is outside the demo freshness window.",
+        "0.5": "Timing is valid (event within window, rule in force, or future rule correctly flagged), but current status was not verified within the verification window.",
+        "1": "Timing is valid and current status was verified within the verification window.",
+        "null": "Required temporal metadata is unknown or conflicting, or the event is future-dated."
+      }
+    }
+  }
+}

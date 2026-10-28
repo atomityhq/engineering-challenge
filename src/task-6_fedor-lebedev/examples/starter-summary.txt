@@ -1,0 +1,16 @@
+G2 gate | policy g2-prototype-v1 (uncalibrated) | weights provisional-v1 (provisional) | threshold 0.8 (provisional)
+fixture fixtures/g2-cases.json | as_of 2026-10-06 (from the fixture, not the system clock) | news window 30 days (demo convention)
+
+case                                   decision       score    ES   SA   TV  freshness           expected      ok  routing reasons
+----------------------------------------------------------------------------------------------------------------------------------
+current-news                           pass          1.0000     1    1    1  current             pass          yes -
+old-law-current                        pass          1.0000     1    1    1  current             pass          yes -
+recent-article-old-event               revise           -       1    1    0  stale               revise        yes STALE_EVENT
+unknown-date                           human_review     -       1    1 null  unknown             human_review  yes UNKNOWN_EVENT_DATE, UNKNOWN_CRITERION
+unsupported-claim                      revise           -       0    1    1  current             revise        yes UNSUPPORTED_MATERIAL_CLAIM
+superseded-source                      revise           -       1    1    0  superseded          revise        yes SUPERSEDED_EVIDENCE
+competitor-promotion                   reject           -       1    0    1  current             reject        yes COMPETITOR_PRODUCT_PROMOTION, COMPETITOR_SOURCE_NEEDS_JUDGMENT
+conflicting-evidence                   human_review     -     0.5    1    1  current             human_review  yes CONFLICTING_EVIDENCE
+future-rule                            pass          1.0000     1    1    1  not_yet_applicable  pass          yes -
+
+9/9 decisions match expected_decision (compared after evaluation; the evaluator never sees it).
