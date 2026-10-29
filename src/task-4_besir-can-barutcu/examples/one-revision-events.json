@@ -1,0 +1,44 @@
+[
+  {
+    "event": "evaluation_completed",
+    "decision": "revise",
+    "reason": "The 70 percent saving is not supported by evidence.",
+    "revision_count": 0,
+    "at": "2026-10-29T18:20:09+00:00"
+  },
+  {
+    "event": "revision_completed",
+    "revision_count": 1,
+    "at": "2026-10-29T18:20:09+00:00"
+  },
+  {
+    "event": "evaluation_completed",
+    "decision": "human_review",
+    "reason": "The revised content is ready for review.",
+    "revision_count": 1,
+    "at": "2026-10-29T18:20:09+00:00"
+  },
+  {
+    "event": "human_review_required",
+    "revision_count": 1,
+    "at": "2026-10-29T18:20:09+00:00"
+  },
+  {
+    "event": "checkpoint_saved",
+    "stage": "human_review",
+    "at": "2026-10-29T18:20:09+00:00"
+  },
+  {
+    "event": "checkpoint_loaded",
+    "stage": "human_review",
+    "at": "2026-10-29T18:20:11+00:00"
+  },
+  {
+    "event": "human_approved",
+    "at": "2026-10-29T18:20:11+00:00"
+  },
+  {
+    "event": "workflow_completed",
+    "at": "2026-10-29T18:20:11+00:00"
+  }
+]

@@ -1,0 +1,61 @@
+# Real output, recorded 2026-10-29 18:20 UTC. Each command ran as its own Python process, sharing one SQLite file.
+# Every command also had --db <temporary file>, left out here for readability.
+# The [exit code N] line after each command was added to show its exit code.
+
+$ python -m workflow run content-001 --scenario one-revision --run-id run-001
+Run: run-001  (content: content-001, scenario: one-revision)
+
+Evaluation completed
+Decision: revise (The 70 percent saving is not supported by evidence.)
+
+Revision attempt: 1
+
+Evaluation completed
+Decision: human_review (The revised content is ready for review.)
+
+Human review required
+
+Checkpoint saved
+
+Workflow paused for human review.
+Title: Spot instances and cloud costs
+Body:  Moving suitable workloads to spot instances can lower cloud costs, but the saving depends on the workload.
+
+To approve, run:  python -m workflow approve run-001
+[exit code 0]
+
+# --- the first process has ended; everything below runs in new processes ---
+
+$ python -m workflow status run-001
+Run:            run-001
+Content:        content-001
+Scenario:       one-revision
+Status:         WAITING_FOR_REVIEW
+Revisions:      1 of 2
+Last decision:  human_review (The revised content is ready for review.)
+Next step:      human_review
+
+Waiting for review. Approve with:  python -m workflow approve run-001
+[exit code 0]
+
+$ python -m workflow approve run-001
+Loaded checkpoint
+Current stage: human_review
+Approved.
+Workflow completed.
+[exit code 0]
+
+$ python -m workflow approve run-001
+Run 'run-001' is already completed. Nothing changed.
+[exit code 0]
+
+$ python -m workflow status run-001
+Run:            run-001
+Content:        content-001
+Scenario:       one-revision
+Status:         COMPLETED
+Revisions:      1 of 2
+Last decision:  human_review (The revised content is ready for review.)
+Next step:      none (finished)
+[exit code 0]
+

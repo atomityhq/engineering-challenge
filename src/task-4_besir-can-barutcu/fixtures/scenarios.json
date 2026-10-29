@@ -1,0 +1,35 @@
+{
+  "schema_version": "1.0",
+  "synthetic": true,
+  "scenarios": [
+    {
+      "id": "normal-pass",
+      "responses": [
+        {"decision": "human_review", "reason": "Content is ready for review."}
+      ],
+      "revised_content": []
+    },
+    {
+      "id": "one-revision",
+      "responses": [
+        {"decision": "revise", "reason": "The 70 percent saving is not supported by evidence."},
+        {"decision": "human_review", "reason": "The revised content is ready for review."}
+      ],
+      "revised_content": [
+        "Moving suitable workloads to spot instances can lower cloud costs, but the saving depends on the workload."
+      ]
+    },
+    {
+      "id": "revision-limit",
+      "responses": [
+        {"decision": "revise", "reason": "The 70 percent saving is not supported by evidence."},
+        {"decision": "revise", "reason": "The claim is still too general."},
+        {"decision": "revise", "reason": "The issue remains unresolved."}
+      ],
+      "revised_content": [
+        "Moving workloads to spot instances usually cuts cloud costs a lot.",
+        "Spot instances can cut cloud costs for many companies."
+      ]
+    }
+  ]
+}

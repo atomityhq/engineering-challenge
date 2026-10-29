@@ -1,0 +1,4 @@
+langgraph>=1.2,<2
+langgraph-checkpoint-sqlite>=3.1,<4
+pydantic>=2.7,<3
+pytest>=8.0,<10
