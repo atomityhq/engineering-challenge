@@ -1,0 +1,9 @@
+{
+    "workflow_id": "workflow-demo-002",
+    "content": {
+        "content_id": "content-demo-002",
+        "title": "Artificial Intelligence in Education",
+        "body": "This content requires human approval. [HUMAN_REVIEW]"
+    }
+}
+
